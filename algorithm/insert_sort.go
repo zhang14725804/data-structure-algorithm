@@ -18,7 +18,7 @@ func InsertSort(array []int) {
 		return
 	}
 	for i := 1; i < length; i++ {
-		//
+		// 注意：j >= 0
 		for j := i - 1; j >= 0; j-- {
 			if array[j] > array[j+1] {
 				array[j], array[j+1] = array[j+1], array[j]
