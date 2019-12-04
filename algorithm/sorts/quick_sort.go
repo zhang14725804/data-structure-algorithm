@@ -1,4 +1,4 @@
-package algorithm
+package sorts
 
 /*
 	快速排序思想：：

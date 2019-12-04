@@ -1,4 +1,4 @@
-package algorithm
+package sorts
 
 import "fmt"
 

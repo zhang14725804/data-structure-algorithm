@@ -1,9 +1,7 @@
 package main
 
-import (
-	"data-structure-algorithm/algorithm"
-)
+import "data-structure-algorithm/algorithm/sorts"
 
 func main() {
-	algorithm.SortMain()
+	sorts.SortMain()
 }
