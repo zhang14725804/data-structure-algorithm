@@ -10,4 +10,5 @@ func SortMain() {
 	fmt.Println("快速排序之后：", result)
 	InsertSort(origin)
 	ShellSort(origin)
+	SelectionSort(origin)
 }
