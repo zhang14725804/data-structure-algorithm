@@ -11,4 +11,6 @@ func SortMain() {
 	InsertSort(origin)
 	ShellSort(origin)
 	SelectionSort(origin)
+	HeapSort(origin)
+	CountSort(origin, 7)
 }
