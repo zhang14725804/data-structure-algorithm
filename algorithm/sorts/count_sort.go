@@ -29,7 +29,7 @@ func CountSort(array []int, maxValue int) {
 		// [0 1 1 1 0 1 1 1]
 		bucket[array[i]] += 1
 	}
-	fmt.Println("计数排序之后：：", bucket)
+	fmt.Println("计数排序bucket：：", bucket)
 	for j := 0; j < bucketLen; j++ {
 		// 填充数据（包括重复数据）
 		for bucket[j] > 0 {

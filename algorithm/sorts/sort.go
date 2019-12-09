@@ -6,11 +6,18 @@ func SortMain() {
 	origin := []int{5, 2, 7, 3, 6, 1}
 	fmt.Println("排序之前的数据：", origin)
 	BubbleSort(origin)
+	BubbleSort2(origin)
 	result := QuickSort(origin)
 	fmt.Println("快速排序之后：", result)
+	result = QuickSort2(origin)
+	fmt.Println("快速排序==2==之后：", result)
 	InsertSort(origin)
-	ShellSort(origin)
-	SelectionSort(origin)
-	HeapSort(origin)
+	InsertSort2(origin)
 	CountSort(origin, 7)
+	CountSort2(origin, 7)
+	SelectionSort(origin)
+	SelectionSort2(origin)
+
+	ShellSort(origin)
+	HeapSort(origin)
 }
