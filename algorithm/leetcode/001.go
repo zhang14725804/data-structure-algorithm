@@ -1,3 +1,7 @@
 package leetcode
 
-func First() {}
+import "fmt"
+
+func First() {
+	fmt.Println("第一题")
+}
