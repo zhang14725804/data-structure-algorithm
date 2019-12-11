@@ -3,6 +3,8 @@
 
 [十大经典排序算法](https://github.com/hustcc/JS-Sorting-Algorithm)
 
+[极客时间-算法训练营]
+
 [LeetCode-Go](https://github.com/halfrost/LeetCode-Go)
 
 [Algorithms & Data Structures in Go](https://github.com/arnauddri/algorithms)
