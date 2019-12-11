@@ -15,8 +15,15 @@ package sorts
 
 
 	和选择排序一样，归并排序的性能不受输入数据的影响，但表现比选择排序好的多，因为始终都是 O(nlogn) 的时间复杂度。代价是需要额外的内存空间。
+
+	(1) 自上而下的递归：
+	申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列
+	设定两个指针，最初位置分别为两个已经排序序列的起始位置
+	比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置
+	重复步骤3直到某一指针到达序列尾
+	将另一序列剩下的所有元素直接复制到合并序列尾
 */
-func MergeSort(array []int) []int{
+func (sort Sort) MergeSort(array []int) []int{
 	length:=len(array)
 	if length<2{
 		return array
@@ -24,7 +31,7 @@ func MergeSort(array []int) []int{
 	key:=length/2
 	left:=MergeSort(array[0:key])
 	right:=MergeSort(array[key:])
-	return merge(left,right)
+	sort.result = merge(left,right)
 }
 
 func merge(left,right []int) []int {

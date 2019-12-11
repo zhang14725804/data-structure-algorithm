@@ -2,6 +2,13 @@ package sorts
 
 import "fmt"
 
+const sortMethods []string{
+	"MergeSort",
+	"ShellSort",
+}
+type Sort struct{
+	result []int
+}
 func SortMain() {
 	origin := []int{5, 2, 7, 3, 6, 1}
 	fmt.Println("排序之前的数据：", origin)

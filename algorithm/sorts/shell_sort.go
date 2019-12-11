@@ -40,7 +40,7 @@ import "fmt"
 		94
 	最后以1步长进行排序（此时就是简单的插入排序了）
 */
-func ShellSort(array []int) {
+func (sort Sort) ShellSort(array []int) {
 	length := len(array)
 	if length < 2 {
 		return
@@ -58,5 +58,6 @@ func ShellSort(array []int) {
 		}
 		key = key / 2
 	}
-	fmt.Println("希尔排序之后：：", array)
+	sort.result = array
+	// fmt.Println("希尔排序之后：：", array)
 }
