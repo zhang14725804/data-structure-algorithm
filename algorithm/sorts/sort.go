@@ -8,18 +8,17 @@ func SortMain() {
 	BubbleSort(origin)
 	BubbleSort2(origin)
 	fmt.Println("快速排序之后：", QuickSort(origin))
-	fmt.Println("快速排序==2==之后：", result)
+	fmt.Println("快速排序==2==之后：", QuickSort2(origin))
 	InsertSort(origin)
 	InsertSort2(origin)
 	CountSort(origin, 7)
 	CountSort2(origin, 7)
 	SelectionSort(origin)
 	SelectionSort2(origin)
-
-	// 五种排序不会
-	MergeSort(origin)
+	ShellSort(origin)
+	fmt.Println("归并排序之后：", MergeSort(origin))
+	// 四种排序不会
 	BucketSort(origin)
 	RadixSort(origin)
-	ShellSort(origin)
 	HeapSort(origin)
 }

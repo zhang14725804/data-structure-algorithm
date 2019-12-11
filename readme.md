@@ -13,8 +13,6 @@
 
 [leetcode题解](https://github.com/azl397985856/leetcode)
 
-[Data Structures and Algorithms implementation in Go](https://github.com/floyernick/Data-Structures-and-Algorithms)
-
 [Solve LeetCode problems in VS Code](https://github.com/jdneo/vscode-leetcode)
 
 [All Algorithms implemented in Python](https://github.com/TheAlgorithms/Python)
