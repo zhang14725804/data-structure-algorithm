@@ -2,6 +2,7 @@ package sorts
 
 import "fmt"
 
+// ShellSort 希尔排序
 /*
 	参考维基百科：https://zh.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F
 
@@ -40,7 +41,7 @@ import "fmt"
 		94
 	最后以1步长进行排序（此时就是简单的插入排序了）
 */
-func (sort Sort) ShellSort(array []int) {
+func ShellSort(array []int) {
 	length := len(array)
 	if length < 2 {
 		return
@@ -58,6 +59,6 @@ func (sort Sort) ShellSort(array []int) {
 		}
 		key = key / 2
 	}
-	sort.result = array
-	// fmt.Println("希尔排序之后：：", array)
+	// sort.Result = array
+	fmt.Println("希尔排序之后：：", array)
 }

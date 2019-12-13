@@ -1,7 +1,8 @@
 package sorts
 
+// MergeSort 归并排序思想
 /*
-	归并排序思想（空间换时间）：
+	（空间换时间）：
 
 	归并排序（Merge sort）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。
 
@@ -23,35 +24,35 @@ package sorts
 	重复步骤3直到某一指针到达序列尾
 	将另一序列剩下的所有元素直接复制到合并序列尾
 */
-func (sort Sort) MergeSort(array []int) []int{
-	length:=len(array)
-	if length<2{
+func MergeSort(array []int) []int {
+	length := len(array)
+	if length < 2 {
 		return array
 	}
-	key:=length/2
-	left:=MergeSort(array[0:key])
-	right:=MergeSort(array[key:])
-	sort.result = merge(left,right)
+	key := length / 2
+	left := MergeSort(array[0:key])
+	right := MergeSort(array[key:])
+	return merge(left, right)
 }
 
-func merge(left,right []int) []int {
-	newArr:=make([]int,len(left)+len(right))
-	i,j,index:=0,0,0
-	for{
-		if left[i]>right[j]{
+func merge(left, right []int) []int {
+	newArr := make([]int, len(left)+len(right))
+	i, j, index := 0, 0, 0
+	for {
+		if left[i] > right[j] {
 			newArr[index] = right[j]
 			index++
 			j++
-			if j == len(right){
-				copy(newArr[index:],left[i:])
+			if j == len(right) {
+				copy(newArr[index:], left[i:])
 				break
 			}
-		}else{
+		} else {
 			newArr[index] = left[i]
 			index++
 			i++
-			if i == len(left){
-				copy(newArr[index:],right[j:])
+			if i == len(left) {
+				copy(newArr[index:], right[j:])
 				break
 			}
 		}

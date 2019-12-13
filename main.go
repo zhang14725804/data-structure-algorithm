@@ -1,7 +1,11 @@
 package main
 
-import "data-structure-algorithm/algorithm/sorts"
+import (
+	"data-structure-algorithm/algorithm/gobase"
+)
 
 func main() {
-	sorts.SortMain()
+	// sorts.SortMain()
+	// gobase.ReflectMain()
+	gobase.ReflectStructMain()
 }
