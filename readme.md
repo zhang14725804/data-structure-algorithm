@@ -1,9 +1,16 @@
-#### 参考资料
+#### 简单排序算法
+
 [极客学院算法](http://wiki.jikexueyuan.com/list/sort/)
 
 [十大经典排序算法](https://github.com/hustcc/JS-Sorting-Algorithm)
 
 [极客时间-算法训练营]
+
+#### TODOS
+
+- 堆排序，希尔排序，桶排序，基数排序不好理解
+
+#### LeetCode
 
 [LeetCode-Go](https://github.com/halfrost/LeetCode-Go)
 
@@ -21,6 +28,8 @@
 
 [Algorithms and data structures implemented in JavaScript](https://github.com/trekhleb/javascript-algorithms)
 
-#### TODOS
+#### 数据结构
 
-- 堆排序，希尔排序，桶排序，基数排序不好理解
+[golang-data-structures](https://flaviocopes.com/golang-data-structures/)
+
+[Go Data Structures](https://github.com/emirpasic/gods)

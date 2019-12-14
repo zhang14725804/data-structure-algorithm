@@ -33,7 +33,6 @@ func Letcode001Hash() {
 	for i := 0; i < len(nums); i++ {
 		complement := target - nums[i]
 		if index, ok := mp[complement]; ok {
-			fmt.Println(index, ok)
 			fmt.Println(index, i)
 			return
 		}
