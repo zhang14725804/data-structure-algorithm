@@ -1,6 +1,5 @@
 package leetcode
 
-// Leetcode002 第二题
 /*
 	给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
 
@@ -16,6 +15,32 @@ package leetcode
 
 	链表，用golang表达链表
 */
-func Leetcode002() {
-	// https://leetcode-cn.com/problems/add-two-numbers/
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+// Leetcode002 第二题
+func Leetcode002(l1, l2 *ListNode) *ListNode {
+	result := &ListNode{}
+	temp := result
+	// 进位
+	carry := 0
+
+	for l1 != nil || l2 != nil || carry > 0 {
+		curSum := carry
+		if l1 != nil {
+			curSum += l1.Val
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			curSum += l2.Val
+			l2 = l2.Next
+		}
+		carry = curSum / 10
+		//
+		temp.Next = &ListNode{Val: curSum % 10}
+		temp = temp.Next
+	}
+	return result.Next
 }
