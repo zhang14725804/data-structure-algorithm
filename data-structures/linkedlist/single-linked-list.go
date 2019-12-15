@@ -1,4 +1,5 @@
 package linkedlist
+import "fmt"
 
 /*
 	Append(t) adds an Item t to the end of the linked list
@@ -10,8 +11,6 @@ package linkedlist
 	String() returns a string representation of the list
 	Head() returns the first node, so we can iterate on it
 */
-import "fmt"
-
 // Node 节点
 type Node struct {
 	Name string

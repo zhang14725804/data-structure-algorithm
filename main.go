@@ -11,5 +11,6 @@ func main() {
 	// leetcode.Letcode001()
 	// leetcode.Letcode001Hash()
 	// 测试数据结构
-	linkedlist.SingleLinkedListDemo()
+	// linkedlist.SingleLinkedListDemo()
+	linkedlist.DoublyLinkedListTest()
 }
