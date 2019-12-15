@@ -1,6 +1,6 @@
 package main
 
-import "data-structure-algorithm/data-structures/linkedlist"
+import "data-structure-algorithm/data-structures/queue"
 
 func main() {
 	// 测试排序
@@ -12,5 +12,6 @@ func main() {
 	// leetcode.Letcode001Hash()
 	// 测试数据结构
 	// linkedlist.SingleLinkedListDemo()
-	linkedlist.DoublyLinkedListTest()
+	// linkedlist.DoublyLinkedListTest()
+	queue.QueueTest()
 }
