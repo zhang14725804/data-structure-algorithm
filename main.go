@@ -1,6 +1,6 @@
 package main
 
-import "data-structure-algorithm/data-structures/queue"
+import "data-structure-algorithm/algorithm/leetcode"
 
 func main() {
 	// 测试排序
@@ -9,9 +9,10 @@ func main() {
 	// gobase.ReflectStructMain()
 	// 测试leetcode
 	// leetcode.Letcode001()
+	leetcode.Letcode003("pwwkew")
 	// leetcode.Letcode001Hash()
 	// 测试数据结构
 	// linkedlist.SingleLinkedListDemo()
 	// linkedlist.DoublyLinkedListTest()
-	queue.QueueTest()
+	// queue.QueueTest()
 }
