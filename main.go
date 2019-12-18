@@ -9,7 +9,8 @@ func main() {
 	// gobase.ReflectStructMain()
 	// 测试leetcode
 	// leetcode.Letcode001()
-	leetcode.Letcode003("abcabcbb")
+	// leetcode.Letcode003("abcabcbb")
+	leetcode.Letcode005("babad")
 	// leetcode.Letcode001Hash()
 	// 测试数据结构
 	// linkedlist.SingleLinkedListDemo()

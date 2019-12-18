@@ -14,6 +14,8 @@
 
 [leetcode题源](https://leetcode-cn.com/problemset/all/)
 
+[facebook算法大哥](http://fisherlei.blogspot.com/)
+
 [LeetCode-Go](https://github.com/halfrost/LeetCode-Go)
 
 [Algorithms & Data Structures in Go](https://github.com/arnauddri/algorithms)
