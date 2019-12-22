@@ -1,5 +1,7 @@
 package main
 
+import "data-structure-algorithm/algorithm/leetcode"
+
 func main() {
 	// 测试排序
 	// sorts.SortMain()
@@ -18,6 +20,7 @@ func main() {
 	// leetcode.Leetcode063()
 	// leetcode.Leetcode091()
 	// leetcode.Leetcode198()
+	leetcode.Leetcode300()
 
 	// leetcode.Letcode001Hash()
 	// 测试数据结构

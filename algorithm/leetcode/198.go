@@ -1,6 +1,9 @@
 package leetcode
 
-import "fmt"
+import (
+	"data-structure-algorithm/algorithm/common"
+	"fmt"
+)
 
 // Leetcode198 “House Robber”
 func Leetcode198() int {
@@ -16,17 +19,10 @@ func Leetcode198() int {
 	f := make([]int, n+1)
 	g := make([]int, n+1)
 	for i := 1; i <= n; i++ {
-		f[i] = max(f[i-1], g[i-1])
+		f[i] = common.Max(f[i-1], g[i-1])
 		g[i] = f[i-1] + nums[i-1]
 	}
 	fmt.Println(f)
 	fmt.Println(g)
-	return max(f[n], g[n])
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
+	return common.Max(f[n], g[n])
 }

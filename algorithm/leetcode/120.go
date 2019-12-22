@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"data-structure-algorithm/algorithm/common"
 	"fmt"
 	"math"
 )
@@ -45,25 +46,18 @@ func Leetcode120() int {
 			dp[i][j] = math.MaxInt64
 			// 左右边界
 			if j > 0 {
-				dp[i][j] = min(dp[i][j], dp[i-1][j-1]+triangle[i][j])
+				dp[i][j] = common.Min(dp[i][j], dp[i-1][j-1]+triangle[i][j])
 			}
 			if j < i {
-				dp[i][j] = min(dp[i][j], dp[i-1][j]+triangle[i][j])
+				dp[i][j] = common.Min(dp[i][j], dp[i-1][j]+triangle[i][j])
 			}
 		}
 	}
 	// 声明一个比较大的值
 	res := math.MaxInt64
 	for i := 0; i < n; i++ {
-		res = min(res, dp[n-1][i])
+		res = common.Min(res, dp[n-1][i])
 	}
 	fmt.Println(res)
 	return res
-}
-
-func min(a, b int) int {
-	if a > b {
-		return b
-	}
-	return a
 }
