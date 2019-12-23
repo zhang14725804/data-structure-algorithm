@@ -22,7 +22,7 @@ func Leetcode518() int {
 	f[0] = 1
 	for i := 0; i < n; i++ {
 		for j := coins[i]; j <= m; j++ {
-			f[j] = f[j-coins[i]]
+			f[j] += f[j-coins[i]]
 		}
 	}
 	return f[m]
