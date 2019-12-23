@@ -1,6 +1,6 @@
 package main
 
-import "data-structure-algorithm/algorithm/leetcode"
+import leetcode "data-structure-algorithm/algorithm/leetcode/dynamic-program"
 
 func main() {
 	// 测试排序
