@@ -1,6 +1,6 @@
 package main
 
-import leetcode "data-structure-algorithm/algorithm/leetcode/base-data-structure"
+import "data-structure-algorithm/data-structures/tree"
 
 func main() {
 	// 测试排序
@@ -21,7 +21,7 @@ func main() {
 	// leetcode.Leetcode091()
 	// leetcode.Leetcode198()
 	// leetcode.Leetcode300()
-	leetcode.Leetcode187()
+	// leetcode.Leetcode187()
 
 	// leetcode.Letcode001Hash()
 	// 测试数据结构
