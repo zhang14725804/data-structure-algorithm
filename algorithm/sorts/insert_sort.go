@@ -2,9 +2,8 @@ package sorts
 
 import "fmt"
 
+// InsertSort 插入排序思想：
 /*
-	插入排序思想：
-
 	每一步将一个待排序的记录，插入到前面已经排好序的有序序列中去，直到插完所有元素为止。
 */
 func InsertSort(array []int) {

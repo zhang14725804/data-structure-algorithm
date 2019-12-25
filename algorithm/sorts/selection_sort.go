@@ -2,9 +2,8 @@ package sorts
 
 import "fmt"
 
+// SelectionSort 选择排序思想：
 /*
-	选择排序思想：
-
 	每次从余下的数中找最小的，并排到余下的数的最开头。
 */
 func SelectionSort(array []int) {

@@ -1,7 +1,31 @@
 package main
 
-import "data-structure-algorithm/algorithm/sorts"
+import "data-structure-algorithm/data-structures/tree"
 
 func main() {
-	sorts.SortMain()
+	// 测试排序
+	// sorts.SortMain()
+	// gobase.ReflectMain()
+	// gobase.ReflectStructMain()
+
+	// 测试leetcode
+	// leetcode.Letcode001()
+	// leetcode.Letcode003("abcabcbb")
+	// leetcode.Letcode005("babad")
+	// leetcode.Leetcode053([]int{-2, 1, -3, 4, -1, 2, 1, -5, 4})
+	// leetcode.Leetcode053([]int{-1, -5})
+	// leetcode.Leetcode053([]int{-1, 0, -2})
+	// leetcode.Leetcode053([]int{-2, 1, -3, 4, -1, 2, 1, -5, 4})
+	// leetcode.Leetcode120()
+	// leetcode.Leetcode063()
+	// leetcode.Leetcode091()
+	// leetcode.Leetcode198()
+	// leetcode.Leetcode300()
+	// leetcode.Leetcode187()
+
+	// leetcode.Letcode001Hash()
+	// 测试数据结构
+	// linkedlist.SingleLinkedListDemo()
+	// linkedlist.DoublyLinkedListTest()
+	// queue.QueueTest()
 }

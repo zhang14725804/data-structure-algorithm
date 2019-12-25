@@ -1,16 +1,27 @@
 package sorts
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
-var sortMethods []string{
-	"MergeSort",
-	"ShellSort",
-}
-type Sort struct{
-	result []int
-}
+// Sort 排序结构
+// type Sort struct {
+// 	Result []int
+// }
+type T struct{}
+
+// SortMain 排序入口函数
 func SortMain() {
-	origin := []int{5, 2, 7, 3, 6, 1}
+	sortMethods := []string{
+		"bar",
+		"foo",
+	}
+	t := &T{}
+	// origin := []int{5, 2, 7, 3, 6, 1}
+	for _, s := range sortMethods {
+		reflect.ValueOf(t).MethodByName(s).Call(nil)
+	}
 
 	// fmt.Println("排序之前的数据：", origin)
 	// BubbleSort(origin)
@@ -29,4 +40,11 @@ func SortMain() {
 	// BucketSort(origin)
 	// RadixSort(origin)
 	// HeapSort(origin)
+}
+
+func bar() {
+	fmt.Println("======bar======")
+}
+func foo() {
+	fmt.Println("======foo======")
 }
