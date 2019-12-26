@@ -1,6 +1,6 @@
 package main
 
-import "data-structure-algorithm/data-structures/tree"
+import leetcode "data-structure-algorithm/algorithm/leetcode/dichotomy"
 
 func main() {
 	// 测试排序
@@ -22,6 +22,7 @@ func main() {
 	// leetcode.Leetcode198()
 	// leetcode.Leetcode300()
 	// leetcode.Leetcode187()
+	leetcode.Leetcode035()
 
 	// leetcode.Letcode001Hash()
 	// 测试数据结构
