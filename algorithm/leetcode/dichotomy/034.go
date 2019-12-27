@@ -1,7 +1,5 @@
 package leetcode
 
-import "fmt"
-
 // Leetcode034 Find First and Last Position of Element in Sorted Array（常规方法和二分法）
 func Leetcode034() []int {
 	nums := []int{5, 7, 7, 8, 8, 10}
@@ -60,6 +58,5 @@ func Leetcode034() []int {
 		}
 	}
 	end := right
-	fmt.Println(start, end)
 	return []int{start, end}
 }
