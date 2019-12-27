@@ -23,7 +23,7 @@ func main() {
 	// leetcode.Leetcode300()
 	// leetcode.Leetcode187()
 	// leetcode.Leetcode035()
-	leetcode.Leetcode034()
+	leetcode.Leetcode074()
 
 	// leetcode.Letcode001Hash()
 	// 测试数据结构
