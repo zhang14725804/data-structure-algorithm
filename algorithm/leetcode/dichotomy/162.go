@@ -4,6 +4,7 @@ package leetcode
 func Leetcode162(nums []int) int {
 	/*
 		出现拐点，这个点就是峰值。不出现拐点，边界就是峰值
+		为什么不需要判断边界（for循环已经处理了）
 	*/
 	left, right := 0, len(nums)-1
 	for left < right {
