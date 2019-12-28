@@ -1,6 +1,6 @@
 package leetcode
 
-// Leetcode287  Find the Duplicate Number 有难度 (二分法)
+// Leetcode287  Find the Duplicate Number (二分法)
 func Leetcode287() int {
 	nums := []int{1, 3, 4, 2, 2}
 	/*
@@ -12,6 +12,7 @@ func Leetcode287() int {
 	for left < right {
 		mid := (left + right) >> 1
 		cnt := 0
+		// 判断难理解
 		for _, x := range nums {
 			if x >= left && x <= mid {
 				cnt++
