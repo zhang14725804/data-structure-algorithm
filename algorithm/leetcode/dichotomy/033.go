@@ -21,6 +21,7 @@ func Leetcode033(nums []int, target int) int {
 	if target <= nums[last] {
 		right = n - 1
 	} else {
+		// 目标值在左边，重新进行二分
 		left = 0
 		right--
 	}
