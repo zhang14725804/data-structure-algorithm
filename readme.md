@@ -40,10 +40,3 @@
 
 [Go Data Structures](https://github.com/emirpasic/gods)
 
-
-### 一定要看的
-
-[经典计算机教材 SICP 的 JavaScript 语言版](https://sicp.comp.nus.edu.sg/)
-
-[javascript设计模式](https://wanago.io/2019/11/11/javascript-design-patterns-1-singleton-and-the-module/)
-
