@@ -8,9 +8,10 @@ type TreeNode struct {
 /**
 	98. Validate Binary Search Tree
 
-	自上而下递归判断
+	自上而下递归判断一棵树是否是二叉搜索树
 	
 	https://www.cnblogs.com/coffeeSS/p/5452719.html
+	https://stackoverflow.com/questions/6878590/the-maximum-value-for-an-int-type-in-go/39571615
 */
 func isValidBST(root *TreeNode) bool {
 	const MaxUint = ^uint(0) 
