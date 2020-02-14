@@ -8,6 +8,7 @@ type TreeNode struct {
 
 /**
 94. Binary Tree Inorder Traversal
+todos::用迭代的方式中序遍历二叉树，问题来了，递归和迭代有什么区别
 */
 func inorderTraversal(root *TreeNode) []int {
 	// 声明空数组
