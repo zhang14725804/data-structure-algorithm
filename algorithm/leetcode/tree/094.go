@@ -10,5 +10,21 @@ type TreeNode struct {
 94. Binary Tree Inorder Traversal
 */
 func inorderTraversal(root *TreeNode) []int {
+	// 声明空数组
+	res := make([]int,0)
+	if root == nil{
+		return res
+	}
+	dfs(root,&res)
+	return res
 
+}
+func dfs(node *TreeNode,res *[]int){
+	if node ==nil{
+		return
+	}
+	dfs(node.Left,res)
+	// TODOS：：这个什么语法
+	(*res) = append(*res, node.Val)
+	dfs(node.Right,res)
 }
