@@ -1,38 +1,38 @@
-
 package leetcode
-/**
-	101. Symmetric Tree
-	判断镜像二叉树问题
 
-	迭代（bfs）的方式（不同的遍历方式，然后比较节点即可）
-	左边：左中右遍历
-	右边：右中左遍历
+/**
+101. Symmetric Tree
+判断镜像二叉树问题
+
+迭代（bfs）的方式（不同的遍历方式，然后比较节点即可）
+左边：左中右遍历
+右边：右中左遍历
 */
-func isSymmetric(root *TreeNode) bool {
-    if root==nil{
+func isSymmetric02(root *TreeNode) bool {
+	if root == nil {
 		return true
 	}
 	var left Stack
 	var right Stack
 
-	l:=root.Left
-	r:=root.Right
+	l := root.Left
+	r := root.Right
 
-	for left.size()>0 || right.size()>0 || r!=nil || l !=nil{
-		for r!=nil && l !=nil {
+	for left.size() > 0 || right.size() > 0 || r != nil || l != nil {
+		for r != nil && l != nil {
 			left.push(l)
 			l = left.Left
 			right.push(r)
 			r = right.Right
 		}
 
-		if l ==nil || r==nil{
+		if l == nil || r == nil {
 			return false
 		}
 
 		l = left.pop()
 		r = right.pop()
-		if l.Val != r.Val{
+		if l.Val != r.Val {
 			return false
 		}
 
@@ -52,14 +52,14 @@ type TreeNode struct {
 type Stack []TreeNode
 
 func (stack Stack) size() int {
-    return len(stack)
+	return len(stack)
 }
-func (s *Stack) push(node TreeNode){
+func (s *Stack) push(node TreeNode) {
 	*s = append(*s, node)
 }
 
-func (s *Stack) pop() interface{}{
-	theStack:=*s
+func (s *Stack) pop() interface{} {
+	theStack := *s
 	if len(theStack) == 0 {
 		return nil
 	}
