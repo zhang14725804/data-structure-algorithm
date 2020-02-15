@@ -20,9 +20,9 @@ func isSymmetric02(root *TreeNode) bool {
 
 	for left.size() > 0 || right.size() > 0 || r != nil || l != nil {
 		for r != nil && l != nil {
-			left.push(l)
+			left.push(*l)
 			l = left.Left
-			right.push(r)
+			right.push(*r)
 			r = right.Right
 		}
 
@@ -49,16 +49,17 @@ type TreeNode struct {
 	Left  *TreeNode
 	Right *TreeNode
 }
+
 type Stack []TreeNode
 
-func (stack Stack) size() int {
+func (stack *Stack) size() int {
 	return len(stack)
 }
-func (s *Stack) push(node TreeNode) {
+func (s *Stack) push(node *TreeNode) {
 	*s = append(*s, node)
 }
 
-func (s *Stack) pop() interface{} {
+func (s *Stack) pop() *TreeNode {
 	theStack := *s
 	if len(theStack) == 0 {
 		return nil
