@@ -13,6 +13,8 @@ type TreeNode struct {
 迭代（bfs）的方式（不同的遍历方式，然后比较节点即可）
 左边：左中右遍历
 右边：右中左遍历
+
+todos：：最后居然卡在了指针*和地址&上了
 */
 func isSymmetric(root *TreeNode) bool {
 	if root == nil {
@@ -49,7 +51,7 @@ func isSymmetric(root *TreeNode) bool {
 	return true
 }
 
-// 利用golang slice实现栈
+// 利用slice实现栈
 type Stack []TreeNode
 
 func (s *Stack) push(node TreeNode) {
