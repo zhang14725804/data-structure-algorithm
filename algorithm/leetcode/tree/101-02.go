@@ -1,5 +1,9 @@
 package leetcode
-
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
 /**
 101. Symmetric Tree
 判断镜像二叉树问题
@@ -8,7 +12,7 @@ package leetcode
 左边：左中右遍历
 右边：右中左遍历
 */
-func isSymmetric02(root *TreeNode) bool {
+func isSymmetric(root *TreeNode) bool {
 	if root == nil {
 		return true
 	}
@@ -18,12 +22,12 @@ func isSymmetric02(root *TreeNode) bool {
 	l := root.Left
 	r := root.Right
 
-	for left.size() > 0 || right.size() > 0 || r != nil || l != nil {
+	for len(left) > 0 || len(right) > 0 || r != nil || l != nil {
 		for r != nil && l != nil {
 			left.push(*l)
-			l = left.Left
+			l = l.Left
 			right.push(*r)
-			r = right.Right
+			r = r.Right
 		}
 
 		if l == nil || r == nil {
@@ -44,22 +48,13 @@ func isSymmetric02(root *TreeNode) bool {
 }
 
 // 利用golang slice实现栈
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 type Stack []TreeNode
 
-func (stack *Stack) size() int {
-	return len(stack)
-}
-func (s *Stack) push(node *TreeNode) {
+func (s *Stack) push(node TreeNode) {
 	*s = append(*s, node)
 }
 
-func (s *Stack) pop() *TreeNode {
+func (s *Stack) pop() TreeNode {
 	theStack := *s
 	if len(theStack) == 0 {
 		return nil
