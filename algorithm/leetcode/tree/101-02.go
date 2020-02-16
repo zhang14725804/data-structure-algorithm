@@ -32,7 +32,7 @@ func isSymmetric(root *TreeNode) bool {
 			r = r.Right
 		}
 
-		if l == nil || r == nil {
+		if l != nil || r != nil {
 			return false
 		}
 
@@ -56,12 +56,13 @@ func (s *Stack) push(node TreeNode) {
 	*s = append(*s, node)
 }
 
-func (s *Stack) pop() TreeNode {
+func (s *Stack) pop() *TreeNode {
 	theStack := *s
+	node := &TreeNode{}
 	if len(theStack) == 0 {
-		return nil
+		return node 
 	}
-	node := theStack[len(theStack)-1]
+	node = &theStack[len(theStack)-1]
 	*s = theStack[0 : len(theStack)-1]
 	return node
 }
