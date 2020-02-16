@@ -1,9 +1,11 @@
 package leetcode
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode
 }
+
 /**
 101. Symmetric Tree
 判断镜像二叉树问题
