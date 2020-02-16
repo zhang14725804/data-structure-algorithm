@@ -60,7 +60,7 @@ func (s *Stack) pop() *TreeNode {
 	theStack := *s
 	node := &TreeNode{}
 	if len(theStack) == 0 {
-		return node 
+		return node
 	}
 	node = &theStack[len(theStack)-1]
 	*s = theStack[0 : len(theStack)-1]
