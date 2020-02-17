@@ -16,6 +16,7 @@ type TreeNode struct {
 	todos：：[]空数组的时候无法通过，[1,2,3,4,5]可以通过
 */
 var ans int
+
 func diameterOfBinaryTree(root *TreeNode) int {
 	dfs(root)
 	return ans
@@ -26,13 +27,13 @@ func Max(a, b int) int {
 	}
 	return b
 }
-func dfs(root *TreeNode) int{
-	if root==nil{
+func dfs(root *TreeNode) int {
+	if root == nil {
 		return 0
 	}
-	left:=dfs(root.Left)
-	right:=dfs(root.Right)
+	left := dfs(root.Left)
+	right := dfs(root.Right)
 
-	ans = Max(ans,left+right)
-	return Max(left+1,right+1)
+	ans = Max(ans, left+right)
+	return Max(left+1, right+1)
 }

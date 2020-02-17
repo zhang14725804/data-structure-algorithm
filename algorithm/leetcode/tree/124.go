@@ -19,19 +19,20 @@ const MinInt = -MaxInt - 1
 
 // 声明最小值
 var ans int = MinInt
+
 func maxPathSum(root *TreeNode) int {
 	dfs(root)
 	return ans
 }
 
-func dfs(root *TreeNode) int{
-	if root ==nil{
+func dfs(root *TreeNode) int {
+	if root == nil {
 		return 0
 	}
-	left:=dfs(root.Left)
-	right:=dfs(root.Right)
-	ans = Max(ans,left+root.Val+right)
-	return Max(0,root.Val + Max(left,right))
+	left := dfs(root.Left)
+	right := dfs(root.Right)
+	ans = Max(ans, left+root.Val+right)
+	return Max(0, root.Val+Max(left, right))
 }
 
 func Max(a, b int) int {
