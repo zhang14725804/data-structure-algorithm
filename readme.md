@@ -34,6 +34,8 @@
 
 [Algorithms and data structures implemented in JavaScript](https://github.com/trekhleb/javascript-algorithms)
 
+[golang-leetcode一部分](https://github.com/heiy/LeetCode)
+
 #### 数据结构
 
 [golang-data-structures](https://flaviocopes.com/golang-data-structures/)
