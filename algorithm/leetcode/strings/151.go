@@ -7,11 +7,12 @@ package leetcode
 	（2）反转整个字符串
 	（3）空格
 */
-func reverseWords(s string) string {
+func reverseWords(str string) string {
+	s:=[]rune(str)
 	k:=0
 	sLen := len(s)
 	for i:=0;i<sLen;i++{
-		for i<sLen && s[i] == " " {
+		for i<sLen && string(s[i]) == " " {
 			i++
 		}
 		if i==sLen{
@@ -19,30 +20,35 @@ func reverseWords(s string) string {
 		}
 		
 		j:=i
-		for j<sLen && s[j]!=" " {
+		for j<sLen && string(s[j])!=" " {
 			j++
 		}
 		reverse(s[i:j])
 		if k>0{
-			s[k++] = " "
+			/*
+				很多编程语言都自带前置后置的 ++、-- 运算。但 Go 特立独行，去掉了前置操作，同时 ++、— 只作为运算符而非表达式
+				syntax error: unexpected ++, expecting :
+				s[k++] = " "
+			*/
+			k++
+			//  cannot use " " (type string) as type rune in assignment
+			s[k] = ' '
 		}
-		for i<j{
-			s[k++] = s[i++]
+		for i<j-1{
+			k++
+			i++
+			s[k] = s[i]
 		}
 	}
-	// 去除前后空格
-	strings.Trim(k,sLen)
-	reverse(s[0,sLen])
-	return s
+	reverse(s[0:sLen])
+	return string(s)
+	
 }
-
-// 反转字符串
-func reverse(s string) string {
-    a := []rune(s)
+func reverse(a []rune) []rune {
     for i, j := 0, len(a)-1; i < j; i, j = i+1, j-1 {
         a[i], a[j] = a[j], a[i]
     }
-    return string(a)
+    return a
 }
 
 /*
