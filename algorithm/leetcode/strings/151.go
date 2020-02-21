@@ -11,18 +11,23 @@ func reverseWords(str string) string {
 	s:=[]rune(str)
 	k:=0
 	sLen := len(s)
+
 	for i:=0;i<sLen;i++{
-		for i<sLen && string(s[i]) == " " {
+		// 空格
+		for i<sLen && s[i] == ' ' {
 			i++
 		}
+		// 遍历完成
 		if i==sLen{
 			break
 		}
 		
+		// 字符
 		j:=i
-		for j<sLen && string(s[j])!=" " {
+		for j<sLen && s[j]!=' ' {
 			j++
 		}
+		// 反转单词
 		reverse(s[i:j])
 		if k>0{
 			/*
@@ -34,13 +39,20 @@ func reverseWords(str string) string {
 			//  cannot use " " (type string) as type rune in assignment
 			s[k] = ' '
 		}
-		for i<j-1{
+		for i<j {
 			k++
 			i++
 			s[k] = s[i]
 		}
 	}
+	//去除前后空格
+	strings.Trim(string(s[k:sLen])," ")
 	reverse(s[0:sLen])
+	/*
+		todos::
+		输入 " Reverse Words in a String !  "
+		输出 "    Strin    i  Word  Revers"
+	*/
 	return string(s)
 	
 }
