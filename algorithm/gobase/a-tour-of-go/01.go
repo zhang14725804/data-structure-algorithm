@@ -27,7 +27,8 @@ func split(sum int)(x,y int){
 	var 声明变量：
 	var 语句用于声明一个变量列表，跟函数的参数列表一样，类型在最后
 	var 语句可以出现在包或函数级别
-	声明之后会给默认值
+	没有明确初始值的变量声明会被赋予它们的 零值。
+
 	如果初始化值已存在，则可以省略类型；变量会从初始值中获得类型
 
 	":="短变量声明
@@ -46,3 +47,25 @@ func t(){
 	fmt.Printf("Type: %T",char)
 	fmt.Printf(reflect.TypeOf(char))
 }
+
+/*
+	类型转换
+*/
+func changeType(){
+	x,y:=3,4
+	var f float64 = math.Sqrt(float64(x*x+y*y))
+	var z uint = uint(f)
+	fmt.Println(x,y,z)
+}
+
+/*
+	类型推导，":="短变量声明时进行
+*/
+
+/*
+	const 声明常量，常量不能使用":="短变量声明
+*/
+
+/*
+	数值常量（这是个什么鬼）
+*/
