@@ -185,5 +185,5 @@ func slice4(){
 	切片 s 的长度和容量可通过表达式 len(s) 和 cap(s) 来获取。
 */
 func slice5(){
-
+	
 }
