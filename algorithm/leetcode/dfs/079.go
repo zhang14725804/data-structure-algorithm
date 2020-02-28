@@ -45,7 +45,7 @@ func dfs(board [][]byte,x,y int,word string,u int) bool{
 	if u ==len(word) -1{
 		return true
 	}
-	// 回溯（恢复初始状态）
+	// 回溯（恢复初始状态）,保证每条线路看到的状态都是一样的
 	board[x][y] = '.'
 	// 枚举上下左右四个方向
 	for i:=0;i<4;i++{
