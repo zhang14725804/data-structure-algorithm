@@ -24,14 +24,15 @@ func twoSum(numbers []int, target int) []int {
 
 /*
 	双指针算法
-	todos：：[0,0,3,4] 0 这组数据测试无法通过
+	i-1 != j 排除[0,0,3,4] 0 情况
 */ 
 func twoSum(numbers []int, target int) []int {
     for j,i:=0,len(numbers)-1;j<len(numbers);j++{
-		for i>0 && numbers[i-1]+numbers[j] >=target{
+
+		for i>0 && numbers[i-1]+numbers[j] >=target && i-1 != j{
 			i--
 		}
-		if numbers[i]+numbers[j] == target{
+		if numbers[i] + numbers[j] == target{
 			// 返回数组 注意下标从1开始，而不是0
 			return []int{j+1,i+1}
 		}
