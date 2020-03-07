@@ -6,7 +6,7 @@
 type MinStack struct {
 	stack []item
 }
-
+// 存储当前值和最小值
 type item struct{
 	min,x int
 }
