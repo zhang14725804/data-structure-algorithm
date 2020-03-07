@@ -21,17 +21,21 @@ func minWindow(s1 string, t1 string) string {
 	}
 
 	var res []rune
+	// 后一个指针i，走在前面的
 	for i,j,c:=0,0,0;i<len(s);i++{
+		// 当前字母个数是1
 		if hash[s[i]] == 1 {
 			c+=1
 		}
 
 		hash[s[i]]-=1
-
+		// 当前字母无关紧要
+		// 前一个指针j，走在后面的
 		for hash[s[j]]<0{
 			j+=1
 			hash[s[j]]+=1
 		}
+		// 所有字母都满足要求，更新答案
 		if c == cnt{
 			if len(res) == 0  || len(res)>i-j+1{
 				res=s[j:i-j+1]
