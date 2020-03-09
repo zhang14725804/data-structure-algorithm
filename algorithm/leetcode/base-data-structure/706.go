@@ -2,16 +2,21 @@
 	706. Design HashMap
 
 	hash两种做法：开放寻址法，拉链法
-*/
 
+	用拉链法实现
+*/
+var N int = 20011
 type MyHashMap struct {
-    
+	first []int
+	second []int
 }
 
 
 /** Initialize your data structure here. */
 func Constructor() MyHashMap {
-    
+    return MyHashMap{
+		table: make([]int, N),
+	}
 }
 
 
