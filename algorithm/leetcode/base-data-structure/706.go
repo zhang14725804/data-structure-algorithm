@@ -7,6 +7,8 @@
 
 	拉链法：：简单理解为链表，当 key 的 hash 冲突时，我们在冲突位置的元素上形成一个链表，通过指针互连接，当查找时，发现 key 冲突，顺着链表一直往下找，直到链表的尾节点，找不到则返回空
 
+	https://www.runoob.com/go/go-map.html（基于 go 实现简单 HashMap，暂未做 key 值的校验，但是没有remove，我是有多懒！）
+
 */
 var N int = 20011
 type MyHashMap struct {
