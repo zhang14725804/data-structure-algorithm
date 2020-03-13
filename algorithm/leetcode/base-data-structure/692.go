@@ -13,62 +13,100 @@
 	（找出出现次数最少的K个单词）用大根堆来维护出现次数最多的K个单词
 	
 	（todos：：归并排序，快排要看看）
+	
+	["i", "love", "leetcode", "i", "love", "coding"]测试不通过
+	["i", "love", "leetcode", "i", "love", "coding"] 测试通过
 */
 
+func topKFrequent(words []string, k int) []string {
+	hash := make(map[string]int)
+	heap := newMinHeap()
+
+	for _, word := range words {
+		hash[word] += 1
+	}
+
+	for key, value := range hash {
+		heap.push(&Node{value, key})
+		// 注意这里是k+1
+		if len(heap.Element) > k+1 {
+			heap.pop()
+		}
+	}
+	res := make([]string, k)
+	// 
+	for i := k-1; i >= 0; i-- {
+		res[i] = heap.pop().second
+	}
+	return res
+}
+
+type minHeap struct {
+	Element []*Node
+}
+type Node struct {
+	first  int
+	second string
+}
+
 /*
-	实现最小堆参考（https://yangjiahao106.github.io/2019/01/15/golang-%E6%9C%80%E5%A4%A7%E5%A0%86%E5%92%8C%E6%9C%80%E5%B0%8F%E5%A0%86/）
+	数组中第一个元素不使用，存放一个小于堆中任何数字的值用于结束循环
+	todos：：为什么要存一个数，而又不使用呢
+*/ 
+func newMinHeap() *minHeap {
+	heap := &minHeap{}
+	heap.push(&Node{-100000, ""})
+	return heap
+}
+
+/*
+	插入元素就直接将元素增加到堆的末尾，然后进行上浮操作，使二叉堆有序。
+	todos：：什么是上浮操作
 */
-type minHeap struct{
-	Element []int
-}
-// 数组中第一个元素不使用，存放一个小于堆中任何数字的值用于结束循环
-func newMinHeap() *minHeap{
-	return &minHeap{Element:[]int{math.MinInt64}}
-}
-// 插入元素就直接将元素增加到堆的末尾，然后进行上浮操作，使二叉堆有序。
-func (h *minHeap) push(v int){
-	h.Element = append(h.Element, v)
+func (h *minHeap) push(node *Node) {
+	h.Element = append(h.Element, node)
 	n := len(h.Element) - 1
 	// 上浮
-	for ;h.Element[n/2] > v;n /= 2{
+	for ; h.Element[n/2].first > node.first; n /= 2 {
 		h.Element[n] = h.Element[n/2]
 	}
 
-	h.Element[n] = v
+	h.Element[n] = node
 }
 
 /*
 	删除最小值
 	删除最大元素就直接从二叉堆顶端删除，然后进行下沉操作
-*/ 
-func (h *minHeap) pop() int{
+	todos：：下沉操作
+*/
+func (h *minHeap) pop() *Node {
 	if len(h.Element) <= 1 {
-		return 0
+		return nil
 	}
-	min := h.Element[1]
 	last := h.Element[len(h.Element)-1]
-
-	var i,child int
-	for i = 1;i*2<len(h.Element);i = child {
-		child = i*2
-		if child < len(h.Element) -1 && h.Element[child+1] < h.Element[child]{
+	// 保存min最小值
+	min := h.Element[1]
+	var i, child int
+	for i = 1; i*2 < len(h.Element); i = child {
+		child = i * 2
+		if child < len(h.Element)-1 && h.Element[child+1].first < h.Element[child].first {
 			child += 1
 		}
-		if last > h.Element[child]{
+		if last.first > h.Element[child].first {
 			h.Element[i] = h.Element[child]
-		}else{
+		} else {
 			break
 		}
 	}
 	h.Element[i] = last
-	h.Element = h.Element[:len(h.Element)-1]	
+	h.Element = h.Element[:len(h.Element)-1]
 	return min
 }
 
 // 获取最小值
-func (h *minHeap) mix() int{
-	if len(h.Element) > 1{
+func (h *minHeap) mix() *Node {
+	if len(h.Element) > 1 {
 		return h.Element[1]
 	}
-	return 0
+	return nil
 }
