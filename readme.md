@@ -44,3 +44,9 @@
 
 [Go Data Structures](https://github.com/emirpasic/gods)
 
+### 数据结构和算法
+
+[数据结构与算法1](https://www.bilibili.com/video/av63215024?p=1)
+
+[数据结构与算法1](https://www.bilibili.com/video/av81882246?p=1)
+
