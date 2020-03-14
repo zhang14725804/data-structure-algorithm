@@ -28,3 +28,7 @@ func (this *MedianFinder) FindMedian() float64 {
  * obj.AddNum(num);
  * param_2 := obj.FindMedian();
  */
+
+ /*
+	大根堆、小根堆（这个有点难啊！！）
+ */
