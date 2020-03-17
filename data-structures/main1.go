@@ -119,7 +119,7 @@ func Add(num int) int{
 	如何用栈模拟递归（所有的递归都可以转成 循环+栈）
 	遍历文件目录（那不就是递归么）
 */
-func main(){
+func main7(){
 	fmt.Println(Add(5))
 	stack := StackArray.NewStack()
 	stack.Push(5)
@@ -131,6 +131,31 @@ func main(){
 			stack.Push(data.(int) - 1)
 		}else{
 			last+=0
+		}
+	}
+	fmt.Println(last)
+}
+
+// 递归实现斐波那契额数列
+func fib(num int) int {
+	if num == 1 || num==2{
+		return 1
+	}
+	return fib(num-1)+fib(num-2)
+}
+func main(){
+	fmt.Println(fib(7))
+	// 栈实现斐波那契额数列
+	stack:=StackArray.NewStack()
+	stack.Push(3)
+	last:=0
+	for !stack.IsEmpty(){
+		data:=stack.Pop()
+		if data == 1 || data == 2{
+			last+=1
+		}else{
+			stack.Push(data.(int)-1)
+			stack.Push(data.(int)-2)
 		}
 	}
 	fmt.Println(last)
