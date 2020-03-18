@@ -3,8 +3,9 @@ package main
 import "fmt"
 import "./ArrayList"
 import "./StackArray"
+import "./Queue"
 
-func main1(){
+func main1y(){
 	// todos：：定义接口对象，复制的对象比u实现接口的所有方法（这他么怎么理解）
 	// list := NewArrayList()
 	var list ArrayList.List = ArrayList.NewArrayList()
@@ -143,7 +144,7 @@ func fib(num int) int {
 	}
 	return fib(num-1)+fib(num-2)
 }
-func main(){
+func main8(){
 	fmt.Println(fib(7))
 	// 栈实现斐波那契额数列
 	stack:=StackArray.NewStack()
@@ -159,4 +160,17 @@ func main(){
 		}
 	}
 	fmt.Println(last)
+}
+
+func main(){
+	q := Queue.NewQueue()
+	q.EnQueue(1)
+	q.EnQueue(2)
+	q.EnQueue(3)
+	q.EnQueue(4)
+	fmt.Println(q.DeQueue())
+	fmt.Println(q.DeQueue())
+	fmt.Println(q.DeQueue())
+	fmt.Println(q.DeQueue())
+	fmt.Println(q.DeQueue())
 }
