@@ -4,6 +4,7 @@ import "fmt"
 import "./ArrayList"
 import "./StackArray"
 import "./Queue"
+import "./CircleQueue"
 
 func main1y(){
 	// todos：：定义接口对象，复制的对象比u实现接口的所有方法（这他么怎么理解）
@@ -162,7 +163,7 @@ func main8(){
 	fmt.Println(last)
 }
 
-func main(){
+func main9(){
 	q := Queue.NewQueue()
 	q.EnQueue(1)
 	q.EnQueue(2)
@@ -173,4 +174,21 @@ func main(){
 	fmt.Println(q.DeQueue())
 	fmt.Println(q.DeQueue())
 	fmt.Println(q.DeQueue())
+}
+
+/*
+	循环队列
+	和之前的写法略有不同
+*/
+func main(){
+	var q CircleQueue.CircleQueue
+	CircleQueue.InitQueue(&q)
+	CircleQueue.EnQueue(&q,1)
+	CircleQueue.EnQueue(&q,2)
+	CircleQueue.EnQueue(&q,3)
+	CircleQueue.EnQueue(&q,4)
+	fmt.Println(CircleQueue.DeQueue(&q))
+	fmt.Println(CircleQueue.DeQueue(&q))
+	fmt.Println(CircleQueue.DeQueue(&q))
+	fmt.Println(CircleQueue.DeQueue(&q))
 }

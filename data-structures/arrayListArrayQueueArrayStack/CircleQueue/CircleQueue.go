@@ -4,9 +4,12 @@ import "errors"
 
 /*
 	循环队列(一个环)
+	不需要数组的反复移动
 */
-const QUEUE_SIZE = 100
 
+// 注意：：最多存储QUEUE_SIZE-1个数据
+const QUEUE_SIZE = 100
+// 空一个空格表示满格
 type CircleQueue struct{
 	data [QUEUE_SIZE]interface{} // 存储数据的结构
 	head int // 头部的位置
