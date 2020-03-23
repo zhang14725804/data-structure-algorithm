@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+/*
+	归并排序（和快排有些类似）
+*/
 func MergeSort(arr []int) []int{
 	l := len(arr)
 	/*

@@ -30,6 +30,6 @@ func OddEvenSort(arr []int) []int {
 }
 
 func main()  {
-	arr:=[]int{9,2,6,1,7,0}
+	arr:=[]int{9,2,5,0,6,1,7,8,4,3}
 	fmt.Println(OddEvenSort(arr))
 }

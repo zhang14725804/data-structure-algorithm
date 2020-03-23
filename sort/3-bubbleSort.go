@@ -4,7 +4,7 @@ import "fmt"
 
 /*
 	冒泡排序
-	每次循环确定一个数子的位置
+	每次循环确定一个数字的位置
 */
 
 func BubbleSort(arr []int) []int{
@@ -30,6 +30,6 @@ func BubbleSort(arr []int) []int{
 }
 
 func main()  {
-	arr:=[]int{4,7,2,1,3,8,5,9,6,8}
+	arr:=[]int{9,2,5,0,6,1,7,8,4,3}
 	fmt.Println(BubbleSort(arr))
 }

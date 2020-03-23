@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 /*
-	插入排序（略微有点绕）
+	插入排序（略微有点绕，有点绕）
 	从左往右，从右往左两种
 */
 func InsertSort(arr []int) []int{
@@ -26,6 +26,6 @@ func InsertSort(arr []int) []int{
 }
 
 func mainInsert()  {
-	arr:=[]int{4,7,2,1,3,8,5,9,6,8}
+	arr:=[]int{9,2,5,0,6,1,7,8,4,3}
 	fmt.Println(InsertSort(arr))
 }

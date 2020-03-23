@@ -4,6 +4,7 @@ import "fmt"
 
 /*
 	选择排序（和冒泡排序有点相似）
+	循环数组，每次从剩下的部分选择最大值\最小值，交换位置
 */
 func SelectSort(arr []int) []int{
 	l := len(arr)
@@ -27,6 +28,6 @@ func SelectSort(arr []int) []int{
 	return arr
 }
 func mainInt()  {
-	arr:=[]int{4,7,2,1,3,8,5,9,6,8}
+	arr:=[]int{9,2,5,0,6,1,7,8,4,3}
 	fmt.Println(SelectSort(arr))
 }

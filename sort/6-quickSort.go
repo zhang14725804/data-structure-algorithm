@@ -1,7 +1,9 @@
 package main
 
 import "fmt"
-
+/*
+	快速排序
+*/
 func QuickSort(arr []int) []int {
 	l := len(arr)
 	if l <= 1 {
@@ -63,7 +65,7 @@ func QuickSort2(arr []int) []int {
 }
 
 func mainQuick()  {
-	arr:=[]int{4,7,2,1,3,8,5,9,6,8}
+	arr:=[]int{9,2,5,0,6,1,7,8,4,3}
 	fmt.Println(QuickSort(arr))
 	fmt.Println(QuickSort2(arr))
 }
