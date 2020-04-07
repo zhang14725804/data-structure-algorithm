@@ -38,6 +38,8 @@
 
 [手撕LeetCode题目](https://github.com/labuladong/fucking-algorithm)
 
+[数据结构和算法必知必会的50个代码实现](https://github.com/wangzheng0822/algo)
+
 #### 数据结构
 
 [golang-data-structures](https://flaviocopes.com/golang-data-structures/)
@@ -50,7 +52,7 @@
 
 [数据结构与算法1](https://www.bilibili.com/video/av81882246?p=1)
 
-[golang数据结构与算法导论](https://ke.qq.com/course/455577) 同样的课程，更便宜😅 [go专业数据结构与算法](https://edu.csdn.net/course/detail/26960)
+[golang数据结构与算法导论(全部)](https://ke.qq.com/course/455577) 同样的课程，更便宜😅 [go专业数据结构与算法(35之前)](https://edu.csdn.net/course/detail/26960)
 
 ### 项目（乱入😅）
 
