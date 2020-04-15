@@ -5,10 +5,10 @@ import "fmt"
 /*
 	快速排序
 */
-func main(){
+func mainQB(){
 	arr:=[]int{5,4,6,7,4,8,3,2,9,0,1}
 	fmt.Println(QuickSort(arr))
-	fmt.Println(binSearch(arr,12))
+	fmt.Println(binSearch(arr,9))
 }
 
 // 快速排序
@@ -17,11 +17,15 @@ func QuickSort(arr []int)[]int{
 	if l<=1{
 		return arr
 	}else{
+		// 基准数据
 		base := arr[0]
+		// 小于基准数据
 		small := make([]int,0,0)
+		// 大于基准数据
 		bigger := make([]int,0,0)
+		// 等于基准数据
 		mid := make([]int,0,0)
-		//
+		// 填充mid
 		mid = append(mid,base)
 		for i:=1; i<l; i++{
 			if arr[i]<base{

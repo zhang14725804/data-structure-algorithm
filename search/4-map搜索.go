@@ -11,7 +11,7 @@ import (
 /*
 	数据载入map内存，然后在进行搜索，相比数组存储结构更快
 */
-func main(){
+func mainMap(){
 	const N = 3
 	// 初始化map,如果是map，自己构造的模拟数据键值对重复概率比较大
 	allStrs:=make(map[int]string,N)
