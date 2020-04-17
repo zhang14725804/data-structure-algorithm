@@ -4,6 +4,7 @@ import "fmt"
 
 /*
 	二分查找改良版--斐波那契查找
+	斐波那契方式切割
 */
 func binSearchMid(arr []int,target int) int  {
 	fmt.Println(arr,target)
@@ -35,7 +36,7 @@ func binSearchMid(arr []int,target int) int  {
 	return -1
 }
 
-func main()  {
+func mainBinSearchMid()  {
 	arr := make([]int,1000,1000)
 	for i:=0; i<1000;i++  {
 		arr[i] = i
