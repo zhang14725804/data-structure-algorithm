@@ -10,7 +10,7 @@ import "fmt"
 	C找到第一个大于等于i的
 	D找到最后一个小于等于i的
 */
-func main(){
+func main_search_n(){
 	arr := []int{0,1,2,2,3,3,3,4,4,5,6,6,6,7,8,8,8,8,9}
 	fmt.Println(bin_search_midA(arr,3))
 	fmt.Println(bin_search_midB(arr,3))
