@@ -26,13 +26,13 @@ func validateBinaryTreeNodes(n int, leftChild []int, rightChild []int) bool {
 	if root == n{
 		return false
 	}
-	// 宽度搜索
+	
 	st:=make([]bool,n)
 	st[root] = true
 	// 借助队列
 	q := &queue{}
 	q.push_back(root)
-
+	// 宽度搜索
 	for q.size()>0{
 		// 对头数据获取删除
 		t:=q.front()
@@ -44,10 +44,10 @@ func validateBinaryTreeNodes(n int, leftChild []int, rightChild []int) bool {
 			if s!=-1{
 				if st[s]{
 					return false
-					// 标记被遍历过
-					st[s] = true
-					q.push_back(s)
 				}
+				// 标记被遍历过
+				st[s] = true
+				q.push_back(s)
 			}
 		}
 	}
