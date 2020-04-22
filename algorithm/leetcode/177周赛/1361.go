@@ -1,5 +1,8 @@
 /*
 	todo:这个题不懂
+	a:=[]int{1,-1,3,-1}
+	b:=[]int{2,-1,-1,-1}
+	fmt.Println(validateBinaryTreeNodes(4,a,b))
 */
 func validateBinaryTreeNodes(n int, leftChild []int, rightChild []int) bool {
 	d :=make([]int,n)
