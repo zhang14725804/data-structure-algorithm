@@ -44,7 +44,7 @@ func main1()  {
 /*
 	双链表
 */
-func main()  {
+func main2()  {
 	list := double_link.NewDoubleLink()
 	node1 := double_link.NewDoublelinkNode(1)
 	node2 := double_link.NewDoublelinkNode(2)
@@ -54,5 +54,23 @@ func main()  {
 	list.InsertBefore(node2)
 	list.InsertAtfer(node3)
 	list.InsertAtfer(node4)
+	fmt.Println(list.String())
+}
+
+func main()  {
+	list := double_link.NewDoubleLink()
+	node1 := double_link.NewDoublelinkNode(1)
+	node2 := double_link.NewDoublelinkNode(2)
+	node3 := double_link.NewDoublelinkNode(3)
+	node4 := double_link.NewDoublelinkNode(4)
+	list.InsertBefore(node1)
+	list.InsertBefore(node2)
+	list.InsertBefore(node3)
+	list.InsertBefore(node4)
+	fmt.Println(list.String())
+	node5 := double_link.NewDoublelinkNode(5)
+	node6 := double_link.NewDoublelinkNode(5)
+	list.InsertNodeBefore(node3,node5)
+	list.InsertNodeAfter(node3,node6)
 	fmt.Println(list.String())
 }
