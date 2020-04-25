@@ -10,12 +10,14 @@
 */
 
 func duplicateInArray(nums []int) int {
-    hash := make(map[int]int)
+	hash := make(map[int]int)
+	// 不在范围内的数字
 	for i := 0; i < len(nums); i++ {
 		if nums[i] < 0 || nums[i] > len(nums)-1 {
 			return -1
 		}
 	}
+	// 利用hash找出重复数字
 	for i := 0; i < len(nums); i++ {
 		hash[nums[i]] += 1
 		if hash[nums[i]] > 1 {
