@@ -17,13 +17,13 @@ var	preorder,inorder []int
 
 func buildTree(_preorder []int, _inorder []int) *TreeNode {
 	preorder,inorder = _preorder,_inorder
-	// 
+	// 遍历中序遍历结果数组，存储数据引用
 	for i:=0;i<len(inorder);i++{
 		hash[inorder[i]] = i
 	}
 	return dfs(0,len(preorder)-1,0,len(inorder)-1)
 }
-
+// 根据前序遍历序列和中序遍历序列得到根节点
 func dfs(pl,pr,il,ir int) *TreeNode{
 	if pl > pr {
 		return nil
@@ -34,7 +34,7 @@ func dfs(pl,pr,il,ir int) *TreeNode{
 		Right:nil,
 	}
 	k:=hash[root.Val]
-	// todo:难点，求左右子树
+	// todo:难点。确定左右子树新的区间范围
 	left:=dfs(pl+1, pl+k-il, il, k-1)
 	right:=dfs(pl+k-il+1, pr, k+1, ir)
 	root.Left = left
