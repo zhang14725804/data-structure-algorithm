@@ -5,6 +5,8 @@
 	（3）边界
 
 	todo：难的很，很难
+
+	变化：如果走K次呢，更难了😅
 */
 func getMaxValue(grid [][]int) int {
 	n,m := len(grid),len(grid[0])
