@@ -1,4 +1,6 @@
-
+/*
+	最大堆和最小堆
+*/
 type Int int
 
 func (x Int) Less(than Item) bool {
