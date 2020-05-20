@@ -51,7 +51,6 @@
 
 [数据结构与算法1](https://www.bilibili.com/video/av81882246?p=1)
 
-当前节点：https://www.bilibili.com/video/BV1hJ411j7gD?p=70
 
 [golang数据结构与算法导论(全部)](https://ke.qq.com/course/455577) 同样的课程，更便宜😅 [go专业数据结构与算法(35之前)](https://edu.csdn.net/course/detail/26960)
 
