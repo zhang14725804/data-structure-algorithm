@@ -1,15 +1,3 @@
-#### 简单排序算法
-
-[极客学院算法](http://wiki.jikexueyuan.com/list/sort/)
-
-[十大经典排序算法](https://github.com/hustcc/JS-Sorting-Algorithm)
-
-[极客时间-算法训练营]
-
-#### TODOS
-
-- 堆排序，希尔排序，桶排序，基数排序不好理解
-
 #### LeetCode
 
 [leetcode题源](https://leetcode-cn.com/problemset/all/)
@@ -40,19 +28,19 @@
 
 [数据结构和算法必知必会的50个代码实现](https://github.com/wangzheng0822/algo)
 
-#### 数据结构
-
-[golang-data-structures](https://flaviocopes.com/golang-data-structures/)
-
-[Go Data Structures](https://github.com/emirpasic/gods)
 
 ### 数据结构和算法
 
+[Go Data Structures](https://github.com/emirpasic/gods)
 
-[数据结构与算法1](https://www.bilibili.com/video/av81882246?p=1)
+[数据结构与算法-尹成](https://www.bilibili.com/video/av81882246?p=1)
+[go专业数据结构与算法-尹成(35之前)](https://edu.csdn.net/course/detail/26960)
+[golang数据结构与算法导论-尹成（多一半）](https://ke.qq.com/course/455577) 
+[数据结构与算法导论-尹成(全部😅)](https://edu.51cto.com/course/20394.html)
 
+[极客学院算法](http://wiki.jikexueyuan.com/list/sort/)
 
-[golang数据结构与算法导论(全部)](https://ke.qq.com/course/455577) 同样的课程，更便宜😅 [go专业数据结构与算法(35之前)](https://edu.csdn.net/course/detail/26960)
+[极客时间-算法训练营]
 
 ### 项目（乱入😅）
 
@@ -60,4 +48,14 @@
 
 
 [程序员面试最常见问题TOP 48](https://zhuanlan.zhihu.com/p/45469008)
+
+
+### 漫漫长路
+
+《数据结构与算法分析》
+《数据库系统概念》
+《现代操作系统》
+《计算机网络》
+《计算机程序的构造和解释》
+《编译原理》
 
