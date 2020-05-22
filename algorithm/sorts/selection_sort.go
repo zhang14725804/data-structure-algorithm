@@ -1,15 +1,13 @@
 package sorts
 
-import "fmt"
-
-// SelectionSort 选择排序思想：
 /*
+	选择排序
 	每次从余下的数中找最小的，并排到余下的数的最开头。
 */
-func SelectionSort(array []int) {
+func SelectionSort(array []int) []int {
 	length := len(array)
 	if length < 2 {
-		return
+		return array
 	}
 
 	for i := 0; i < length; i++ {
@@ -24,5 +22,5 @@ func SelectionSort(array []int) {
 		// 把每次找出来的最小值与之前的最小值做交换
 		array[i], array[min] = array[min], array[i]
 	}
-	fmt.Println("选择排序之后：：", array)
+	return array
 }
