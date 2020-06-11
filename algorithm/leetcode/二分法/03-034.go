@@ -1,0 +1,37 @@
+/*
+	给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置
+	需要两次二分
+*/
+func searchRange(nums []int, target int) []int {
+	if len(nums) == 0{
+		return []int{-1,-1}
+	}
+	// 左边(模板1)
+	l,r := 0,len(nums)-1
+	for l<r{
+		mid:=(l+r) >> 1
+		// 
+		if nums[mid] >= target{
+			r = mid
+		}else{
+			l = mid+1
+		}
+	}
+	if nums[r] != target{
+		return []int{-1,-1}
+	}
+	start := r
+	// 右边(模板2)
+	l,r := 0,len(nums)-1
+	for l < r{
+		mid := (r+l+1) >> 1
+		// 
+		if nums[mid] <= target{
+			l = mid
+		}else{
+			r = mid-1
+		}
+	}
+	end := r
+	return []int{start,end}
+}
