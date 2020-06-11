@@ -30,32 +30,35 @@ func MergeSort(array []int) []int {
 		return array
 	}
 	key := length / 2
+	// 递归左右两部份
 	left := MergeSort(array[0:key])
 	right := MergeSort(array[key:])
 	return merge(left, right)
 }
 
 func merge(left, right []int) []int {
-	newArr := make([]int, len(left)+len(right))
+	res := make([]int, len(left)+len(right))
 	i, j, index := 0, 0, 0
 	for {
+		// 左边大于右边
 		if left[i] > right[j] {
-			newArr[index] = right[j]
+			res[index] = right[j]
 			index++
 			j++
 			if j == len(right) {
-				copy(newArr[index:], left[i:])
+				// 作用相当于append
+				copy(res[index:], left[i:])
 				break
 			}
 		} else {
-			newArr[index] = left[i]
+			res[index] = left[i]
 			index++
 			i++
 			if i == len(left) {
-				copy(newArr[index:], right[j:])
+				copy(res[index:], right[j:])
 				break
 			}
 		}
 	}
-	return newArr
+	return res
 }
