@@ -1,5 +1,5 @@
 /*
-	 搜索旋转排序数组
+	 搜索旋转排序数组（不太好理解）
 */
 func search(nums []int, target int) int {
 	if len(nums) == 0{

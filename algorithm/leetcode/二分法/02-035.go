@@ -1,6 +1,5 @@
 /*
-	找到大于等于target得最左边的数
-	模板1
+	找到大于等于target得最左边的数（模板1）
 */
 func searchInsert(nums []int, target int) int {
 	if len(nums) == 0 || nums[len(nums)-1]<target{
