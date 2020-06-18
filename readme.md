@@ -50,6 +50,12 @@
 [程序员面试最常见问题TOP 48](https://zhuanlan.zhihu.com/p/45469008)
 
 
+### leetcode刷题打卡活动
+
+[斗鱼-大雪菜](https://v.douyu.com/author/PDAPVoKO3wxN)
+
+[b栈-大雪菜](https://space.bilibili.com/7836741/channel/detail?cid=92900)
+
 ### 漫漫长路
 
 《数据结构与算法分析》
