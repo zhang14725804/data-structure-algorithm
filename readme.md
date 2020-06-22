@@ -8,6 +8,8 @@
 
 [LeetCode-Go](https://github.com/halfrost/LeetCode-Go)
 
+[leetcode-Go(循序渐进)](https://github.com/greyireland/algorithm-pattern)
+
 [Algorithms & Data Structures in Go](https://github.com/arnauddri/algorithms)
 
 [用动画的形式呈现解LeetCode题目的思路](https://github.com/MisterBooo/LeetCodeAnimation)
