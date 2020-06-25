@@ -1,15 +1,18 @@
 /*
 	929. Unique Email Addresses
 
+	域名不变，需要处理用户名
+
 	golang没有set，所以用map替代set
 */
 func numUniqueEmails(emails []string) int {
 	hash:= make(map[string]int,0)
 	for _,e := range emails{
 		email:=[]rune(e)
+		// 找到@位置
 		at:= find(email,'@')
 		var name string
-		// 排除”+“和”.“，生成name
+		// 排除”+“之后的内容和”.“，生成name
 		for _,c :=range(email[:at]){
 			if c == '+' {
 				break
@@ -18,6 +21,7 @@ func numUniqueEmails(emails []string) int {
 			}
 		}
 
+		// 域名
 		domain:=email[at+1:]
 		// 每个email存入hash表
 		emain :=name + "@" + string(domain) 

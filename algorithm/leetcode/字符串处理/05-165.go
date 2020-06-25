@@ -8,26 +8,24 @@
 func compareVersion(version1 string, version2 string) int {
 	s1:=[]rune(version1)
 	s2:=[]rune(version2)
-
+	// 遍历两个字符串
 	i,j:=0,0
 	for i<len(s1) || j<len(s2){
 		x,y:=i,j
-
+		// 找到连续的数字
 		for x < len(s1) && s1[x] != '.' {
 			x = x+1
 		}
-
 		for y < len(s2) && s2[y] != '.' {
 			y = y+1
 		}
-
+		// 取出数字
 		var a int
 		if i == x{
 			a = 0
 		}else{
 			a,_ = strconv.Atoi(string(s1[i:i+1]))
-		}
-			
+		}	
 		var b int
 		if j == y{
 			b = 0
@@ -35,6 +33,7 @@ func compareVersion(version1 string, version2 string) int {
 			b,_ = strconv.Atoi(string(s2[j:j+1]))
 		}
 
+		// 比较
 		if a>b{
 			return 1
 		}
