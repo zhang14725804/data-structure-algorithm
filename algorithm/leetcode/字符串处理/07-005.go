@@ -2,7 +2,9 @@
 	5. Longest Palindromic Substring(最长回文子串)
 
 	马拉车算法
-
+	选一个中心点，向两边扩展
+	回文串是奇数长度、偶数长度两种情况
+	
 	todos：："cbbd"、"bb"测试不通过！！！
 */
 func longestPalindrome(s string) string {
