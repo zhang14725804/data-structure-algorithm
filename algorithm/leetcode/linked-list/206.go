@@ -6,20 +6,27 @@ type ListNode struct {
 }
 
 /*
-	206. Reverse Linked List
+	206. Reverse Linked List（链表反转）
 */
-func Leetcode206(head *ListNode) *ListNode {
+func reverseList(head *ListNode) *ListNode {
 	if head == nil {
 		return nil
 	}
-	a := head
-	b := head.Next
-	for b != nil {
-		c := b.Next
-		b.Next = a
-		a = b
-		b = c
+	// 当前位置
+	cur := head
+	// 前一个位置
+	prev := head
+	for cur != nil {
+		// 占位符。存储next指针
+		next := cur.Next
+		// 改变指针指向
+		cur.Next = prev
+		// 移动prev指针
+		prev = cur
+		// 移动cur指针
+		cur = next
 	}
+	// 切断循环链
 	head.Next = nil
-	return a
+	return prev
 }
