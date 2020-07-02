@@ -8,7 +8,12 @@ type ListNode struct {
 /*
 	92.Reverse Linked List II
 
-	翻转某一段
+	链表反转某一段
+
+	思路：
+	（1）保存m的前一个元素，保存n的下一个元素
+	（2）反转m-n之间的元素，
+	（3）修改m、n指针指向
 */
 func reverseBetween(head *ListNode, m int, n int) *ListNode {
 	if m == n {
@@ -20,7 +25,7 @@ func reverseBetween(head *ListNode, m int, n int) *ListNode {
 
 	// a 是m的前一个元素
 	a := newHead
-	// d 表示n那个元素
+	// 保存 n元素
 	d := newHead
 
 	for i := 0; i < m-1; i++ {
@@ -30,19 +35,19 @@ func reverseBetween(head *ListNode, m int, n int) *ListNode {
 		d = d.Next
 	}
 
-	// b 表示m那个元素
+	// b 表示m元素
 	b := a.Next
-	// c 是n的下一个元素
+	// 保存n的下一个元素
 	c := d.Next
 
 	// m到n之间元素指针翻转
-	p := b
-	q := b.Next
-	for q != c {
-		o := q.Next
-		q.Next = p
-		p = q
-		q = o
+	prev := b
+	cur := b.Next
+	for cur != c {
+		next := cur.Next
+		cur.Next = prev
+		prev = cur
+		cur = next
 	}
 	b.Next = c
 	a.Next = d
