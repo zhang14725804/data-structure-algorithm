@@ -30,6 +30,7 @@
 
 [数据结构和算法必知必会的50个代码实现](https://github.com/wangzheng0822/algo)
 
+[leetcode919之前所有题目](https://github.com/grandyang/leetcode)
 
 ### 数据结构和算法
 
