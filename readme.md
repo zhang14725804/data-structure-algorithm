@@ -8,7 +8,7 @@
 
 [LeetCode-Go](https://github.com/halfrost/LeetCode-Go)
 
-[leetcode-Go(循序渐进)](https://github.com/greyireland/algorithm-pattern)
+[leetcode-Go(循序渐进-算法模板)](https://github.com/greyireland/algorithm-pattern)
 
 [Algorithms & Data Structures in Go](https://github.com/arnauddri/algorithms)
 
