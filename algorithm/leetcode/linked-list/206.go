@@ -19,7 +19,7 @@ func reverseList(head *ListNode) *ListNode {
 	for cur != nil {
 		// 占位符。存储next指针
 		next := cur.Next
-		// 改变指针指向
+		// 改变当前节点指针指向（反转嘛） 😅
 		cur.Next = prev
 		// 移动prev指针
 		prev = cur
