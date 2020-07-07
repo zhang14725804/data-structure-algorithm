@@ -7,6 +7,7 @@ type ListNode struct {
 
 /*
 	206. Reverse Linked List（链表反转）
+	再次遇到链表反转
 */
 func reverseList(head *ListNode) *ListNode {
 	if head == nil {
