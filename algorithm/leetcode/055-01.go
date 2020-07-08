@@ -17,10 +17,16 @@ func canJump(arr []int) bool {
 	for i := 0; i < length; i++ {
 		dp[i] = 0
 	}
+	/*
+		dp每个位置有三种可能
+		1：可到达
+		0：未知
+		-1：不可到达
+	*/
 	dp[length-1] = 1
+	// 动态规划1 top-bottom 从第一个元素开始递归
 	return jump(0)
 }
-// 动态规划1 top-bottom
 func jump(pos int) bool {
 	if dp[pos] == 1{
 		return true
