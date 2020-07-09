@@ -7,14 +7,14 @@ package main
 */
 func lengthOfLongestSubstring(s string) int {
 	n, ans := len(s), 0
-	m := make(map[byte]int) // 存放字符出现的位置
+	hash := make(map[byte]int) // 存放字符出现的位置
 	for i, j := 0, 0; j < n; j++ {
-		if _, ok := m[s[j]]; ok {
+		if _, ok := hash[s[j]]; ok {
 			// 发现重复的，则重新选一个i，这个i停留再出现重复的下一位置
-			i = compare(m[s[j]], i, true)
+			i = compare(hash[s[j]], i, true)
 		}
 		ans = compare(ans, j-i+1, true)
-		m[s[j]] = j + 1
+		hash[s[j]] = j + 1
 	}
 	return ans
 }
