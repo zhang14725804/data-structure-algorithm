@@ -1,5 +1,3 @@
-package main
-
 /*
 	给你字符串 s 和整数 k 。
 
@@ -46,10 +44,4 @@ func compare(a, b int, max bool) int {
 		return b
 	}
 	return a
-}
-
-func main() {
-	s := "weallloveyou"
-	k := 7
-	maxVowels(s, k)
 }
