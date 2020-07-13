@@ -1,5 +1,3 @@
-package leetcode
-
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -7,14 +5,13 @@ type TreeNode struct {
 }
 
 /**
-101. Symmetric Tree
-判断镜像二叉树问题
+	判断镜像二叉树问题
 
-迭代（bfs）的方式（不同的遍历方式，然后比较节点即可）
-左边：左中右遍历
-右边：右中左遍历
+	迭代（bfs）的方式（自行维护一个栈）
+	左边：左中右遍历
+	右边：右中左遍历
 
-todos：：最后居然卡在了指针*和地址&上了
+	todos：：指针*和地址&
 */
 func isSymmetric(root *TreeNode) bool {
 	if root == nil {
@@ -27,24 +24,28 @@ func isSymmetric(root *TreeNode) bool {
 	r := root.Right
 
 	for len(left) > 0 || len(right) > 0 || r != nil || l != nil {
+
 		for r != nil && l != nil {
+			// 左子树的左子树 和 右子树的右子树
 			left.push(*l)
 			l = l.Left
 			right.push(*r)
 			r = r.Right
 		}
 
+		// 左右节点一个为空一个不为空
 		if l != nil || r != nil {
 			return false
 		}
 
 		l = left.pop()
 		r = right.pop()
+		// 左右子节点val不同
 		if l.Val != r.Val {
 			return false
 		}
 
-		// 这里注意
+		// 左子树的右子树 和 右子树的左子树
 		l = l.Right
 		r = r.Left
 	}
