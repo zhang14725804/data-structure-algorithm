@@ -8,13 +8,16 @@
 	todo：分析挺绕的
 */
 func longestValidParentheses(s string) int {
+	// 用slice模拟栈
 	stk := make([]int, 0)
-
 	res := 0
+	// start，记录每个分段的前一个位置
 	for i, start := 0, -1; i < len(s); i++ {
+		// 当前这个字符是左括号
 		if s[i] == '(' {
 			stk = append(stk, i)
 		} else {
+			// 当前是右括号
 			if len(stk) > 0 {
 				// stk.pop
 				stk = stk[:len(stk)-1]
@@ -25,6 +28,7 @@ func longestValidParentheses(s string) int {
 					res = compare(res, i-start, true)
 				}
 			} else {
+				// 当前右括号是分界点
 				start = i
 			}
 		}
