@@ -45,6 +45,7 @@ func inorderTraversal(root *TreeNode) []int {
 	var res []int
 	var stk []TreeNode
 	p := root
+	// 这个他么哪里错了！！！！
 	for p != nil || len(stk) > 0 {
 		for p != nil {
 			stk = append(stk, p)
@@ -52,13 +53,32 @@ func inorderTraversal(root *TreeNode) []int {
 		}
 		// top、pop
 		p := stk[len(stk)-1]
-		stk = stk[:len(stk)-1]
 		res = append(res, p.Val)
 		p = p.Right
+		stk = stk[:len(stk)-1]
 	}
 	return res
 }
 
+// 这个是对的
+func inorderTraversal(root *TreeNode) []int {
+    var res []int
+    stack := list.New()
+    for root!=nil || stack.Len()>0{
+        for root!=nil{
+            stack.PushBack(root)
+            root = root.Left
+        }
+        if stack.Len()>0{
+            v:=stack.Back()
+            root = v.Value.(*TreeNode)
+            res = append(res,root.Val)
+            root = root.Right
+            stack.Remove(v)
+        }
+    }
+    return res
+}
 // type Stack []TreeNode
 
 // func (s *Stack) push(node TreeNode) {
