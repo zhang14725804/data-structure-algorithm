@@ -21,9 +21,9 @@ func levelOrder(root *TreeNode) [][]int {
 	var q Queue
 	// 入队
 	q.push(*root)
-	
+
 	for len(q) > 0 {
-		// tips:循环的时候不能直接 i:=0;i<len(q);i++
+		// tips:循环的时候不能直接  i:=0;i<len(q);i++
 		length := len(q)
 		// 存储每一层元素
 		var level []int

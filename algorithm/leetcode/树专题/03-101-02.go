@@ -4,10 +4,11 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-/**
+/*
 	判断镜像二叉树问题
 
 	迭代（bfs）的方式（自行维护一个栈）
+
 	左边：左中右遍历
 	右边：右中左遍历
 

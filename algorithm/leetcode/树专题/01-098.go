@@ -7,8 +7,6 @@ type TreeNode struct {
 }
 
 /*
-	98. Validate Binary Search Tree
-
 	给定一个二叉树，判断其是否是一个有效的二叉搜索树。
 
 	假设一个二叉搜索树具有如下特征：
@@ -17,16 +15,12 @@ type TreeNode struct {
 	节点的右子树只包含大于当前节点的数。
 	所有左子树和右子树自身必须也是二叉搜索树。
 
-	二叉搜索树定义：
-	https://www.cnblogs.com/coffeeSS/p/5452719.html
-	https://stackoverflow.com/questions/6878590/the-maximum-value-for-an-int-type-in-go/39571615
 
 	两种方式：自顶向下、自底向上
 */
 
 /*
-	自顶向下
-
+	思路：自顶向下
 	左右子树的值都要在一个区间当中
 */
 func isValidBST1(root *TreeNode) bool {
