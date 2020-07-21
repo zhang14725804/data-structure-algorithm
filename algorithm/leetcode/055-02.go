@@ -9,11 +9,12 @@
 var dp []int
 var nums []int
 var length int
+
 func canJump(arr []int) bool {
-    nums = arr
+	nums = arr
 	length = len(nums)
 	// 初始化数组，长度为length，初始值为0（这么些是不是有点蠢）
-	dp=make([]int,length)
+	dp = make([]int, length)
 	for i := 0; i < length; i++ {
 		dp[i] = 0
 	}
@@ -26,32 +27,18 @@ func canJump(arr []int) bool {
 	*/
 	// 动态规划2 bottom-up 从第最后个元素开始倒着递归
 	// length-2最后一个数不需要考虑
-	for i := length-2; i>=0; i-- {
-		maxJump:=compare(i+nums[i],length-1,false)
-		for j := i+1; j <= maxJump; j++ {
-			if dp[j] == 1{
+	for i := length - 2; i >= 0; i-- {
+		maxJump := compare(i+nums[i], length-1, false)
+		for j := i + 1; j <= maxJump; j++ {
+			if dp[j] == 1 {
 				dp[i] = 1
 				break
 			}
 		}
 	}
-	if dp[0] == 1{
+	if dp[0] == 1 {
 		return true
-	}else{
+	} else {
 		return false
 	}
-}
-
-func compare(a, b int, max bool) int {
-	// max 是否返回最大值
-	if a > b {
-		if max == true {
-			return a
-		}
-		return b
-	}
-	if max == true {
-		return b
-	}
-	return a
 }

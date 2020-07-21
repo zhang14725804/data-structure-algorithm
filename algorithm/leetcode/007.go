@@ -6,24 +6,22 @@
 
 	思路2：转换成字符串，reverse
 */
-// int最大值，最小值 -9223372036854775808 9223372036854775807
-const INT_MAX = int(^uint(0) >> 1)
-const INT_MIN = ^INT_MAX
+
 func reverse(x int) int {
-	res:=0
+	res := 0
 	// 处理正负数
-	pn:=1
-	if x<0{
+	pn := 1
+	if x < 0 {
 		pn = -1
 		x = -x
 	}
 	// 重点在这里： x % 10 取余数，x /= 10取整
-	for x>0{
-		res = res*10 + x % 10
+	for x > 0 {
+		res = res*10 + x%10
 		x /= 10
 	}
-	res*=pn
-	if res<INT_MIN || res>INT_MAX{
+	res *= pn
+	if res < INT_MIN || res > INT_MAX {
 		return 0
 	}
 	return res

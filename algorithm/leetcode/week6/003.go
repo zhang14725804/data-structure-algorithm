@@ -19,27 +19,14 @@ func lengthOfLongestSubstring(s string) int {
 	}
 	return ans
 }
-func compare(a, b int, max bool) int {
-	// max 是否返回最大值
-	if a > b {
-		if max == true {
-			return a
-		}
-		return b
-	}
-	if max == true {
-		return b
-	}
 
-	return a
-}
 /*
 	双指针算法
 */
 func lengthOfLongestSubstring(s string) int {
 	hash := make(map[byte]int)
-	res :=0
-	for i,j := 0,0; i<len(s); i++{
+	res := 0
+	for i, j := 0, 0; i < len(s); i++ {
 		// s[i]存入hash中
 		hash[s[i]]++
 		// hash[s[i]] > 1的时候，hash[s[i]] == hash[s[j]]

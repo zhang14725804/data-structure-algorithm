@@ -9,11 +9,12 @@
 var dp []int
 var nums []int
 var length int
+
 func canJump(arr []int) bool {
-    nums = arr
+	nums = arr
 	length = len(nums)
 	// 初始化数组，长度为length，初始值为0（这么些是不是有点蠢）
-	dp=make([]int,length)
+	dp = make([]int, length)
 	for i := 0; i < length; i++ {
 		dp[i] = 0
 	}
@@ -28,34 +29,20 @@ func canJump(arr []int) bool {
 	return jump(0)
 }
 func jump(pos int) bool {
-	if dp[pos] == 1{
+	if dp[pos] == 1 {
 		return true
-	}else if dp[pos] == -1{
+	} else if dp[pos] == -1 {
 		return false
 	}
-	maxJump := compare(pos + nums[pos],length-1,false)
-	for i := pos+1; i <= maxJump; i++ {
-		if jump(i) == true{
+	maxJump := compare(pos+nums[pos], length-1, false)
+	for i := pos + 1; i <= maxJump; i++ {
+		if jump(i) == true {
 			dp[pos] = 1
 			return true
 		}
 	}
 	dp[pos] = -1
 	return false
-}
-
-func compare(a, b int, max bool) int {
-	// max 是否返回最大值
-	if a > b {
-		if max == true {
-			return a
-		}
-		return b
-	}
-	if max == true {
-		return b
-	}
-	return a
 }
 
 // 动态规划2 bottom-top（倒着推）
