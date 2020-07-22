@@ -53,7 +53,10 @@ func minimumTotal(triangle [][]int) int {
 	return res
 }
 
-// todo：这个骚操作，不懂
+/*
+	todo：这个骚操作，不懂
+	每一行的状态只和上一行相关，用2行就可以表示
+*/
 func minimumTotal(triangle [][]int) int {
 	n := len(triangle)
 	// 二维数组，只需要两行就搞定
