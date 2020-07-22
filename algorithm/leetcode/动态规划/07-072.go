@@ -1,8 +1,10 @@
-import "data-structure-algorithm/algorithm/common"
-
 /*
 	集合：所有将第一个字符串的前i个字母，变成第二个字符串的前j个字母的方案
-	状态计算：四种方案求最小值（insert，delete，replace（两种）），不懂
+	状态计算：三种方案求最小值
+		最后一步insert，dp[i][j-1] + 1
+		最后一步delete，dp[i-1][j] + 1
+		最后一步replace（两种，str1[i]和str2[j]已经相等了，str1[i]和str2[j]不相等）），todo：还是不懂
+
 */
 func minDistance(str1 string, str2 string) int {
 	n := len(str1)
@@ -35,4 +37,28 @@ func minDistance(str1 string, str2 string) int {
 		}
 	}
 	return dp[n][m]
+}
+
+/*
+	递归思路。超出时间限制了😅
+*/
+func minDistance(word1 string, word2 string) int {
+	// 三种边界条件，无需赘述边界条件
+	if len(word1) == 0 && len(word2) == 0 {
+		return 0
+	}
+	if len(word1) == 0 {
+		return len(word2)
+	}
+	if len(word2) == 0 {
+		return len(word1)
+	}
+	// 这他么怎么理解
+	x := minDistance(word1, word2[:len(word2)-1]) + 1
+	y := minDistance(word1[:len(word1)-1], word2) + 1
+	z := minDistance(word1[:len(word1)-1], word2[:len(word2)-1])
+	if word1[len(word1)-1] != word2[len(word2)-1] {
+		z++
+	}
+	return compare(compare(x, y, false), z, false)
 }

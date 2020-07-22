@@ -1,7 +1,3 @@
-import (
-	"data-structure-algorithm/algorithm/common"
-)
-
 /*
 	给定一个无序的整数数组，找到其中最长上升子序列的长度。
 
@@ -19,25 +15,24 @@ import (
 
 	动态规划思路：
 	（1）状态表示。集合（所有以i结尾的上升子序列），属性：长度最大值
-	（2）状态计算。todo，状态计算蒙圈了，不懂
+	（2）状态计算。
+
+	https://leetcode.wang/leetcode-300-Longest-Increasing-Subsequence.html
 
 */
 func lengthOfLIS(nums []int) int {
 	n := len(nums)
 	f := make([]int, n)
-
+	var res int
 	for i := 0; i < n; i++ {
 		f[i] = 1
 		for j := 0; j < i; j++ {
-			// 倒数第二个小于最后一个
+			// 如果前边的某个数 nums[j] < nums[i] ，那么我们可以将第 i 个数接到第 j 个数字的后边作为一个新的上升子序列
 			if nums[j] < nums[i] {
-				f[i] = common.Max(f[i], f[j]+1)
+				f[i] = compare(f[i], f[j]+1, true)
 			}
 		}
-	}
-	var res int
-	for k := 0; k < n; k++ {
-		res = common.Max(res, f[k])
+		res = compare(res, f[i], true)
 	}
 	return res
 }
