@@ -3,7 +3,7 @@
 	状态计算：三种方案求最小值
 		最后一步insert，dp[i][j-1] + 1
 		最后一步delete，dp[i-1][j] + 1
-		最后一步replace（两种，str1[i]和str2[j]已经相等了，str1[i]和str2[j]不相等）），todo：还是不懂
+		最后一步replace（两种，str1[i]和str2[j]已经相等了，str1[i]和str2[j]不相等）），有点难理解
 
 */
 func minDistance(str1 string, str2 string) int {
