@@ -31,17 +31,3 @@ func check(c byte) int {
 	}
 	return 0
 }
-
-func compare(a, b int, max bool) int {
-	// max 是否返回最大值
-	if a > b {
-		if max == true {
-			return a
-		}
-		return b
-	}
-	if max == true {
-		return b
-	}
-	return a
-}

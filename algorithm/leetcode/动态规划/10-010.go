@@ -44,15 +44,35 @@ func isMatch(s string, p string) bool {
 			}
 			// i从1开始
 			if i > 0 && p[j] != '*' {
+				//
 				dp[i][j] = dp[i-1][j-1] && (s[i] == p[i] || p[j] == '.')
 			} else if p[j] == '*' {
 				/*
 					dp[i][j-2],"*"表示0个
 					dp[i-1][j] && (s[i] == p[j-1] || p[j-1] == '.')，“*”表示一个或多个
-				*/ 
+				*/
 				dp[i][j] = dp[i][j-2] || i > 0 && dp[i-1][j] && (s[i] == p[j-1] || p[j-1] == '.')
 			}
 		}
 	}
 	return dp[n][m]
+}
+
+/*
+	递归思路，连这个也不太理解
+*/
+func isMatch(s string, p string) bool {
+	if len(p) == 0 {
+		return len(s) == 0
+	}
+
+	first_match := len(s) > 0 && (p[0] == s[0] || p[0] == '.')
+	// 长度大于1的情况
+	if len(p) > 1 && p[1] == '*' {
+		// p 跳过两个字符，*前面的字符出现0次
+		// p 不变，例如 s = aa ，p = a*，第一个 a 匹配，然后 text 的第二个 a 接着和 p 的第一个 a 进行匹配。表示 * 用前一个字符替代。
+		return isMatch(s, p[2:]) || (first_match && isMatch(s[1:], p))
+	}
+	// 第一个字符匹配，从第二个字符开始
+	return first_match && isMatch(s[1:], p[1:])
 }

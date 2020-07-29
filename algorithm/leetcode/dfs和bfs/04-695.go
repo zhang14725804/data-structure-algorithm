@@ -6,54 +6,41 @@
 
 */
 // 网格长宽
-var m,n int
+var m, n int
+
 func maxAreaOfIsland(grid [][]int) int {
-	if len(grid) == 0 || len(grid[0]) == 0{
+	if len(grid) == 0 || len(grid[0]) == 0 {
 		return 0
 	}
-	m=len(grid)
-	n=len(grid[0])
+	m = len(grid)
+	n = len(grid[0])
 	// 遍历网格
-	res:=0
+	res := 0
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
 			// 如果是岛屿
-			if grid[i][j] == 1{
-				res=compare(res,dfs(grid,i,j),true)
+			if grid[i][j] == 1 {
+				res = compare(res, dfs(grid, i, j), true)
 			}
 		}
 	}
-    return res
+	return res
 }
 
-func dfs(grid [][]int,x,y int) int {
-	dx:=[]int{-1,0,1,0}
-	dy:=[]int{0,1,0,-1}
-	count:=1
+func dfs(grid [][]int, x, y int) int {
+	dx := []int{-1, 0, 1, 0}
+	dy := []int{0, 1, 0, -1}
+	count := 1
 	// 标记走过的位置
 	grid[x][y] = 0
 	// 遍历四个方向
 	for i := 0; i < 4; i++ {
-		a:=x+dx[i]
-		b:=y+dy[i]
+		a := x + dx[i]
+		b := y + dy[i]
 		// 边界条件
-		if a>=0 && a<m && b>=0 && b<n && grid[a][b] == 1{
-			count+=dfs(grid,a,b)
+		if a >= 0 && a < m && b >= 0 && b < n && grid[a][b] == 1 {
+			count += dfs(grid, a, b)
 		}
 	}
 	return count
-}
-
-func compare(a, b int,max bool) int {
-	// max 是否返回最大值
-	if a > b {
-		if max == true{
-			return a
-		}
-		return b
-	}
-	if max == true{
-		return b
-	}
-	return a
 }

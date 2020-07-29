@@ -6,14 +6,13 @@
 
 	思路：动态规划
 */
-const INT_MAX = int(^uint(0) >> 1)
-const INT_MIN = ^INT_MAX
+
 func maxDotProduct(nums1 []int, nums2 []int) int {
-	n,m:=len(nums1),len(nums2)
+	n, m := len(nums1), len(nums2)
 	// 初始化二维数组并赋值
-	dp:=make([][]int,n+1)
+	dp := make([][]int, n+1)
 	for i := 0; i < n+1; i++ {
-		dp[i]=make([]int,m+1)
+		dp[i] = make([]int, m+1)
 		for j := 0; j < m+1; j++ {
 			dp[i][j] = INT_MIN
 		}
@@ -26,28 +25,14 @@ func maxDotProduct(nums1 []int, nums2 []int) int {
 		dp[0][i] = 0
 	}
 	// todo：动态规划还是难以理解
-	res:=INT_MIN
+	res := INT_MIN
 	for i := 1; i < n+1; i++ {
 		for j := 1; j < m+1; j++ {
-			dp[i][j] = compare(dp[i-1][j],dp[i][j-1],true)
-			t:=dp[i-1][j-1] + nums1[i-1]*nums2[j-1]
-			res = compare(res,t,true)
-			dp[i][j] = compare(dp[i][j],t,true) 
+			dp[i][j] = compare(dp[i-1][j], dp[i][j-1], true)
+			t := dp[i-1][j-1] + nums1[i-1]*nums2[j-1]
+			res = compare(res, t, true)
+			dp[i][j] = compare(dp[i][j], t, true)
 		}
 	}
 	return res
-}
-
-func compare(a, b int, max bool) int {
-	// max 是否返回最大值
-	if a > b {
-		if max == true {
-			return a
-		}
-		return b
-	}
-	if max == true {
-		return b
-	}
-	return a
 }

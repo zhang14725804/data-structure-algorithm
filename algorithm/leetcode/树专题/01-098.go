@@ -82,17 +82,3 @@ func dfs2(root *TreeNode, maxv, minv int) bool {
 	}
 	return true
 }
-
-func compare(a, b int, max bool) int {
-	// max 是否返回最大值
-	if a > b {
-		if max == true {
-			return a
-		}
-		return b
-	}
-	if max == true {
-		return b
-	}
-	return a
-}

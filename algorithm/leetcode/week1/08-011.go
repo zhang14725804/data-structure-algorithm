@@ -6,28 +6,14 @@
 */
 func maxArea(height []int) int {
 	res := 0
-	for l,r := 0,len(height)-1;l<r;{
-		left,right := height[l],height[r]
-		res = compare(res,(r-l)*compare(left,right,false),true)
-		if left < right{
+	for l, r := 0, len(height)-1; l < r; {
+		left, right := height[l], height[r]
+		res = compare(res, (r-l)*compare(left, right, false), true)
+		if left < right {
 			l++
-		}else{
+		} else {
 			r--
 		}
 	}
 	return res
-}
-
-func compare(a, b int,max bool) int {
-	// max 是否返回最大值
-	if a > b {
-		if max == true{
-			return a
-		}
-		return b
-	}
-	if max == true{
-		return b
-	}
-	return a
 }

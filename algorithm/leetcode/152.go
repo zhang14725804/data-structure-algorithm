@@ -1,5 +1,3 @@
-
-
 /*
 	给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。
 
@@ -18,17 +16,4 @@ func maxProduct(nums []int) int {
 		max = compare(max, maxArr[i], true)
 	}
 	return max
-}
-func compare(a, b int, max bool) int {
-	// max 是否返回最大值
-	if a > b {
-		if max == true {
-			return a
-		}
-		return b
-	}
-	if max == true {
-		return b
-	}
-	return a
 }
