@@ -28,27 +28,3 @@ func trap(height []int) int {
 	return res
 }
 
-// 栈
-type stack struct {
-	x []int
-}
-
-// 入栈
-func (this *stack) push(x int) {
-	this.x = append(this.x, x)
-}
-
-// 入栈
-func (this *stack) size() int {
-	return len(this.x)
-}
-
-// 出栈
-func (this *stack) pop() {
-	this.x = this.x[:len(this.x)-1]
-}
-
-// 返回栈顶元素
-func (this *stack) top() int {
-	return this.x[len(this.x)-1]
-}
