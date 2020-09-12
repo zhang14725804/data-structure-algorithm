@@ -6,9 +6,9 @@
 
 [facebook算法大哥](http://fisherlei.blogspot.com/)
 
-[LeetCode-Go](https://github.com/halfrost/LeetCode-Go)
+[LeetCode-Go golang实现](https://github.com/halfrost/LeetCode-Go)
 
-[leetcode-Go(循序渐进-算法模板)](https://github.com/greyireland/algorithm-pattern)
+[leetcode-Go (循序渐进-算法模板)](https://github.com/greyireland/algorithm-pattern)
 
 [Algorithms & Data Structures in Go](https://github.com/arnauddri/algorithms)
 
@@ -43,12 +43,7 @@
 
 [极客学院算法](http://wiki.jikexueyuan.com/list/sort/)
 
-[极客时间-算法训练营]
-
 ### 项目（乱入😅）
-
-[go分布式爬虫项目与分布式大数据检索](https://ke.qq.com/course/457600)
-
 
 [程序员面试最常见问题TOP 48](https://zhuanlan.zhihu.com/p/45469008)
 
@@ -61,10 +56,11 @@
 
 ### 漫漫长路
 
-《数据结构与算法分析》
-《数据库系统概念》
-《现代操作系统》
-《计算机网络》
-《计算机程序的构造和解释》
-《编译原理》
+    《数据结构与算法分析》
+    《数据库系统概念》
+    《现代操作系统》
+    《计算机网络》
+    《计算机程序的构造和解释》
+    《编译原理》
+    《TCP/IP详解》
 
