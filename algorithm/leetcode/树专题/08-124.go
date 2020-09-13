@@ -5,8 +5,6 @@
 	向左走，向右走，不走（边的权重给定，不是1）
 
 	思路：枚举所有点
-
-	[0]不通过，[1,2,3]可以通过；leetcode编译器有问题，有缓存
 */
 const MaxUint = ^uint(0)
 const MaxInt = int(MaxUint >> 1)
@@ -29,8 +27,8 @@ func dfs(root *TreeNode) int {
 	left := dfs(root.Left)
 	right := dfs(root.Right)
 	// 当前路径和与ans比较
-	ans = compare(ans, left+root.Val+right,true)
+	ans = MaxInt(ans, left+root.Val+right)
 	// ps：返回当前节点的最大路径和（如果小于0需要排除）
-	return compare(0, root.Val+compare(left, right,true),true)
+	return MaxInt(0, root.Val+MaxInt(left, right))
 }
 
