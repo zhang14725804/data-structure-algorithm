@@ -1,8 +1,8 @@
 /*
 	求根到叶子节点数字之和
-
-	思路：深度优先遍历获取每个路径，存入数组，然后字符串转数组相加
 */
+
+// 思路1：深度优先遍历获取每个路径，存入数组，然后字符串转数字相加
 var res []string
 
 func sumNumbers(root *TreeNode) int {
@@ -27,4 +27,26 @@ func dfs(root *TreeNode, s string) {
 			dfs(root.Right, s+strconv.Itoa(root.Right.Val))
 		}
 	}
+}
+
+// 思路2：每次递归，如果有叶子节点，当前节点值*10,叶子节点位置不变
+var ans int
+func sumNumbers(root *TreeNode) int {
+    if root!=nil{
+        dfs(root,0)
+    }
+    return ans
+}
+func dfs(root *TreeNode,n int){
+	n = n*10 + root.Val
+	// 叶子节点
+    if root.Left ==nil && root.Right==nil{
+        ans += n
+    }
+    if root.Left!=nil{
+        dfs(root.Left,n)
+    }
+    if root.Right!=nil{
+        dfs(root.Right,n)
+    }
 }

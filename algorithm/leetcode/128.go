@@ -22,3 +22,28 @@ func longestConsecutive(nums []int) int {
 	}
 	return res
 }
+
+// hash的方法，每次从最小值（每一段的开始）开始枚举，枚举完之后删除
+func longestConsecutive(nums []int) int {
+	// 存入set中
+	set:=NewSet()
+	for _,n:=range nums{
+		set.Insert(n)
+	}
+
+	res:=0
+	for _,x:=range nums{
+		// 每次从最小值（每一段的开始）开始枚举
+		if set.Contains(x) && !set.Contains(x-1){
+			y:=x
+			// 枚举完之后删除
+			set.Remove(x)
+			for set.Contains(y+1){
+				y++
+				set.Remove(y)
+			}
+			res = MaxInt(res,y-x+1)
+		}
+	}
+	return res
+}

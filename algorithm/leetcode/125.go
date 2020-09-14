@@ -20,7 +20,7 @@ func isPalindrome(s string) bool {
 	return true
 }
 
-// 思路2：for循环双指针，跳过字母数字之外的字符
+// 思路2：for循环,双指针，跳过字母数字之外的字符
 func isPalindrome(s string) bool {
 	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
 		for !unicode.IsLetter(rune(s[i])) && !unicode.IsDigit(rune(s[i])) && i < j {

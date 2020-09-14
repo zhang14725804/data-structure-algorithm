@@ -73,12 +73,13 @@ func minimumTotal(triangle [][]int) int {
 			dp[i&1][j] = math.MaxInt64
 			// 左上角下来[i-1][j-1]
 			if j > 0 {
-				dp[i&1][j] = compare(dp[i&1][j], dp[i-1&1][j-1]+triangle[i][j], true)
+				// 注意操作优先级
+				dp[i&1][j] = compare(dp[i&1][j], dp[(i-1)&1][j-1]+triangle[i][j], false)
 			}
 			//右上角[i-1][j]
 			if j < i {
-				// 这里数组越界
-				dp[i&1][j] = compare(dp[i&1][j], dp[i-1&1][j]+triangle[i][j], true)
+				// 注意操作优先级
+				dp[i&1][j] = compare(dp[i&1][j], dp[(i-1)&1][j]+triangle[i][j], false)
 			}
 		}
 	}
@@ -86,7 +87,21 @@ func minimumTotal(triangle [][]int) int {
 	res := math.MaxInt64
 	// 遍历最后一行，取最大值
 	for i := 0; i < n; i++ {
-		res = compare(res, dp[n-1&1][i], true)
+		// 注意操作优先级
+		res = compare(res, dp[(n-1)&1][i], false)
 	}
 	return res
+}
+
+
+// 自下而上的做法，最简单！！！！
+func minimumTotal(f [][]int) int {
+	// len(f)-2
+	for i := len(f)-2; i >=0; i-- {
+		// j <= i
+		for j := 0; j <= i; j++ {
+			f[i][j] += compare(f[i+1][j+1],f[i+1][j],false)
+		}
+	}
+	return f[0][0]
 }
