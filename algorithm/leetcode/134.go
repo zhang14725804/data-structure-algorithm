@@ -8,21 +8,21 @@
 */
 func canCompleteCircuit(gas []int, cost []int) int {
 	// totalGas totalCost
-	tg,tc := 0,0
+	tg, tc := 0, 0
 	for i := 0; i < len(gas); i++ {
-		tc+=cost[i]
-		tg+=gas[i]
+		tc += cost[i]
+		tg += gas[i]
 	}
-	if tg<tc{
+	if tg < tc {
 		return -1
 	}
 	// currentGas,start
-	cg,s := 0,0
+	cg, s := 0, 0
 	for i := 0; i < len(gas); i++ {
 		cg += gas[i] - cost[i]
-		if cg<0{
+		if cg < 0 {
 			cg = 0
-			s = i+1
+			s = i + 1
 		}
 	}
 	return s
