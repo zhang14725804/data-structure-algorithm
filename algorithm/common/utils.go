@@ -29,6 +29,15 @@ func MinInt(a, b int) int {
 	return a
 }
 
+/*************************math.pow*******************************/
+func pow(base, exp int) int {
+	res := 1
+	for i := 0; i < exp; i++ {
+		res *= base
+	}
+	return res
+}
+
 /**************************int最大值，最小值 -9223372036854775808 9223372036854775807*******************************/
 const INT_MAX = int(^uint(0) >> 1)
 const INT_MIN = ^INT_MAX
