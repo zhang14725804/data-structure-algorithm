@@ -1,10 +1,11 @@
 /*
 	给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。
+
+	[0,0]返回 00，应该是返回0
 */
 func largestNumber(nums []int) string {
 	for i := 1; i < len(nums); i++ {
-		for j := 0; j < i-1; j++ {
-			// todo：长度小于3，有问题
+		for j := 0; j < len(nums)-1; j++ {
 			if fmt.Sprint(nums[j])+""+fmt.Sprint(nums[j+1]) > fmt.Sprint(nums[j+1])+""+fmt.Sprint(nums[j]) {
 				nums[j], nums[j+1] = nums[j+1], nums[j]
 			}
