@@ -1,13 +1,5 @@
-package leetcode
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 /*
-	206. Reverse Linked List（链表反转）
-	再次遇到链表反转
+	todo:链表反转（迭代或递归）
 */
 func reverseList(head *ListNode) *ListNode {
 	if head == nil {
@@ -30,4 +22,15 @@ func reverseList(head *ListNode) *ListNode {
 	// 切断循环链
 	head.Next = nil
 	return prev
+}
+
+// 迭代方式
+func reverseList(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil{
+		return head
+	}
+	tail := reverseList(head.Next)
+	head.Next.Next = head
+	head.Next = nil
+	return tail
 }

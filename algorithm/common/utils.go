@@ -1,6 +1,5 @@
 package common
 
-
 /*************************整型比较大小*******************************/
 func compare(a, b int, max bool) int {
 	// max 是否返回最大值
@@ -16,18 +15,27 @@ func compare(a, b int, max bool) int {
 	return a
 }
 
-func MaxInt(a, b int)int{
-	if a>b{
+func MaxInt(a, b int) int {
+	if a > b {
 		return a
 	}
 	return b
 }
 
-func MinInt(a, b int)int{
-	if a>b{
+func MinInt(a, b int) int {
+	if a > b {
 		return b
 	}
 	return a
+}
+
+/*************************math.pow*******************************/
+func pow(base, exp int) int {
+	res := 1
+	for i := 0; i < exp; i++ {
+		res *= base
+	}
+	return res
 }
 
 /**************************int最大值，最小值 -9223372036854775808 9223372036854775807*******************************/
@@ -97,28 +105,26 @@ func (this *Queue) pop_front() {
 	this.x = this.x[1:]
 }
 
-
-
 /**************************Set*******************************/
-type Set struct{
+type Set struct {
 	m map[interface{}]struct{}
 }
 
-func NewSet() *Set{
-	s:=&Set{}
+func NewSet() *Set {
+	s := &Set{}
 	s.m = make(map[interface{}]struct{})
 	return s
 }
 
-func (s *Set) Insert(key interface{}){
+func (s *Set) Insert(key interface{}) {
 	s.m[key] = struct{}{}
 }
 
-func (s *Set) Contains(key interface{}) bool{
-	_,ok := s.m[key]
+func (s *Set) Contains(key interface{}) bool {
+	_, ok := s.m[key]
 	return ok
 }
 
-func (s *Set) Remove(key interface{}){
-	delete(s.m,key)
+func (s *Set) Remove(key interface{}) {
+	delete(s.m, key)
 }

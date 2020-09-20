@@ -4,9 +4,9 @@
 	思路(思路妙啊)：每次交易分解成每天都交易，把所有结果为正数的加起来
 */
 func maxProfit(prices []int) int {
-	res:=0
-	for i:=0;i+1<len(prices);i++{
-		res+=compare(0,prices[i+1]-prices[i],true)
+	res := 0
+	for i := 0; i+1 < len(prices); i++ {
+		res += compare(0, prices[i+1]-prices[i], true)
 	}
 	return res
 }
