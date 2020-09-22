@@ -29,6 +29,36 @@ func MinInt(a, b int) int {
 	return a
 }
 
+/*************************reverse*******************************/
+func reverse(a []interface{}) []interface{} {
+	for i, j := 0, len(a)-1; i < j; i, j = i+1, j-1 {
+		a[i], a[j] = a[j], a[i]
+	}
+	return a
+}
+
+/*************************quickSort*******************************/
+func quickSort(array []int) []int {
+	if len(array) < 2 {
+		return array
+	}
+
+	// 基准元素
+	pivot := array[0]
+	var small, large, result []int
+	for _, value := range array[1:] {
+		if value <= pivot {
+			small = append(small, value)
+		} else {
+			large = append(large, value)
+		}
+	}
+	result = append(result, quickSort(small)...)
+	result = append(result, pivot)
+	result = append(result, quickSort(large)...)
+	return result
+}
+
 /*************************math.pow*******************************/
 func pow(base, exp int) int {
 	res := 1
