@@ -93,11 +93,14 @@ func (this *Stack) push(x interface{}) {
 	this.x = append(this.x, x)
 }
 
-// 出栈,返回栈顶元素
-func (this *Stack) pop() interface{} {
-	top := this.x[len(this.x)-1]
+// 出栈
+func (this *Stack) pop() {
 	this.x = this.x[:len(this.x)-1]
-	return top
+}
+
+// 返回栈顶元素
+func (this *Stack) top() interface{} {
+	return this.x[len(this.x)-1]
 }
 
 // 栈大小
