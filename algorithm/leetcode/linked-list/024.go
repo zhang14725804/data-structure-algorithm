@@ -1,10 +1,3 @@
-package leetcode
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 /*
 	24.Swap Nodes in Pairs
 

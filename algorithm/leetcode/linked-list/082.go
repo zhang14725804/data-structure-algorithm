@@ -1,10 +1,3 @@
-package leetcode
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 // Leetcode082 Remove Duplicates from Sorted List II
 func Leetcode082(head *ListNode) *ListNode {
 	if head == nil {

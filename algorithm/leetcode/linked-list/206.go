@@ -1,5 +1,5 @@
 /*
-	todo:链表反转（迭代或递归）
+	反转链表/链表反转：迭代或递归（todo:）
 */
 func reverseList(head *ListNode) *ListNode {
 	if head == nil {
@@ -26,7 +26,7 @@ func reverseList(head *ListNode) *ListNode {
 
 // 迭代方式
 func reverseList(head *ListNode) *ListNode {
-	if head == nil || head.Next == nil{
+	if head == nil || head.Next == nil {
 		return head
 	}
 	tail := reverseList(head.Next)
