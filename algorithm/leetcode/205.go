@@ -1,7 +1,7 @@
 /*
 	给定两个字符串 s 和 t，判断它们是否是同构的。
 
-	todo，没懂
+	todo：没懂
 */
 func isIsomorphic(s string, t string) bool {
 	if len(s) != len(t) {
