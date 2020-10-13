@@ -123,9 +123,9 @@ func (this *Queue) push_back(x interface{}) {
 	this.x = append(this.x, x)
 }
 
-// 返回头元素
-func (this *Queue) front() interface{} {
-	return this.x[0]
+// 头插入
+func (this *Queue) push_front(x interface{}) {
+	this.x = append([]interface{}{x}, this.x...)
 }
 
 // size
@@ -133,9 +133,24 @@ func (this *Queue) size() int {
 	return len(this.x)
 }
 
+// 返回头元素
+func (this *Queue) front() interface{} {
+	return this.x[0]
+}
+
 // 头删除
 func (this *Queue) pop_front() {
 	this.x = this.x[1:]
+}
+
+// 返回尾元素
+func (this *Queue) back() interface{} {
+	return this.x[len(this.x)-1]
+}
+
+// 尾删除
+func (this *Queue) pop_back() {
+	this.x = this.x[:len(this.x)-1]
 }
 
 /**************************Set*******************************/

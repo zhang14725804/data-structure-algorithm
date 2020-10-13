@@ -1,64 +1,48 @@
 /*
-	239. Sliding Window Maximum	
-	
-	单调队列问题（滑动窗口）
+	给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
+	返回滑动窗口中的最大值。
 
-	todos：：不太好理解
+	进阶：你能在线性时间复杂度内解决此题吗？
+
+	单调队列问题（滑动窗口）
 */
+
+// 解法3：单调队列（todo，不懂）
 func maxSlidingWindow(nums []int, k int) []int {
-	res := make([]int,0)
-	q := &queue{}
-	for i:=0;i<len(nums);i++{
-		if q.size() >0 && i-k+1>q.front(){
+	res := make([]int, 0)
+	q := &Queue{}
+
+	for i := 0; i < len(nums); i++ {
+		if q.size() > 0 && i-k+1 > q.front() {
 			q.pop_front()
 		}
-		for q.size()>0 && nums[q.back()] <= nums[i]{
+		for q.size() > 0 && nums[q.back()] <= nums[i] {
 			q.pop_back()
 		}
 		q.push_back(i)
-		if i>= k-1{
-			res = append(res,nums[q.front()])
+		if i >= k-1 {
+			res = append(res, nums[q.front()])
 		}
 	}
 	return res
 }
 
-// 队列
-type queue struct{
-	x []int
+// 解法一：暴力破解（超时）
+func maxSlidingWindow(nums []int, k int) []int {
+	n := len(nums)
+	if n == 0 {
+		return nums
+	}
+	res := make([]int, n-k+1)
+	// 循环条件
+	for i := 0; i < len(res); i++ {
+		max := INT_MIN
+		for j := 0; j < k; j++ {
+			max = MaxInt(max, nums[j+i])
+		}
+		res[i] = max
+	}
+	return res
 }
 
-// 尾插入
-func (this *queue) push_back(x int){
-	this.x = append(this.x,x)
-}
-
-// 头插入 (注意这里)
-func (this *queue) push_front(x int){
-	this.x = append([]int{x}, this.x...)
-}
-
-// size
-func (this *queue) size() int{
-	return len(this.x)
-}
-
-// 返回头元素
-func (this *queue) front() int{
-	return this.x[0]
-}
-
-// 头删除
-func (this *queue) pop_front(){
-	this.x= this.x[1:]
-}
-
-// 返回头元素
-func (this *queue) back() int{
-	return this.x[len(this.x)-1]
-}
-
-// 尾删除
-func (this *queue) pop_back(){
-	this.x= this.x[:len(this.x)-1]
-}
+// 解法2：优先队列（todo）
