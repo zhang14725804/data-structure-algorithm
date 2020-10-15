@@ -68,6 +68,14 @@ func pow(base, exp int) int {
 	return res
 }
 
+/**************************abs*******************************/
+func absInt(num int) int {
+	if num > 0 {
+		return num
+	}
+	return -num
+}
+
 /**************************int最大值，最小值 -9223372036854775808 9223372036854775807*******************************/
 const INT_MAX = int(^uint(0) >> 1)
 const INT_MIN = ^INT_MAX

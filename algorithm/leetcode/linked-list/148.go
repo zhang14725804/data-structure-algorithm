@@ -1,10 +1,3 @@
-package leetcode
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 /*
 	148. Sort List
 
