@@ -1,9 +1,3 @@
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 /*
 	判断镜像二叉树问题
 

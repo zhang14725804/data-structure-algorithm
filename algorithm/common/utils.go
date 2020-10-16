@@ -1,4 +1,17 @@
-package common
+
+
+/*************************ListNode*******************************/
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+/*************************TreeNode*******************************/
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
 
 /*************************整型比较大小*******************************/
 func compare(a, b int, max bool) int {

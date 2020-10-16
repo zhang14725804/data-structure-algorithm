@@ -3,56 +3,51 @@
 
 	思路：层序遍历之后，按照层级反转答案即可
 */
-type TreeNode struct {
-    Val int
-    Left *TreeNode
-    Right *TreeNode
-}
-
 func zigzagLevelOrder(root *TreeNode) [][]int {
 	var res [][]int
-	if root == nil{
+	if root == nil {
 		return res
 	}
-	// 
+	//
 	var q Queue
 	q.push(*root)
-	cnt:=0
-	// 
-	for len(q) > 0{
-		// 
+	cnt := 0
+	//
+	for len(q) > 0 {
+		//
 		length := len(q)
 		var level []int
 		cnt++
-		
-		for i := 0; i < length; i++{
-			// 
-			t:=q.front()
-			level = append(level,t.Val)
-			
-			// 
-			if t.Left !=nil{
+
+		for i := 0; i < length; i++ {
+			//
+			t := q.front()
+			level = append(level, t.Val)
+
+			//
+			if t.Left != nil {
 				q.push(*t.Left)
 			}
-			if t.Right !=nil{
+			if t.Right != nil {
 				q.push(*t.Right)
 			}
 		}
 		// 偶数行反转数组
-        if cnt % 2 == 0{
-            reverse(level)
-        }
-		res = append(res,level)
+		if cnt%2 == 0 {
+			reverse(level)
+		}
+		res = append(res, level)
 	}
 	return res
 }
 
-func reverse(res []int){
+func reverse(res []int) {
 	// 反转数组
 	for i, j := 0, len(res)-1; i < j; i, j = i+1, j-1 {
 		res[i], res[j] = res[j], res[i]
 	}
 }
+
 // 利用slice实现队列
 type Queue []TreeNode
 

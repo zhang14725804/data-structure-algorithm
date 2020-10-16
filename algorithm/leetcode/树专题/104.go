@@ -5,11 +5,6 @@
 
 	说明: 叶子节点是指没有子节点的节点。
 */
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
 
 func maxDepth(root *TreeNode) int {
 	if root == nil {

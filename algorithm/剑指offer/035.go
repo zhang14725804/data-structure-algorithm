@@ -3,15 +3,11 @@
 	todo:测试不通过：输入[]，输出[0]
 */
 
-type ListNode struct {
-    Val int
-    Next *ListNode
-}
 // 考点：使用一个临时变量记录前序节点
 func reverseList(head *ListNode) *ListNode {
 	pre := &ListNode{}
 	// cur := head
-	for head != nil{
+	for head != nil {
 		// 缓存下个节点
 		next := head.Next
 		// todo：下面两行我硬是没看懂😅
@@ -21,6 +17,6 @@ func reverseList(head *ListNode) *ListNode {
 		pre = head
 		// 遍历下一个节点
 		head = next
-	} 
+	}
 	return pre
 }

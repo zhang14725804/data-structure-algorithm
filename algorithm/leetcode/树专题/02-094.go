@@ -1,9 +1,3 @@
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 /*
 	思路1：递归
 */
@@ -62,23 +56,24 @@ func inorderTraversal(root *TreeNode) []int {
 
 // 这个是对的
 func inorderTraversal(root *TreeNode) []int {
-    var res []int
-    stack := list.New()
-    for root!=nil || stack.Len()>0{
-        for root!=nil{
-            stack.PushBack(root)
-            root = root.Left
-        }
-        if stack.Len()>0{
-            v:=stack.Back()
-            root = v.Value.(*TreeNode)
-            res = append(res,root.Val)
-            root = root.Right
-            stack.Remove(v)
-        }
-    }
-    return res
+	var res []int
+	stack := list.New()
+	for root != nil || stack.Len() > 0 {
+		for root != nil {
+			stack.PushBack(root)
+			root = root.Left
+		}
+		if stack.Len() > 0 {
+			v := stack.Back()
+			root = v.Value.(*TreeNode)
+			res = append(res, root.Val)
+			root = root.Right
+			stack.Remove(v)
+		}
+	}
+	return res
 }
+
 // type Stack []TreeNode
 
 // func (s *Stack) push(node TreeNode) {

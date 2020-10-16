@@ -4,33 +4,25 @@
 
 	思路：找中间结点是难点
 */
-type ListNode struct {
-    Val int
-    Next *ListNode
-}
-type TreeNode struct {
-    Val int
-    Left *TreeNode
-    Right *TreeNode
-}
+
 func sortedListToBST(head *ListNode) *TreeNode {
-	if head == nil{
+	if head == nil {
 		return nil
 	}
 	// 链表长度
-	n:=0
-	for p:=head; p!=nil; p=p.Next{
+	n := 0
+	for p := head; p != nil; p = p.Next {
 		n++
 	}
-	if n == 1{
-		return &TreeNode{Val:head.Val}
+	if n == 1 {
+		return &TreeNode{Val: head.Val}
 	}
 	// 找到中间节点
-	cur:=head
-	for i:=0;i<n/2-1;i++{
+	cur := head
+	for i := 0; i < n/2-1; i++ {
 		cur = cur.Next
 	}
-	root := &TreeNode{Val:cur.Next.Val}
+	root := &TreeNode{Val: cur.Next.Val}
 	// 递归建立左右子节点
 	root.Right = sortedListToBST(cur.Next.Next)
 	// 中间节点置为nil

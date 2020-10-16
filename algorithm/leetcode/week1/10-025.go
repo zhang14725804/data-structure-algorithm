@@ -11,23 +11,19 @@
 	todo：不太懂
 */
 
-type ListNode struct {
-    Val int
-    Next *ListNode
-}
 func reverseKGroup(head *ListNode, k int) *ListNode {
 	// 虚拟头节点
-	dummy:=&ListNode{}
+	dummy := &ListNode{}
 	dummy.Next = head
 	cur := dummy
 
-	for cur!=nil{
+	for cur != nil {
 		// 判断是否够k个节点
-		s:=0
-		for i:=cur.Next;i!=nil;i = i.Next{
+		s := 0
+		for i := cur.Next; i != nil; i = i.Next {
 			s++
 		}
-		if s<k{
+		if s < k {
 			break
 		}
 
@@ -36,7 +32,7 @@ func reverseKGroup(head *ListNode, k int) *ListNode {
 		a := cur.Next
 		b := a.Next
 		// 反转k-1次
-		for s < k-1{
+		for s < k-1 {
 			s++
 			// 真乱😅
 			c := b.Next

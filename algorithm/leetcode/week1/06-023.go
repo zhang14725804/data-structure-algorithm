@@ -5,10 +5,6 @@
 
 	todo：堆，优先队列是个硬伤
 */
-type ListNode struct {
-    Val int
-    Next *ListNode
-}
 func mergeKLists(lists []*ListNode) *ListNode {
 
 }

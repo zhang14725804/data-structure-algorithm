@@ -5,11 +5,6 @@
 		前序遍历（根、左、右）
 		中序遍历（左、根、右）
 */
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
 
 // map 保存中序遍历节点的index
 var pos = make(map[int]int)

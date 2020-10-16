@@ -4,16 +4,11 @@
 
 	左子树的深度和右子树的最大值，再加上1（递归）
 */
-type TreeNode struct {
-    Val int
-    Left *TreeNode
-    Right *TreeNode
-}
 func treeDepth(root *TreeNode) int {
-    if root == nil{
+	if root == nil {
 		return 0
 	}
-	return max(treeDepth(root.Left),treeDepth(root.Right)) + 1
+	return max(treeDepth(root.Left), treeDepth(root.Right)) + 1
 }
 func max(a, b int) int {
 	if a > b {

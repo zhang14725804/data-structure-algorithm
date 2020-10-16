@@ -10,11 +10,6 @@
 	思路：双指针
 */
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 func oddEvenList(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head

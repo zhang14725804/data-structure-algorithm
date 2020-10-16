@@ -4,11 +4,6 @@
 	容器属性：flex-wrap,flex-direction,flex-flow,align-items,justify-content,align-content
 	元素属性：order,flex-grow,flex-shrink,flex-basis,align-self,flex
 */
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
 
 var ans []int
 

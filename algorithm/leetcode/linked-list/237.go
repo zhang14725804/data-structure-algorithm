@@ -1,10 +1,3 @@
-package leetcode
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 // Leetcode237 Delete Node in a Linked List
 func Leetcode237(node *ListNode) {
 	/*

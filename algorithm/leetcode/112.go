@@ -8,18 +8,13 @@
 	f(u)：从根节点走到u的权值之和
 
 */
-type TreeNode struct {
-    Val int
-    Left *TreeNode
-    Right *TreeNode
-}
 func hasPathSum(root *TreeNode, sum int) bool {
-	if root == nil{
+	if root == nil {
 		return false
 	}
-	sum-=root.Val
-	if root.Left == nil && root.Right == nil{
+	sum -= root.Val
+	if root.Left == nil && root.Right == nil {
 		return sum == 0
 	}
-	return root.Left!=nil && hasPathSum(root.Left,sum) || root.Right!=nil && hasPathSum(root.Right,sum)
+	return root.Left != nil && hasPathSum(root.Left, sum) || root.Right != nil && hasPathSum(root.Right, sum)
 }

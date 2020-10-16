@@ -2,12 +2,6 @@
 	输入一棵二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径
 	todo：代码有问题，测试不通过
 */
-type TreeNode struct {
-    Val int
-    Left *TreeNode
-    Right *TreeNode
-}
-
 var ans [][]int
 var path []int
 
@@ -16,9 +10,9 @@ func findPath(root *TreeNode, sum int) [][]int {
 	return ans
 }
 
-func dfs(root *TreeNode, sum int){
+func dfs(root *TreeNode, sum int) {
 	// 空节点
-	if root == nil{
+	if root == nil {
 		return
 	}
 	path = append(path, root.Val)

@@ -11,10 +11,6 @@
 	（3）first，second两个指针同时走，相差n步，当first走到结尾时，终止。second走到了倒数第n+1个节点
 	（4）倒数n+1个节点直接指向n的下一个节点就好了
 */
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
 
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	// 快慢指针，初始位置都在head

@@ -4,39 +4,34 @@
 
 	思路：伪回文等价于路径中最多只有一个点出现的次数是奇数
 */
-type TreeNode struct {
-    Val int
-    Left *TreeNode
-    Right *TreeNode
-}
+var hash = make(map[int]int, 0)
 
-var hash = make(map[int]int,0)
-func pseudoPalindromicPaths (root *TreeNode) int {
+func pseudoPalindromicPaths(root *TreeNode) int {
 	// 存入hash
 	hash[root.Val]++
-	if root.Left == nil && root.Right == nil{
-		t:=0
-		for _,val:=range hash{
+	if root.Left == nil && root.Right == nil {
+		t := 0
+		for _, val := range hash {
 			// 某个点出现的次数是否是奇数
-			if val % 2 == 1{
+			if val%2 == 1 {
 				t++
 			}
 		}
 		// 根节点只能算一次，所以这里需要减
 		hash[root.Val]--
 		// 当前路径满足
-		if t<=1{
-            return 1
-        } 
-        return 0
+		if t <= 1 {
+			return 1
+		}
+		return 0
 	}
-	res:=0
+	res := 0
 	// 遍历左右节点
-	if root.Left!=nil{
-		res+=pseudoPalindromicPaths(root.Left)
+	if root.Left != nil {
+		res += pseudoPalindromicPaths(root.Left)
 	}
-	if root.Right!=nil{
-		res+=pseudoPalindromicPaths(root.Right)
+	if root.Right != nil {
+		res += pseudoPalindromicPaths(root.Right)
 	}
 	// 根节点只能算一次，所以这里需要减
 	hash[root.Val]--

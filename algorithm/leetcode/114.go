@@ -1,8 +1,3 @@
-type TreeNode struct {
-    Val int
-    Left *TreeNode
-    Right *TreeNode
-}
 /*
 	给定一个二叉树，原地将它展开为一个单链表。
 
@@ -12,11 +7,11 @@ type TreeNode struct {
 	todo：有点绕
 */
 
-func flatten(root *TreeNode)  {
-	for root !=nil{
+func flatten(root *TreeNode) {
+	for root != nil {
 		p := root.Left
-		if p !=nil{
-			for p.Right !=nil{
+		if p != nil {
+			for p.Right != nil {
 				p = p.Right
 			}
 			p.Right = root.Right

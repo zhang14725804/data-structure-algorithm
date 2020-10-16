@@ -4,11 +4,6 @@
 		后序遍历（左、右、根）
 		中序遍历（左、根、右）
 */
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
 
 var pos = make(map[int]int)
 

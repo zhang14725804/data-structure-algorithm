@@ -6,25 +6,20 @@
 
 	测试不通过，提交通过了,,ԾㅂԾ,,
 */
-type TreeNode struct {
-    Val int
-    Left *TreeNode
-    Right *TreeNode
-}
 func sortedArrayToBST(nums []int) *TreeNode {
-	return build(nums,0,len(nums)-1)
+	return build(nums, 0, len(nums)-1)
 }
 
-// 
-func build(nums []int,left,right int) *TreeNode{
-	if left>right{
+//
+func build(nums []int, left, right int) *TreeNode {
+	if left > right {
 		return nil
 	}
 	// 根节点
-	mid := (left+right)>>1
-	root := &TreeNode{Val:nums[mid]}
+	mid := (left + right) >> 1
+	root := &TreeNode{Val: nums[mid]}
 	// 左右子节点
-	root.Left = build(nums,left,mid-1)
-	root.Right = build(nums,mid+1,right)
+	root.Left = build(nums, left, mid-1)
+	root.Right = build(nums, mid+1, right)
 	return root
 }

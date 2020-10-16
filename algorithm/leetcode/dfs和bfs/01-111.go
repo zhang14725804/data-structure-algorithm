@@ -1,8 +1,3 @@
-type TreeNode struct {
-    Val int
-    Left *TreeNode
-    Right *TreeNode
-}
 /*
 	给定一个二叉树，找出其最小深度。
 
@@ -14,22 +9,22 @@ type TreeNode struct {
 	ps：自下而上的方式
 */
 func minDepth(root *TreeNode) int {
-	if root == nil{
+	if root == nil {
 		return 0
 	}
 	// 计算左右子树
-	left:=minDepth(root.Left)
-	right:=minDepth(root.Right)
+	left := minDepth(root.Left)
+	right := minDepth(root.Right)
 	// 左边或者右边是空
-	if left == 0 || right == 0{
+	if left == 0 || right == 0 {
 		return left + right + 1
 	}
 	// 左右子树都不为空
-	return min(left,right)+1
+	return min(left, right) + 1
 }
 
-func min(a,b int)int{
-	if a>b{
+func min(a, b int) int {
+	if a > b {
 		return b
 	}
 	return a
