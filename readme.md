@@ -16,6 +16,8 @@
 
 [leetcode题解](https://github.com/azl397985856/leetcode)
 
+[JavaScript-Algorithms](https://github.com/sisterAn/JavaScript-Algorithms)
+
 [Solve LeetCode problems in VS Code](https://github.com/jdneo/vscode-leetcode)
 
 [All Algorithms implemented in Python](https://github.com/TheAlgorithms/Python)
@@ -47,12 +49,6 @@
 
 [程序员面试最常见问题TOP 48](https://zhuanlan.zhihu.com/p/45469008)
 
-
-### leetcode刷题打卡活动
-
-[斗鱼-大雪菜](https://v.douyu.com/author/PDAPVoKO3wxN)
-
-[b栈-大雪菜](https://space.bilibili.com/7836741/channel/detail?cid=92900)
 
 ### 漫漫长路
 

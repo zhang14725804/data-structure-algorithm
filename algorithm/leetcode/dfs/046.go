@@ -1,11 +1,11 @@
 /*
-	46. Permutations：给定一个 没有重复 数字的序列，返回其所有可能的全排列。
+	46. Permutations：
+	回溯算法（todo）
+	给定一个 没有重复 数字的序列，返回其所有可能的全排列。
 
 	全排列问题，两种方法（这特么。。。）
 	（1）枚举每个位置上放那个树
 	（2）枚举每个数放在哪个位置
-
-	回溯算法（精讲）：https://leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/
 */
 
 var (

@@ -16,14 +16,17 @@ var ans = make([][]int, 0)
 var path = make([]int, 0)
 
 func combinationSum2(c []int, target int) [][]int {
-	sort(c) // sort.Ints() 快排
+	c = quickSort(c)
 	fmt.Println(c)
 	dfs(c, 0, target)
 	return ans
 }
 func dfs(c []int, u int, target int) {
 	if target == 0 {
-		ans = append(ans, path)
+		// 坑在这里
+		c := make([]int, len(path))
+		copy(c, path)
+		ans = append(ans, c)
 		return
 	}
 	if u == len(c) {
