@@ -117,6 +117,9 @@ func (this *Stack) push(x interface{}) {
 // 出栈
 func (this *Stack) pop() {
 	this.x = this.x[:len(this.x)-1]
+	// node:=this.x[len(this.x)-1]
+	// this.x = this.x[:len(this.x)-1]
+	// return node
 }
 
 // 返回栈顶元素
