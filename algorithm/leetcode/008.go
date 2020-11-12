@@ -1,18 +1,11 @@
 /*
 	请你来实现一个 atoi 函数，使其能将字符串转换成整数。
 
-	首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。接下来的转化规则如下：
+	三种方法：
+		（1）硬编码
+		（2）状态机
+		（3）正则表达式
 
-	如果第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字字符组合起来，形成一个有符号整数。
-	假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成一个整数。
-	该字符串在有效的整数部分之后也可能会存在多余的字符，那么这些字符可以被忽略，它们对函数不应该造成影响。
-	注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换，即无法进行有效转换。
-
-	在任何情况下，若函数不能进行有效的转换时，请返回 0 。
-
-	提示：
-	本题中的空白字符只包括空格字符 ' ' 。
-	假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−231,  231 − 1]。如果数值超过这个范围，请返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。
 */
 
 /*
@@ -43,6 +36,9 @@ func myAtoi(str string) int {
 	return auto.Sign * auto.Ans
 }
 
+var MAX int = (1 << 31) - 1
+var MIN int = -(1 << 31)
+
 type Automaton struct {
 	Sign  int
 	Ans   int
@@ -50,14 +46,16 @@ type Automaton struct {
 	table map[string][]string
 }
 
-func (auto Automaton) get(c byte) {
+// 这里需要传递指针（要改变struct的值）
+func (auto *Automaton) get(c byte) {
 	auto.state = auto.table[auto.state][auto.getCol(c)]
 	if "in_number" == auto.state {
 		auto.Ans = auto.Ans*10 + int(c-'0')
+		// 极值处理
 		if auto.Sign == 1 {
-			auto.Ans = MinInt((1<<31)-1, auto.Ans)
+			auto.Ans = MinInt(MAX, auto.Ans)
 		} else {
-			auto.Ans = MaxInt(-(1 << 31), -auto.Ans)
+			auto.Ans = MinInt(-MIN, auto.Ans)
 		}
 	} else if "signed" == auto.state {
 		if c == '+' {
@@ -68,6 +66,7 @@ func (auto Automaton) get(c byte) {
 	}
 }
 
+// 获取状态
 func (auto Automaton) getCol(c byte) int {
 	if c == ' ' {
 		return 0
@@ -110,7 +109,7 @@ func myAtoi(str string) int {
 	return 0
 }
 
-// 直接上手写程序的结果，还没有写出来😅
+// 自己的方法，是错的😅
 func myAtoi1(str string) int {
 	// "  0000000000012345678"  12345678
 	// "00000-42a1234"  0
@@ -164,4 +163,44 @@ func myAtoi1(str string) int {
 		}
 	}
 	return 0
+}
+
+// 硬编码实现，正确的代码
+func myAtoi(str string) int {
+	sign := 1        // 正负数
+	ans := 0         // 当前答案
+	pop := 0         // 当前数字
+	hasSign := false // 是否开始转换数字
+	MAX := (1 << 31) - 1
+	MIN := -(1 << 31)
+	for i := 0; i < len(str); i++ {
+		if str[i] == '-' && !hasSign {
+			sign = -1
+			hasSign = true
+			continue
+		}
+		if str[i] == '+' && !hasSign {
+			sign = 1
+			hasSign = true
+			continue
+		}
+		if str[i] == ' ' && !hasSign {
+			continue
+		}
+		if str[i] >= '0' && str[i] <= '9' {
+			hasSign = true
+			pop = int(str[i] - '0')
+			// 极值处理
+			if ans*sign > MAX/10 || (ans*sign == MAX/10 && pop*sign > 7) {
+				return MAX
+			}
+			if ans*sign < MIN/10 || (ans*sign == MIN/10 && pop*sign < -8) {
+				return MIN
+			}
+			ans = ans*10 + pop
+		} else {
+			return ans * sign
+		}
+	}
+	return ans * sign
 }
