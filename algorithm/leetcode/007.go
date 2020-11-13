@@ -7,20 +7,23 @@
 	思路2：转换成字符串，reverse
 */
 
+const INT_MAX = (1 << 31) - 1
+const INT_MIN = -(1 << 31)
+
 func reverse(x int) int {
 	res := 0
-	// 处理正负数
-	pn := 1
+	pn := 1 // 正负数
 	if x < 0 {
 		pn = -1
 		x = -x
 	}
-	// 重点在这里： x % 10 取余数，x /= 10取整
+	// 每次遍历一位
 	for x > 0 {
 		res = res*10 + x%10
 		x /= 10
 	}
 	res *= pn
+	// 处理极值
 	if res < INT_MIN || res > INT_MAX {
 		return 0
 	}
