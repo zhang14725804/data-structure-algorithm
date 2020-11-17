@@ -102,15 +102,15 @@ func (heap *minHeap) swap(i, j int) {
 	heap.heapArray[i], heap.heapArray[j] = heap.heapArray[j], heap.heapArray[i]
 }
 
-func main() {
-	inputArray := []int{6, 5, 3, 7, 2, 8}
-	minHeap := newMinHeap(len(inputArray))
-	for i := 0; i < len(inputArray); i++ {
-		minHeap.insert(inputArray[i])
-	}
-	minHeap.buildMinHeap()
-	fmt.Println(minHeap.heapArray)
-	// for i := 0; i < len(inputArray); i++ {
-	// 	fmt.Println(minHeap.remove())
-	// }
-}
+// func main() {
+// 	inputArray := []int{6, 5, 3, 7, 2, 8}
+// 	minHeap := newMinHeap(len(inputArray))
+// 	for i := 0; i < len(inputArray); i++ {
+// 		minHeap.insert(inputArray[i])
+// 	}
+// 	minHeap.buildMinHeap()
+// 	fmt.Println(minHeap.heapArray)
+// 	// for i := 0; i < len(inputArray); i++ {
+// 	// 	fmt.Println(minHeap.remove())
+// 	// }
+// }
