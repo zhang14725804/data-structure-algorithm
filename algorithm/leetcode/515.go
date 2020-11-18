@@ -28,7 +28,7 @@ func largestValues(root *TreeNode) []int {
 	return result
 }
 
-// 方法二：dfs；返回结果空数组（question）
+// 方法二：dfs；返回结果空数组（question）；没有用指针
 func largestValues(root *TreeNode) []int {
 	res := make([]int, 0)
 	dfs(root, res, 1)
@@ -37,7 +37,6 @@ func largestValues(root *TreeNode) []int {
 
 // lavel表示层数
 func dfs(root *TreeNode, res []int, level int) {
-
 	if root == nil {
 		return
 	}
@@ -49,4 +48,26 @@ func dfs(root *TreeNode, res []int, level int) {
 	}
 	dfs(root.Left, res, level+1)
 	dfs(root.Right, res, level+1)
+}
+
+// 方法二：dfs；需要用指针和地址🔥🔥🔥
+func dfs(root *TreeNode, res *[]int, level int) {
+
+	if root == nil {
+		return
+	}
+
+	if level == len(*res)+1 {
+		*res = append(*res, root.Val)
+	} else {
+		// type *[]int not support indexing
+		(*res)[level-1] = MaxInt((*res)[level-1], root.Val)
+	}
+	dfs(root.Left, res, level+1)
+	dfs(root.Right, res, level+1)
+}
+func largestValues(root *TreeNode) []int {
+	res := make([]int, 0)
+	dfs(root, &res, 1)
+	return res
 }
