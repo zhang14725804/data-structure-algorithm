@@ -17,7 +17,7 @@ func detectCapitalUse(word string) bool {
 			upperLen++
 		}
 	}
-	// 统计大写字母个数，0，1，len三种情况
+	// 统计大写字母个数：0，1，len，三种情况分别判断
 	if upperLen == 0 || upperLen == len(word) || (upperLen == 1 && isUpperCase(word[0])) {
 		return true
 	}
