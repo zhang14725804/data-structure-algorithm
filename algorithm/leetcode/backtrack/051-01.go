@@ -1,59 +1,13 @@
 /*
 	n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
 
-	思路：全排列问题，要考虑对角线（正反两个方向）
-*/
-var (
-	n int
-	//
-	col, dg, udg []bool
-	path         []string
-	ans          [][]string
-)
-
-func solveNQueens(_n int) [][]string {
-	n = _n
-	col = make([]bool, n)
-	dg, udg = make([]bool, n*2), make([]bool, n*2)
-	// 有问题
-	path = make([]string, n)
-	for i := 0; i < n; i++ {
-		path[i] = "."
-	}
-	dfs(0)
-	return ans
-}
-
-func dfs(u int) {
-	if u == n {
-		ans = append(ans, path)
-		return
-	}
-
-	for i := 0; i < n; i++ {
-		if !col[i] && !dg[u-i+n] && !udg[u+i] {
-			col[i], dg[u-i+n], udg[u+i] = true, true, true
-			// 有问题
-			path[u][i] = "Q"
-			dfs(u + 1)
-			col[i], dg[u-i+n], udg[u+i] = false, false, false
-			path[u][i] = "."
-		}
-	}
-}
-
-/*
-	方法1：基于集合的回溯
-
-	todo：用set存放列，斜线，反斜线是否有皇后，可以用bool数组代替
+	方法：基于集合的回溯
 */
 var ans [][]string
-var queues []int
-
-// 用三个集合cols，diag1，diag2表示列，斜线，反斜线是否有皇后
-var cols *Set
-var diag1 *Set
-var diag2 *Set
+var queues []int // 互斥锁
+var cols *Set    // 列是否有皇后
+var diag1 *Set   // 斜线是否有皇后
+var diag2 *Set   // 反斜线是否有皇后
 var n int
 
 func solveNQueens(_n int) [][]string {
@@ -76,7 +30,7 @@ func backtrack(row int) {
 		ans = append(ans, board)
 	} else {
 		for i := 0; i < n; i++ {
-			// 判断每一列是否存在
+			// 每一列是否存在
 			if cols.Contains(i) {
 				continue
 			}
@@ -121,7 +75,3 @@ func generate(queues []int, n int) []string {
 	}
 	return board
 }
-
-/*
-	方法2：基于位运算的回溯（todo：没看懂😅）
-*/
