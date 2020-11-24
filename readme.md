@@ -30,6 +30,8 @@
 
 [手撕LeetCode题目](https://github.com/labuladong/fucking-algorithm)
 
+[labuladong算法小炒（🔥🔥🔥）](https://labuladong.gitbook.io/algo/)
+
 [数据结构和算法必知必会的50个代码实现](https://github.com/wangzheng0822/algo)
 
 [leetcode919之前所有题目](https://github.com/grandyang/leetcode)
