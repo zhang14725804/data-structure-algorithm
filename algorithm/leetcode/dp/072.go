@@ -1,4 +1,5 @@
 /*
+	方法2：动态规划
 	集合：所有将第一个字符串的前i个字母，变成第二个字符串的前j个字母的方案
 	状态计算：三种方案求最小值
 		最后一步insert，dp[i][j-1] + 1
@@ -9,7 +10,7 @@
 func minDistance(str1 string, str2 string) int {
 	n := len(str1)
 	m := len(str2)
-	// 二维数组（todos：我这么开辟二维数组是不是有点蠢）
+	// (question)为什么要开辟n+1,m+1的空间
 	dp := make([][]int, n+1)
 	for i := 0; i < n+1; i++ {
 		dp[i] = make([]int, m+1)
@@ -29,7 +30,7 @@ func minDistance(str1 string, str2 string) int {
 			dp[i][j] = common.Min(dp[i-1][j], dp[i][j-1]) + 1
 			// replace
 			var add int
-			// 第一个字符串的第i-1个字母和第二个字符串的j-1个字母不相等
+			// 第一个字符串的第i-1个字母和第二个字符串的j-1个字母不相等（两个字符串的最后一个字母不相等）
 			if str1[i-1] != str2[j-1] {
 				add = 1
 			}
@@ -40,7 +41,8 @@ func minDistance(str1 string, str2 string) int {
 }
 
 /*
-	递归思路。超出时间限制了😅
+	方法1：递归
+	超出时间限制了😅
 */
 func minDistance(word1 string, word2 string) int {
 	// 三种边界条件，无需赘述边界条件
