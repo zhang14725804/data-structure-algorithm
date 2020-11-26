@@ -48,7 +48,10 @@ func longestPalindromeSubseq(s string) int {
 	return dp[0][n-1]
 }
 
-// 动态规划（进行状态压缩）,难以理解，(question)
+/*
+	动态规划（进行状态压缩）,难以理解
+	(question)状态压缩
+*/
 func longestPalindromeSubseq(s string) int {
 	n := len(s)
 	// base case：一维 dp 数组全部初始化为 0
