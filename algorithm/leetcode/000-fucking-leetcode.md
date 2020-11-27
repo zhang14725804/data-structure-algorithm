@@ -77,4 +77,59 @@ todo:还可以通过剪枝进行优化
 
 ### 5、数学技巧
 
-### 6、二分法
+## 6、二分法
+
+- 二分法特征
+
+    存在单调性
+    存在二段性
+
+- 二分的流程
+
+    (1)确定边界
+    (2)代码框架
+    (3)设置check
+    (4)判断区间如何更新
+    (5)注意mid取值
+
+- 两个模板
+
+（1）下取整
+
+这种通常题目描述为 满足某种情况的最小的元素。是否存在一个目标值（精确查找）
+
+```golang
+func bsearch1(l,r int){
+    while(l<r){
+        mid := (l+r) >> 1
+        if check(mid){
+            r = mid
+        }else{
+            l = mid+1
+        }
+    }
+    return l
+}
+```
+
+（2）上取整
+
+这种通常题目描述为 满足某种情况的最大的元素，069题（mid*mid <= x）
+
+```golang
+func bsearch2(l,r int){
+    while(l<r){
+        mid := (l+r+1) >> 1
+        if check(mid){
+            l = mid
+        }else{
+            r = mid-1
+        }
+    }
+    return l
+}
+```
+
+- question
+
+    模板简单但是不好理解😅
