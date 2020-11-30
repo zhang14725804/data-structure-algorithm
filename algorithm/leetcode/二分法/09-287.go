@@ -5,22 +5,22 @@
 	实现思路: 抽屉原理
 */
 func findDuplicate(nums []int) int {
-	n := len(nums)-1
-	// 
-	l,r := 1,n
-	for l < r{
-		mid := (l+r) >> 1
+	n := len(nums) - 1
+	//
+	l, r := 1, n
+	for l < r {
+		mid := (l + r) >> 1
 		cnt := 0
-		// 这里几个意思
-		for _,x := range nums{
-			if x >= l && x <= mid{
+		// 统计比mid值小的数
+		for _, x := range nums {
+			if x >= l && x <= mid {
 				cnt++
 			}
 		}
-		// 
-		if cnt > mid-l+1{
+		// 判断target在左、右两边
+		if cnt > mid-l+1 {
 			r = mid
-		}else{
+		} else {
 			l = mid + 1
 		}
 	}

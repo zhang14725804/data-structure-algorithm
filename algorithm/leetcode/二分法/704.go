@@ -29,7 +29,7 @@ func search(nums []int, target int) int {
 
 func search2(nums []int, target int) int {
 	left, right := 0, len(nums)-1
-	// 循环条件left < right
+	// 循环条件：开区间
 	for left < right {
 		mid := (left + right) >> 1
 		if nums[mid] == target {
@@ -48,7 +48,7 @@ func search2(nums []int, target int) int {
 
 func search1(nums []int, target int) int {
 	left, right := 0, len(nums)-1
-	// 循环条件left <= right
+	// 循环条件：闭区间
 	for left <= right {
 		mid := (left + right) >> 1
 		if nums[mid] == target {
