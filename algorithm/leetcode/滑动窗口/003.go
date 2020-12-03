@@ -1,11 +1,8 @@
-package main
-
 /*
 	给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
-
 	思路：滑动窗口(todo：思路和代码有点绕)
 */
-func lengthOfLongestSubstring(s string) int {
+func lengthOfLongestSubstring1(s string) int {
 	n, ans := len(s), 0
 	hash := make(map[byte]int) // 存放字符出现的位置
 	for i, j := 0, 0; j < n; j++ {
