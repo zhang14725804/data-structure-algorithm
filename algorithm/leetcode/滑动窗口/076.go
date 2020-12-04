@@ -7,12 +7,64 @@
 	方法1：暴力做法
 	枚举所有字串，检查是否包含所有T，找到最小字串
 */
-
 /*
-	方法2：滑动窗口
+	方法1：滑动窗口
 	如何快速判断当前字串是否包含t中所有字母，hash或数组
 */
-func minWindow(s1 string, t1 string) string {
+func minWindow(s string, t string) string {
+	// 需要满足的字符及其个数组成的map
+	need := make(map[byte]int, 0)
+	window := make(map[byte]int, 0)
+	needSize, left, right, valid := 0, 0, 0, 0
+	for i := 0; i < len(t); i++ {
+		c := t[i]
+		need[c]++
+		if need[c] == 1 {
+			// 要满足的元素种类
+			needSize++
+		}
+	}
+
+	var res string
+	for right < len(s) {
+		// 将要入窗口的字符
+		c := s[right]
+		// 右移窗口
+		right++
+		// 进行窗口内数据的一系列更新
+		if _, ok := need[c]; ok {
+			window[c]++
+			if window[c] == need[c] {
+				valid++
+			}
+		}
+		// 判断左侧边界是否需要收缩
+		for valid == needSize {
+			// 更新最小覆盖字串
+			if len(res) == 0 || len(res) > right-left {
+				res = s[left:right]
+			}
+			// 将要移除窗口的字符
+			d := s[left]
+			// 左移
+			left++
+			// 进行窗口内数据的一系列更新
+			if _, ok := need[d]; ok {
+				if window[d] == need[d] {
+					valid--
+				}
+				window[d]--
+			}
+		}
+	}
+	return res
+}
+
+/*
+	方法2：滑动窗口（优化版）(question)没看懂
+	如何快速判断当前字串是否包含t中所有字母，hash或数组
+*/
+func minWindow2(s1 string, t1 string) string {
 	// need始终记录着当前滑动窗口下，我们还需要的元素数量
 	// 数量为负的就是不必要的元素，而数量为0表示刚刚好
 	need := make(map[byte]int, 0)
