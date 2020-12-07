@@ -39,7 +39,7 @@ func maxProfit2(prices []int) int {
 	dp[i][k][0] // 第i天，至多进行k次交易，目前没有(0/1)持有股票
 	k=1，可以省略
 */
-func maxProfit(prices []int) int {
+func maxProfit3(prices []int) int {
 	n := len(prices)
 	if n == 0 {
 		return 0
@@ -51,18 +51,13 @@ func maxProfit(prices []int) int {
 	}
 
 	for i := 0; i < n; i++ {
+		// base case
 		if i-1 == -1 {
 			dp[i][0] = 0
-			//   dp[i][0]
-			// = max(dp[-1][0], dp[-1][1] + prices[i])
-			// = max(0, -infinity + prices[i]) = 0
 			dp[i][1] = -prices[i]
-			//   dp[i][1]
-			// = max(dp[-1][1], dp[-1][0] - prices[i])
-			// = max(-infinity, 0 - prices[i])
-			// = -prices[i]
 			continue
 		}
+		// 持有和未持有两种状态
 		dp[i][0] = MaxInt(dp[i-1][0], dp[i-1][1]+prices[i])
 		dp[i][1] = MaxInt(dp[i-1][1], -prices[i])
 	}
@@ -71,8 +66,7 @@ func maxProfit(prices []int) int {
 
 /*
 	方法2：状态机（动态规划），优化版（状态压缩）
-	dp[i][k][0] // 第i天，至多进行k次交易，目前没有(0/1)持有股票
-	k=1，可以省略
+	新状态只和相邻的一个状态有关
 */
 func maxProfit(prices []int) int {
 	n := len(prices)

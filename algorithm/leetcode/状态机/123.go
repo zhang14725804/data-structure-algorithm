@@ -30,7 +30,7 @@ func maxProfit1(prices []int) int {
 }
 
 /*
-	方法2：动态规划
+	方法2：动态规划；穷举所有状态(天数i，交易次数k，当前持有状态，三种情况穷举)
 */
 func maxProfit(prices []int) int {
 	// 初始化

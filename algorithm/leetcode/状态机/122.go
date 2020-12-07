@@ -24,18 +24,19 @@ func maxProfit2(prices []int) int {
 	if n == 0 {
 		return 0
 	}
-	// 初始化操作
 	dp := make([][]int, n)
 	for i := 0; i < n; i++ {
 		dp[i] = make([]int, 2)
 	}
 
 	for i := 0; i < n; i++ {
+		// base case
 		if i-1 == -1 {
 			dp[i][0] = 0
 			dp[i][1] = -prices[i]
 			continue
 		}
+		// 持有和未持有两种状态
 		dp[i][0] = MaxInt(dp[i-1][0], dp[i-1][1]+prices[i])
 		dp[i][1] = MaxInt(dp[i-1][1], dp[i-1][0]-prices[i])
 	}
@@ -44,15 +45,15 @@ func maxProfit2(prices []int) int {
 
 /*
 	方法2：状态机（优化版），状态压缩
+	新状态只和相邻的一个状态有关
 */
 func maxProfit(prices []int) int {
 	n := len(prices)
 	dp_i_0 := 0
 	dp_i_1 := -(1 << 32)
 	for i := 0; i < n; i++ {
-		temp := dp_i_0
-		dp_i_0 = MaxInt(temp, dp_i_1+prices[i])
-		dp_i_1 = MaxInt(dp_i_1, temp-prices[i])
+		dp_i_0 = MaxInt(dp_i_0, dp_i_1+prices[i])
+		dp_i_1 = MaxInt(dp_i_1, dp_i_0-prices[i])
 	}
 	return dp_i_0
 }

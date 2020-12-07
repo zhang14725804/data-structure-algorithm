@@ -27,15 +27,16 @@ func maxProfit1(prices []int, fee int) int {
 
 /*
 	动态规划，状态压缩
+	(question)
 */
 func maxProfit(prices []int, fee int) int {
 	n := len(prices)
+	// base case
 	dp_i_0 := 0
 	dp_i_1 := -(1 << 32)
 	for i := 0; i < n; i++ {
-		temp := dp_i_0
-		dp_i_0 = MaxInt(temp, dp_i_1+prices[i])
-		dp_i_1 = MaxInt(dp_i_1, temp-prices[i]-fee)
+		dp_i_0 = MaxInt(dp_i_0, dp_i_1+prices[i])
+		dp_i_1 = MaxInt(dp_i_1, dp_i_0-prices[i]-fee)
 	}
 	return dp_i_0
 }

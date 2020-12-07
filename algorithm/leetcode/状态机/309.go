@@ -5,6 +5,7 @@
 	设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:
 		你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
 		卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。
+
 	k = +infinity with cooldown
 */
 func maxProfit1(prices []int) int {
@@ -18,6 +19,7 @@ func maxProfit1(prices []int) int {
 	}
 	// (question)，n-1和n-2，base case处理有问题😅
 	for i := 1; i < n; i++ {
+		// base case难点
 		if i-1 == -1 {
 			dp[i][0] = 0
 			dp[i][1] = -prices[i]
@@ -30,10 +32,11 @@ func maxProfit1(prices []int) int {
 }
 
 /*
-	动态规划，状态压缩
+	动态规划，状态压缩(question)
 */
 func maxProfit(prices []int) int {
 	n := len(prices)
+	// base case
 	dp_i_0 := 0
 	dp_i_1 := -(1 << 32)
 	dp_pre_0 := 0 // 代表dp[i-2][0]

@@ -5,6 +5,7 @@
 
 /*
 	方法1：动态规划（状态机）
+	穷举所有状态(天数i，交易次数k，当前持有状态，三种情况穷举)
 */
 func maxProfit(max_k int, prices []int) int {
 	// 初始化
