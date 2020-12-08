@@ -23,14 +23,15 @@ func merge(intervals [][]int) [][]int {
 	res := make([][]int, 0)
 
 	for i := 1; i < len(intervals); i++ {
-		// 最后一个数大于等于另一个数组的第一个数
+		// 最后一个数 大于等于 另一个数组的第一个数
 		if curr[1] >= intervals[i][0] {
-			curr[1] = compare(curr[1], intervals[i][1], true)
+			curr[1] = MaxInt(curr[1], intervals[i][1])
 		} else {
 			res = append(res, curr)
 			curr = intervals[i]
 		}
 	}
+	// 处理剩余的数组
 	if len(curr) != 0 {
 		res = append(res, curr)
 	}
