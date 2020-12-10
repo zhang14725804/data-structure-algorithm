@@ -6,8 +6,11 @@
 
 	思路：枚举所有点
 */
-const MaxUint = ^uint(0)
-const MaxInt = int(MaxUint >> 1)
+
+/*
+	方法1：
+*/
+const MaxInt = (1 << 32)
 const MinInt = -MaxInt - 1
 
 // 声明最小值
