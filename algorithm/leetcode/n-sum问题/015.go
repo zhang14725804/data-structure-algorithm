@@ -12,25 +12,23 @@
 	遇到i和start相等，跳过
 */
 func threeSum(nums []int) [][]int {
-	res := make([][]int, 0)
-	// 对数组排序(冒泡，蠢一些)
-	for i := 0; i < len(nums)-1; i++ {
-		for j := 0; j < len(nums)-1-i; j++ {
-			if nums[j] > nums[j+1] {
-				nums[j+1], nums[j] = nums[j], nums[j+1]
-			}
-		}
-	}
+	n := len(nums)
+	// 排序先
+	nums = sort(nums)
 
-	numsLen := len(nums)
-	for i := 0; i < numsLen-2; i++ {
+	var res [][]int
+	for i := 0; i < n; i++ {
+		// 排除重复的情况
 		if i == 0 || nums[i] != nums[i-1] {
-			start, end := i+1, numsLen-1
+			// 双指针
+			start, end := i+1, n-1
 			for start < end {
+				// 符合条件
 				if nums[i]+nums[start]+nums[end] == 0 {
 					res = append(res, []int{nums[i], nums[start], nums[end]})
 					start++
 					end--
+					// 排除重复的情况
 					for start < end && nums[start] == nums[start-1] {
 						start++
 					}
