@@ -1,18 +1,20 @@
 /*
 	二叉搜索树中第K小的元素
+*/
 
-	二叉搜索树性值（todo）
+/*
+	方法1：利用BST性质，中序遍历
 */
 var nums = 0
 var res int
 
-// 方法1：中序遍历（左根右）输出的是一个升序数组
 func kthSmallest(root *TreeNode, k int) int {
 	inorderTraversal(root, k)
 	return res
 }
 
 func inorderTraversal(node *TreeNode, k int) {
+	// base case
 	if node == nil {
 		return
 	}
@@ -47,6 +49,7 @@ func kthSmallest(root *TreeNode, k int) int {
 	return res
 }
 
+// 统计当前节点有多少个子节点
 func count(node *TreeNode) int {
 	if node == nil {
 		return 0
