@@ -1,22 +1,26 @@
 /*
 	根据一棵树的中序遍历与后序遍历构造二叉树。
-	tips：
-		后序遍历（左、右、根）
-		中序遍历（左、根、右）
 */
 
 var pos = make(map[int]int)
 
 func buildTree(inorder []int, postorder []int) *TreeNode {
-	for i := 0; i < len(inorder); i++ {
+	n := len(inorder)
+	for i := 0; i < n; i++ {
 		// 重点：保存中序遍历节点的index
 		pos[inorder[i]] = i
 	}
-	return build(inorder, postorder, 0, len(inorder)-1, 0, len(postorder)-1)
+	return build(inorder, postorder, 0, n-1, 0, n-1)
 }
 
+/*
+	inorder   中序遍历数组
+	postorder 后序遍历数组
+	il，ir    中序遍历起点终点
+	pl，pr    后序遍历起点终点
+*/
 func build(inorder []int, postorder []int, il, ir, pl, pr int) *TreeNode {
-	//
+	// base case
 	if pl > pr {
 		return nil
 	}
