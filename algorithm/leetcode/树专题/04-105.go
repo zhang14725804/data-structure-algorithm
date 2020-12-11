@@ -15,16 +15,18 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 		// 重点：保存中序遍历节点的index
 		pos[inorder[i]] = i
 	}
+	// 本质上是前序遍历(🔥🔥🔥)
 	return dfs(preorder, inorder, 0, n-1, 0, n-1)
 }
 
 /*
 	preorder，前序遍历数组
 	inorder，中序遍历数组
-	pl，pr，il，ir
+	pl，pr 前序遍历起点终点
+	il，ir 中序遍历起点终点
 */
 func dfs(preorder, inorder []int, pl, pr, il, ir int) *TreeNode {
-	//
+	// 递归出口
 	if pl > pr {
 		return nil
 	}
@@ -35,12 +37,13 @@ func dfs(preorder, inorder []int, pl, pr, il, ir int) *TreeNode {
 	// 根节点，对应前序遍历的pl对应的节点
 	root := &TreeNode{val, nil, nil}
 	/*
-		pl+1, pl+(k-il), il, k-1。ps:k-il是左子树长度
+		pl+1, pl+(k-il), il, k-1。
+		ps:k-il是左子树长度(🔥🔥🔥)
 	*/
-	root.Left = dfs(preorder, inorder, pl+1, pl+k-il, il, k-1)
+	root.Left = dfs(preorder, inorder, pl+1, pl+(k-il), il, k-1)
 	/*
 		pl+(k-il)+1, pr, k+1, ir
 	*/
-	root.Right = dfs(preorder, inorder, pl+k-il+1, pr, k+1, ir)
+	root.Right = dfs(preorder, inorder, pl+(k-il)+1, pr, k+1, ir)
 	return root
 }

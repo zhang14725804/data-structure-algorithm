@@ -24,7 +24,9 @@ func reverseList(head *ListNode) *ListNode {
 	return prev
 }
 
-// 迭代方式
+/*
+	方法2：迭代方式
+*/
 func reverseList(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head

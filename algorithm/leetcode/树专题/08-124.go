@@ -8,21 +8,22 @@
 */
 
 /*
-	方法1：
+	方法1：递归：自顶向下
+	(question)硬是没看懂😅
 */
-const MaxInt = (1 << 32)
-const MinInt = -MaxInt - 1
+const min = -(1 << 32) - 1
 
 // 声明最小值
-var ans int = MinInt
+var ans int = min
 
 func maxPathSum(root *TreeNode) int {
+	// 本质上是后序遍历(🔥🔥🔥)
 	dfs(root)
 	return ans
 }
 
-// 返回从root往下递归的最大值
 func dfs(root *TreeNode) int {
+	// base case
 	if root == nil {
 		return 0
 	}
