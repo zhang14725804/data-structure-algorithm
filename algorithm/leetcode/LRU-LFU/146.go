@@ -1,5 +1,6 @@
 /*
 	运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
+	LRU认为最近使用过的数据应该是是「有用的」，很久都没用过的数据应该是无用的，内存满了就优先删那些很久没用过的数据。
 
 	获取数据 get(key) - 如果关键字 (key) 存在于缓存中，则获取关键字的值（总是正数），否则返回 -1。
 	写入数据 put(key, value) - 如果关键字已经存在，则变更其数据值；如果关键字不存在，则插入该组「关键字/值」。
@@ -8,10 +9,12 @@
 	进阶:
 		你是否可以在 O(1) 时间复杂度内完成这两种操作？
 
-	方法1：哈希表 + 双向链表（todo）
+
 */
 
-// 双向链表
+/*
+	方法1：哈希表 + 双向链表（todo）
+*/
 type DoubleLinkedNode struct {
 	key, value int
 	Prev, Next *DoubleLinkedNode
@@ -22,7 +25,7 @@ type LRUCache struct {
 	size       int
 	capacity   int
 	cache      map[int]*DoubleLinkedNode
-	head, tail *DoubleLinkedNode
+	head, tail *DoubleLinkedNode // head表示最近使用，tail表示最久未使用
 }
 
 func initDoubleLinkedNode(key, value int) *DoubleLinkedNode {
@@ -48,7 +51,8 @@ func (this *LRUCache) Get(key int) int {
 	if _, ok := this.cache[key]; !ok {
 		return -1
 	}
-	node := this.cache[key] //
+	node := this.cache[key]
+	// 最近使用
 	this.moveToHead(node)
 	return node.value
 }
@@ -73,6 +77,7 @@ func (this *LRUCache) Put(key int, value int) {
 	}
 }
 
+/********************************** 为链表提供一层抽象API **********************************************/
 // 移动到头步，表示最近使用
 func (this *LRUCache) moveToHead(node *DoubleLinkedNode) {
 	this.removeNode(node)
