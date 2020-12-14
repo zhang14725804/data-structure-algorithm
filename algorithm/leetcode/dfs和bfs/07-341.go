@@ -1,43 +1,21 @@
-/**
- * // This is the interface that allows for creating nested lists.
- * // You should not implement it, or speculate about its implementation
- * type NestedInteger struct {
- * }
- *
- * // Return true if this NestedInteger holds a single integer, rather than a nested list.
- * func (this NestedInteger) IsInteger() bool {}
- *
- * // Return the single integer that this NestedInteger holds, if it holds a single integer
- * // The result is undefined if this NestedInteger holds a nested list
- * // So before calling this method, you should have a check
- * func (this NestedInteger) GetInteger() int {}
- *
- * // Set this NestedInteger to hold a single integer.
- * func (n *NestedInteger) SetInteger(value int) {}
- *
- * // Set this NestedInteger to hold a nested list and adds a nested integer to it.
- * func (this *NestedInteger) Add(elem NestedInteger) {}
- *
- * // Return the nested list that this NestedInteger holds, if it holds a nested list
- * // The list length is zero if this NestedInteger holds a single integer
- * // You can access NestedInteger's List element directly if you want to modify it
- * func (this NestedInteger) GetList() []*NestedInteger {}
- */
+/*  
+    给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
+    列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。
+
+    迭代器惰性求值（每次只循环获取下一个元素）
+    N叉树遍历问题，dfs或者bfs会一次性把所有结果都算出来
+    迭代器惰性求值：调用hasNext时，如果nestedList的第一个元素是列表类型，则不断展开这个元素，直到第一个元素是整数类型
+*/
  
-// 实现迭代器
 type NestedIterator struct {
 	seq []int
 	cnt int
 }
 
-// todo蒙圈了
 func Constructor(nestedList []*NestedInteger) *NestedIterator {
     dfs(nestedList)
 }
 
-func dfs()  {
-	
-}
 
 func (this *NestedIterator) Next() int {
     return this.seq[this.cnt++]

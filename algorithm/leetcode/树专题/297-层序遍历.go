@@ -38,6 +38,7 @@ func (this *Codec) deserialize(data string) *TreeNode {
 	codecs := strings.Split(data, ",")
 
 	queue := make([]*TreeNode, 0)
+	// 构造根节点
 	root := &TreeNode{Val: stringToInt(codecs[0])}
 	queue = append(queue, root)
 	for i := 1; i < len(codecs); {
@@ -50,6 +51,7 @@ func (this *Codec) deserialize(data string) *TreeNode {
 		// 左节点
 		left := codecs[i]
 		i++
+		// 构造左子树
 		if left != "null" {
 			node.Left = &TreeNode{Val: stringToInt(left)}
 			queue = append(queue, node.Left)
@@ -59,6 +61,7 @@ func (this *Codec) deserialize(data string) *TreeNode {
 		// 右节点
 		right := codecs[i]
 		i++
+		// 构造右子树
 		if right != "null" {
 			node.Right = &TreeNode{Val: stringToInt(right)}
 			queue = append(queue, node.Right)
