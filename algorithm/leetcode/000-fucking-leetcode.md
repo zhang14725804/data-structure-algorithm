@@ -240,13 +240,33 @@ oooooooov...................
 （1）二叉树遍历问题：前序遍历，中序遍历，后序遍历（相对于根元素来将）；层序遍历（宽度优先遍历）
 
 ```golang
-    // 递归实现。当然也有栈实现
+    // 递归实现（🔥🔥🔥）
     traverse(root *TreeNode) {
         // 前序遍历
         traverse(root.Left)
         // 中序遍历
         traverse(root.Right)
         // 后序遍历
+    }
+
+    // 迭代实现（🔥🔥🔥）
+    traverse(root *TreeNode) {
+        if root == nil {
+            return root
+        }
+        queue := make([]*TreeNode, 0)
+        queue = append(queue, root)
+        for len(queue) > 0 {
+            node := queue[0]
+            queue = queue[1:]
+            // 层序遍历
+            if node.Left != nil {
+                queue = append(queue, node.Left)
+            }
+            if node.Right != nil {
+                queue = append(queue, node.Right)
+            }
+        }
     }
 ```
 
@@ -271,11 +291,12 @@ oooooooov...................
 
 （3）搜索二叉树
 
-BST 的中序遍历结果是有序的（升序）
+BST特性（🔥🔥🔥）：中序遍历结果是有序的（升序）
 
 直接基于 BST 的数据结构有 AVL 树，红黑树等等，拥有了自平衡性质，可以提供 logN 级别的增删查改效率；还有 B+ 树，线段树等结构都是基于 BST 的思想来设计的。
 
 ```golang
+    // BST增删改查套路 
     func BST(root *TreeNode, target int) *TreeNode {
         if root.Val == target {
             // 目标节点

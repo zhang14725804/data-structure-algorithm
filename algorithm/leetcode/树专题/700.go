@@ -6,7 +6,7 @@ func searchBST(root *TreeNode, val int) *TreeNode {
 	if root == nil {
 		return nil
 	}
-	// 三种情况
+	// BST套路
 	if root.Val == val {
 		return root
 	} else if root.Val > val {

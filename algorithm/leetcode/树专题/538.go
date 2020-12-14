@@ -4,8 +4,8 @@
 
 /*
 	方法1：逆序遍历BST(question 机智啊)
-		BST 的中序遍历代码可以升序打印节点的值
-		如果想降序打印节点的值怎么办：把遍历顺序改为  右根左
+		【BST中序遍历特性】：升序
+		如果想降序打印节点的值怎么办：把遍历顺序改为【右根左】
 */
 func convertBST(root *TreeNode) *TreeNode {
 	traverse(root)

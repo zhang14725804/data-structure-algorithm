@@ -49,7 +49,7 @@ func helper(root, min, max *TreeNode) bool {
 
 /*
 	方法1：自顶向下
-	左右子树的值都要在一个区间当中
+	***************左右子树的值都要在一个区间当中********************
 */
 func isValidBST1(root *TreeNode) bool {
 	const MaxInt = (1 << 32)
