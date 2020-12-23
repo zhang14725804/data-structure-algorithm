@@ -4,10 +4,6 @@
 */
 
 /*
-	方法1：暴力做法
-	枚举所有字串，检查是否包含所有T，找到最小字串
-*/
-/*
 	方法1：滑动窗口
 	如何快速判断当前字串是否包含t中所有字母，hash或数组
 */
@@ -15,6 +11,8 @@ func minWindow(s string, t string) string {
 	// 需要满足的字符及其个数组成的map
 	need := make(map[byte]int, 0)
 	window := make(map[byte]int, 0)
+	// needSize 要满足的元素个数
+	// valid 当前已满足的元素个数
 	needSize, left, right, valid := 0, 0, 0, 0
 	for i := 0; i < len(t); i++ {
 		c := t[i]
@@ -29,7 +27,7 @@ func minWindow(s string, t string) string {
 	for right < len(s) {
 		// 将要入窗口的字符
 		c := s[right]
-		// 右移窗口
+		// 移动右边指针
 		right++
 		// 进行窗口内数据的一系列更新
 		if _, ok := need[c]; ok {
@@ -46,7 +44,7 @@ func minWindow(s string, t string) string {
 			}
 			// 将要移除窗口的字符
 			d := s[left]
-			// 左移
+			// 向左移动左边指针
 			left++
 			// 进行窗口内数据的一系列更新
 			if _, ok := need[d]; ok {

@@ -20,6 +20,7 @@ func findAnagrams(s string, p string) []int {
 	res := make([]int, 0)
 	for right < len(s) {
 		c := s[right]
+		// 移动右指针
 		right++
 		if _, ok := need[c]; ok {
 			window[c]++
@@ -28,12 +29,14 @@ func findAnagrams(s string, p string) []int {
 			}
 		}
 
-		//(question)判断左侧窗口是否要收缩
+		//(question) 判断左侧窗口是否要收缩
 		for right-left >= len(p) {
+			// 更新答案
 			if valid == needSize {
 				res = append(res, left)
 			}
 			d := s[left]
+			// 移动左指针
 			left++
 			if _, ok := need[d]; ok {
 				if need[d] == window[d] {

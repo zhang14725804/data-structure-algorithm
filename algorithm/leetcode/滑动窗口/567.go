@@ -13,7 +13,7 @@
 func checkInclusion(t string, s string) bool {
 	need := make(map[byte]int)
 	window := make(map[byte]int)
-	needSize := 0
+	needSize, left, right, valid := 0, 0, 0, 0
 	for i := 0; i < len(t); i++ {
 		c := t[i]
 		need[c]++
@@ -21,8 +21,7 @@ func checkInclusion(t string, s string) bool {
 			needSize++
 		}
 	}
-	left, right, valid := 0, 0, 0
-	//
+
 	for right < len(s) {
 		c := s[right]
 		right++
