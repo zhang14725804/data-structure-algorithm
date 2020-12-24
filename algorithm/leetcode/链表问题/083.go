@@ -1,16 +1,21 @@
-// Leetcode083 Remove Duplicates from Sorted List
-func Leetcode083(head *ListNode) *ListNode {
+/*
+	给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+	思路：快慢指针
+*/
+func deleteDuplicates(head *ListNode) *ListNode {
 	if head == nil {
 		return nil
 	}
-	cur := head
-	// 这个指针移到下一个点，是个什么操作，不太理解
-	for cur != nil {
-		if cur.Next != nil && cur.Val == cur.Next.Val {
-			cur.Next = cur.Next.Next
-		} else {
-			cur = cur.Next
+	slow, fast := head, head
+	// 移动快慢指针
+	for fast != nil {
+		if fast.Val != slow.Val {
+			slow.Next = fast
+			slow = slow.Next
 		}
+		fast = fast.Next
 	}
+	// 断开后续重复数据
+	slow.Next = nil
 	return head
 }

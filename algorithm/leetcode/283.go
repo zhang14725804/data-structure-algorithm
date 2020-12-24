@@ -7,14 +7,15 @@
 	思路：双指针
 */
 func moveZeroes(nums []int) {
-	i, j := 0, 0
+	fast, slow := 0, 0
 	// 将所有非零元素放到开头，这样就保证末尾剩下的都是 0
-	// 双指针，指针 i 用于遍历数组，指针 j 开始指向开头，保证它前边的所有元素都是非 0 元素。
-	// 当 i 指针遇到非零元素就和 j 指针指向的元素交换，j 指针然后后移
-	for ; i < len(nums); i++ {
-		if nums[i] != 0 {
-			nums[i], nums[j] = nums[j], nums[i]
-			j++
+	// 双指针，指针 fast 用于遍历数组，指针 slow 开始指向开头，保证它前边的所有元素都是非 0 元素。
+	// 当 fast 指针遇到非零元素就和 slow 指针指向的元素交换，j 指针然后后移
+	for fast < len(nums) {
+		if nums[fast] != 0 {
+			nums[fast], nums[slow] = nums[slow], nums[fast]
+			slow++
 		}
+		fast++
 	}
 }

@@ -4,21 +4,22 @@
 */
 
 /*
-	方法1：双指针算法
+	方法1：双指针算法，快慢指针
 */
 func removeDuplicates(nums []int) int {
 	if len(nums) == 0 {
 		return 0
 	}
-	// k存所有不重复的数
-	k := 1
-	// j从前向后遍历
-	for j := 1; j < len(nums); j++ {
+	// slow存所有不重复的数
+	slow, fast := 0, 0
+	// fast从前向后遍历
+	for fast < len(nums) {
 		// 判断是否和上一个数相同
-		if nums[j] != nums[j-1] {
-			nums[k] = nums[j]
-			k++
+		if nums[slow] != nums[fast] {
+			slow++
+			nums[slow] = nums[fast]
 		}
+		fast++
 	}
-	return k
+	return slow + 1
 }
