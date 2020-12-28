@@ -13,6 +13,7 @@ var (
 func solveNQueens(_n int) [][]string {
 	n = _n
 	col = make([]bool, n)
+	// 斜线，反斜线
 	dg, udg = make([]bool, n*2), make([]bool, n*2)
 	path = make([][]byte, n)
 	for i := 0; i < n; i++ {
