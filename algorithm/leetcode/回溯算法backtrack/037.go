@@ -28,17 +28,17 @@ func solveSudoku(board [][]byte) {
 			}
 		}
 	}
-	// 左上角开始遍历
+	// 左上角开始，从左到右从上到下遍历
 	backtrack(board, 0, 0)
 }
 
 func backtrack(board [][]byte, x, y int) bool {
-	// 遍历到最右端，遍历下一个位置（下一行第一个位置）
+	// 遍历到最右端（最后一列），遍历下一个位置（下一行第一个位置）
 	if y == 9 {
 		x++
 		y = 0
 	}
-	// 遍历完所有行
+	// base case，遍历完所有行
 	if x == 9 {
 		return true
 	}
@@ -48,16 +48,16 @@ func backtrack(board [][]byte, x, y int) bool {
 	}
 	// 当前这个位置没有填数字，枚举当前位置可以填那个数字
 	for i := 0; i < 9; i++ {
-		// 保证每行每列每个九宫格没有出现过这个数字
+		// 保证每行、每列、每个九宫格没有出现过这个数字
 		if row[x][i] == false && col[y][i] == false && cell[x/3][y/3][i] == false {
-			// 填数字
+			// 选择
 			board[x][y] = byte('1' + i)
 			row[x][i], col[y][i], cell[x/3][y/3][i] = true, true, true
-			// 下一个格子
+			// 回溯
 			if backtrack(board, x, y+1) == true {
 				return true
 			}
-			// 恢复现场
+			// 撤销选择
 			board[x][y] = '.'
 			row[x][i], col[y][i], cell[x/3][y/3][i] = false, false, false
 		}

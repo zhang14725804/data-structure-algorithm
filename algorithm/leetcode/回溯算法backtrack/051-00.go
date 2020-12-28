@@ -2,6 +2,7 @@ var ans [][]string
 
 func solveNQueens(n int) [][]string {
 	board := make([][]byte, n)
+	// 初始化每个位置
 	for i := 0; i < n; i++ {
 		board[i] = make([]byte, n)
 		for j := 0; j < n; j++ {
@@ -13,6 +14,7 @@ func solveNQueens(n int) [][]string {
 }
 
 func backtrack(board [][]byte, row int) {
+	// 结束条件
 	if row == len(board) {
 		c := make([]string, 0)
 		for i := 0; i < len(board); i++ {
