@@ -19,14 +19,19 @@ func subsets(nums []int) [][]int {
 	return ans
 }
 
-// question 地址引用有问题
 func backtrack(nums []int, start int) {
+
+	// question 这里无需判断结束条件
 	temp := make([]int, len(path))
 	copy(temp, path)
 	ans = append(ans, temp)
+
 	for i := start; i < len(nums); i++ {
+		// 选择
 		path = append(path, nums[i])
+		// 回溯； i+1 而不是start+1
 		backtrack(nums, i+1)
+		// 撤销选择
 		path = path[:len(path)-1]
 	}
 }

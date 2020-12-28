@@ -11,16 +11,21 @@ func combine(_n int, _k int) [][]int {
 	return ans
 }
 
+// start 从第i个数字开始
 func backtrack(start int) {
-	// 如果 temp 里的数字够了 k 个，就把它加入到结果中
+	// 结束条件 temp 里的数字够了 k 个
 	if len(path) == k {
 		temp := make([]int, k)
 		copy(temp, path)
 		ans = append(ans, temp)
+		return
 	}
 	for i := start; i <= n; i++ {
+		// 选择
 		path = append(path, i)
-		backtrack(i + 1) // i+1 而不是start+1
+		// 进入下一层决策树；i+1 而不是start+1
+		backtrack(i + 1)
+		// 取消选择
 		path = path[:len(path)-1]
 	}
 }
