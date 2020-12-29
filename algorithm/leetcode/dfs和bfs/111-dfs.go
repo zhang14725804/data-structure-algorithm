@@ -6,7 +6,10 @@
 	说明: 叶子节点是指没有子节点的节点。
 
 	时间复杂度O(n)
-	ps：自下而上的方式
+*/
+
+/*
+	dfs:自下而上的方式
 */
 func minDepth(root *TreeNode) int {
 	if root == nil {
@@ -20,12 +23,5 @@ func minDepth(root *TreeNode) int {
 		return left + right + 1
 	}
 	// 左右子树都不为空
-	return min(left, right) + 1
-}
-
-func min(a, b int) int {
-	if a > b {
-		return b
-	}
-	return a
+	return MinInt(left, right) + 1
 }

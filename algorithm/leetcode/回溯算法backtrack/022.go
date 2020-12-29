@@ -24,17 +24,17 @@ func generateParenthesis(n int) []string {
 
 // 用 left 记录还可以使用多少个左括号，用 right 记录还可以使用多少个右括号
 func backtrack(left, right int) {
-	if right < left {
+	// 非法方案; 左括号的数量都大于或等于右括号的数量
+	if right < left || left < 0 || right < 0 {
 		return
 	}
-	if left < 0 || right < 0 {
-		return
-	}
+
 	// 当所有括号都恰好用完时，得到一个合法的括号组合
 	if left == 0 && right == 0 {
 		ans = append(ans, path)
 		return
 	}
+
 	// 选择，尝试放一个左括号
 	path += "("
 	// 回溯
