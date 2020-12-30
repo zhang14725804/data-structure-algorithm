@@ -40,6 +40,8 @@
 
 [Go Data Structures](https://github.com/emirpasic/gods)
 
+[数据结构与算法-尹成629集](https://www.bilibili.com/video/BV11K4y1t7kk?p=76)
+
 [数据结构与算法-尹成](https://www.bilibili.com/video/av81882246?p=1)
 [go专业数据结构与算法-尹成(35之前)](https://edu.csdn.net/course/detail/26960)
 [golang数据结构与算法导论-尹成（多一半）](https://ke.qq.com/course/455577) 

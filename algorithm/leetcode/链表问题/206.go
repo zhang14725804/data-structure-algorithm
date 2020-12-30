@@ -1,5 +1,5 @@
 /*
-	反转链表/链表反转：迭代或递归（todo:）
+	迭代方式
 */
 func reverseList(head *ListNode) *ListNode {
 	if head == nil {
@@ -14,25 +14,30 @@ func reverseList(head *ListNode) *ListNode {
 		next := cur.Next
 		// 改变当前节点指针指向（反转嘛） 😅
 		cur.Next = prev
-		// 移动prev指针
+		// 移动prev指针；先移动prev，再移动next
 		prev = cur
 		// 移动cur指针
 		cur = next
 	}
 	// 切断循环链
 	head.Next = nil
+	// 最后返回prev
 	return prev
 }
 
 /*
-	方法2：迭代方式
+	方法2：递归方式
 */
 func reverseList(head *ListNode) *ListNode {
+	// base case
 	if head == nil || head.Next == nil {
 		return head
 	}
 	tail := reverseList(head.Next)
+	// 链接head和已反转的部分
 	head.Next.Next = head
+	// 切断原来的链接
 	head.Next = nil
+	// 返回反转之后的链表
 	return tail
 }

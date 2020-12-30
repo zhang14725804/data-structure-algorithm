@@ -9,7 +9,36 @@ BFS 找到的路径一定是最短的，但代价就是空间复杂度比 DFS �
 
 
 ```golang
-
+    // BFS框架
+	var queue []string
+	// 保存已经访问过的节点
+	visited := make(map[string]bool, 0)
+	queue = append(queue, start)
+	visited[start] = true
+	step := 0
+	for len(queue) > 0 {
+		size := len(queue)
+		for i := 0; i < size; i++ {
+			// 队列，先进先出
+			cur := queue[0]
+			queue = queue[1:]
+			// 到达目标
+			if target == cur {
+				return step
+			}
+			// 将0和相邻的数字交换位置
+			for _, adj := range neighbor[idx] {
+				newBoard := []rune(cur)
+				sBoard := string(newBoard)
+				// 防止重复走
+				if _, ok := visited[sBoard]; !ok {
+					queue = append(queue, sBoard)
+					visited[sBoard] = true
+				}
+			}
+		}
+		step++
+	}
 ```
 
 ### 双向BFS
