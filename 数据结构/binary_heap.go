@@ -14,7 +14,7 @@ type Heap interface {
 	IsEmpty() bool
 	Insert(it int)
 	Delete() int
-	BuildHeap() // 建立大顶堆（线性时间复杂度）
+	BuildHeap(items []int) // 建立大顶堆（线性时间复杂度）
 }
 
 type heap struct {
@@ -24,7 +24,7 @@ type heap struct {
 	Capacity int // 容量
 }
 
-func NewHeap(cap int, min bool) Heap {
+func NewHeap(cap int) Heap {
 	elems := make([]int, 0)
 	// 设置一个哨兵
 	elems = append(elems, (1 << 32))
@@ -89,11 +89,14 @@ func (h *heap) IsFull() bool {
 }
 
 /*
-	先按照完全二叉树的顺序将元素插入
-	然后有底向上调整堆
-	（线性时间复杂度）
-	TODO
+	方法1：一个个Insert到初始为空的堆中 (Nlog(N))
+	方法2：先按照完全二叉树的结构特性将元素插入，然后由底向上调整堆（线性时间复杂度）
 */
-func (h *heap) BuildHeap() {
-
+func (h *heap) BuildHeap(items []int) {
+	// 第一步
+	for i := 0; i < len(items); i++ {
+		h.Element = append(h.Element, items[i])
+		h.Size++
+	}
+	// （ TODO ）第二步，不会呀😅
 }
