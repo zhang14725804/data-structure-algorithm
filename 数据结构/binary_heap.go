@@ -36,7 +36,16 @@ func NewHeap(cap int) Heap {
 	}
 }
 
+func (h *heap) IsEmpty() bool {
+	return len(h.Element) == 0
+}
+
+func (h *heap) IsFull() bool {
+	return h.Size == h.Capacity
+}
+
 func (h *heap) Insert(it int) {
+	// TODO 如果堆已经满了，应该删除或者替换某个元素
 	if h.IsFull() {
 		fmt.Println("满了！！")
 		return
@@ -78,14 +87,6 @@ func (h *heap) Delete() int {
 	}
 	h.Element[parent] = temp
 	return max
-}
-
-func (h *heap) IsEmpty() bool {
-	return len(h.Element) == 0
-}
-
-func (h *heap) IsFull() bool {
-	return h.Size == h.Capacity
 }
 
 /*
