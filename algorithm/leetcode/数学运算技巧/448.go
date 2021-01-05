@@ -1,33 +1,26 @@
 /*
-	集合 S 包含从1到 n 的整数。不幸的是，因为数据错误，导致集合里面某一个元素复制了成了集合里面的另外一个元素的值，导致集合丢失了一个整数并且有一个元素重复。
-	给定一个数组 nums 代表了集合 S 发生错误后的结果。你的任务是首先寻找到重复出现的整数，再找到丢失的整数，将它们以数组的形式返回。
+	给定一个范围在  1 ≤ a[i] ≤ n ( n = 数组大小 ) 的 整型数组，数组中的元素一些出现了【两次】，另一些只出现一次。
+	找到所有在 [1, n] 范围之间没有出现在数组中的数字。
+	您能在不使用额外空间且时间复杂度为O(n)的情况下完成这个任务吗? 你可以假定返回的数组不算在额外空间内。
 
-	给定数组的长度范围是 [2, 10000]。
-	给定的数组是无序的。
-
-	(question)不懂(😅)
-	ps：关键点在于元素和索引是成对儿出现的，常用的方法是排序、异或、映射。
+	如何寻找缺失的元素（ question 🔥🔥🔥 ）
+	对于缺失一个数而且不存在重复数字的情况：
+	方法1：排序然后查找
+	方法2：借用hashSet
+	方法3：位运算，对于异或运算（^）：一个数和它本身做异或运算结果为 0，一个数和 0 做异或运算还是它本身
+	方法4：等差数列求和，然后再减去当前数组中的数，注意【整型溢出 ❗】
 */
-func findErrorNums(nums []int) []int {
+func findDisappearedNumbers(nums []int) []int {
 	n := len(nums)
-	dup := -1
+	used := make([]bool, n)
 	for i := 0; i < n; i++ {
-		// 现在的元素是从 1 开始的
-		index := abs(nums[i]) - 1
-		// nums[index] 小于 0 则说明重复访问
-		if nums[index] < 0 {
-			dup = abs(nums[i])
-		} else {
-			nums[index] *= -1
+		used[nums[i]-1] = true
+	}
+	res := make([]int, 0)
+	for i := 0; i < n; i++ {
+		if !used[i] {
+			res = append(res, i+1)
 		}
 	}
-
-	missing := -1
-	for i := 0; i < n; i++ {
-		if nums[i] > 0 {
-			// 将索引转换成元素
-			missing = i + 1
-		}
-	}
-	return []int{dup, missing}
+	return res
 }

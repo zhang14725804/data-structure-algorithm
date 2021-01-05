@@ -4,9 +4,8 @@
 	元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
 
 */
-/*
-	方法1：快慢指针,同时向右走
-*/
+
+// 方法1：快慢指针,同时向右走
 func removeElement(nums []int, val int) int {
 	slow, fast := 0, 0
 	for fast < len(nums) {
@@ -19,12 +18,11 @@ func removeElement(nums []int, val int) int {
 	return slow
 }
 
-/*
-	方法2：双指针的变种，两边向中间夹击
-*/
+// 方法2：双指针的变种，两边向中间夹击
 func removeElement(nums []int, val int) int {
 	i, n := 0, len(nums)
 	for i < n {
+		// 找到目标元素
 		if nums[i] == val {
 			nums[i] = nums[n-1]
 			n--
