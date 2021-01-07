@@ -1,10 +1,3 @@
-package main
-
-import (
-	"fmt"
-	"strconv"
-)
-
 /*
 	给你一个长度为 n 的字符串数组 names 。你将会在文件系统中创建 n 个文件夹：
 	在第 i 分钟，新建名为 names[i] 的文件夹。

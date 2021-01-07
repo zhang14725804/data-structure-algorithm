@@ -1,7 +1,3 @@
-package main
-
-import "fmt"
-
 /*
 	输入n个整数，找出其中最小的k个数。 Top-K问题
 	方法1：大根堆、小根堆

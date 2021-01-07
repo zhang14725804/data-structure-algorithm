@@ -1,9 +1,3 @@
-package main
-
-import (
-	"fmt"
-)
-
 // 数组和slice 值传递和址传递问题
 
 func main() {

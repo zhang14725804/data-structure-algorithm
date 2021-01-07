@@ -1,6 +1,21 @@
+package main
+
+import (
+	"fmt"
+	"unicode/utf8"
+)
+
+// func main() {
+// fmt.Println(calculate("1+(4+5+2) - 3"))
+// fmt.Println(calculate("(1+(4+5+2)-3)+(6+8)"))
+// fmt.Println(calculate(" ( 5*(4-2)+1-6)/5*2 "))
+// fmt.Println(calculate(" (12-1) + 12 "))
+// 	fmt.Println(calculate("(12-1)"))
+// }
+
 /*
 	实现一个基本的计算器来计算一个简单的字符串表达式的值。
-	字符串表达式可以包含左括号 ( ，右括号 )，加号 + ，减号 -，非负整数和空格  。
+	字符串表达式可以包含左括号 ( ，右括号 )，加号 + ，减号 -，乘号 *，除号 /，非负整数和空格  。
 
 */
 
@@ -12,58 +27,54 @@
 	（4）处理空格字符
 	（5）处理包含括号的算式
 */
+//
 func calculate(s string) int {
-	l := len(s)
-	if l == 0 {
+	if len(s) == 0 {
 		return 0
 	}
-	return dfs(s)
+	return helper(s)
 }
 
-func dfs(s string) int {
+// question 遇到括号递归有问题
+func helper(s string) int {
 	stack := make([]int, 0)
 	num := 0
 	sign := '+'
 	for len(s) > 0 {
 		c := s[0]
-		s = s[1:] // pop(0)
+		s = s[1:]
 		if isdigit(c) {
 			num = num*10 + int(c-'0')
 		}
-		// 遇到左括号，递归
 		if c == '(' {
-			num = dfs(s)
+			num = helper(s)
 		}
 		if (!isdigit(c) && c != ' ') || len(s) == 0 {
-			switch sign {
-			case '-':
-				fmt.Println("减")
+			if sign == '-' {
 				stack = append(stack, -num)
-			case '+':
-				fmt.Println("加")
+			} else if sign == '+' {
 				stack = append(stack, num)
-			case '*':
-				fmt.Println("乘")
+			} else if sign == '*' {
 				pre := stack[len(stack)-1]   // top
 				stack = stack[:len(stack)-1] // pop
 				stack = append(stack, num*pre)
-			case '/':
-				fmt.Println("除")
+			} else if sign == '/' {
 				pre := stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
 				stack = append(stack, num/pre)
 			}
-			// 😅
+
 			sign, _ = utf8.DecodeRune([]byte{c})
 			num = 0
 		}
-		// 遇到右括号
 		if c == ')' {
 			break
 		}
 	}
+	fmt.Println(stack)
 	return sum(stack)
 }
+
 func sum(stack []int) int {
 	res := 0
 	for i := 0; i < len(stack); i++ {
@@ -72,5 +83,6 @@ func sum(stack []int) int {
 	return res
 }
 func isdigit(char byte) bool {
-	return char >= 48 && char <= 57
+	// char >= 48 && char <= 57
+	return char >= '0' && char <= '9'
 }
