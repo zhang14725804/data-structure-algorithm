@@ -1,4 +1,4 @@
-package main
+ 
 
 import "fmt"
 
@@ -6,7 +6,7 @@ import "fmt"
 	链式存储结构（没有堆栈溢出问题）
 */
 
-func main1()  {
+func main1() {
 	/*
 		这样写的时候在根目录下执行go build就可以执行了
 		直接运行main.go报错：：undefined: Node
@@ -37,25 +37,25 @@ func main1()  {
 	数组实现栈，队列
 	链表实现栈，队列
 */
-func main2()  {
+func main2() {
 	// 链式栈
 	stack := NewStack()
-	for i:=0;i<10 ;i++  {
+	for i := 0; i < 10; i++ {
 		stack.Push(i)
 	}
-	for data:=stack.Pop();data!=nil;data = stack.Pop(){
+	for data := stack.Pop(); data != nil; data = stack.Pop() {
 		fmt.Println(data)
 	}
 }
 
-func main(){
+func main() {
 	// 链式队列
 	ql := NewLinkQueue()
-	for i:=0;i<10 ;i++  {
+	for i := 0; i < 10; i++ {
 		ql.EnQueue(i)
 	}
 	fmt.Println(ql.Length())
-	for data:=ql.DeQueue();data!=nil;data = ql.DeQueue(){
+	for data := ql.DeQueue(); data != nil; data = ql.DeQueue() {
 		fmt.Println(data)
 	}
 }

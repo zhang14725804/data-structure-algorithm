@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+//
 
 func calculater(s string) int {
 	oper := make([]byte, 0)
@@ -73,11 +71,12 @@ func calc(oper *[]byte, nums *[]int) {
 func isdigit(char byte) bool {
 	return char >= '0' && char <= '9'
 }
-func main() {
-	fmt.Println(calculater("1+(4+5+2) - 3"))
-	fmt.Println(calculater("(1+(4+5)-3)+(6+8)"))
-	fmt.Println(calculater(" ( 5*(4-2)+1-6)/5*2 "))
-	fmt.Println(calculater(" (12-1) + 12 "))
-	fmt.Println(calculater("(12/2+3)"))
-	// fmt.Println(calculater("-2+1"))  // 有问题😅
-}
+
+// func main() {
+// 	fmt.Println(calculater("1+(4+5+2) - 3"))
+// 	fmt.Println(calculater("(1+(4+5)-3)+(6+8)"))
+// 	fmt.Println(calculater(" ( 5*(4-2)+1-6)/5*2 "))
+// 	fmt.Println(calculater(" (12-1) + 12 "))
+// 	fmt.Println(calculater("(12/2+3)"))
+// 	fmt.Println(calculater("-2+1"))  // todo question 有问题😅
+// }

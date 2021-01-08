@@ -1,24 +1,18 @@
-package main
+// package main
 
-import (
-	"fmt"
-	"unicode/utf8"
-)
+// import (
+// 	"fmt"
+// 	"unicode/utf8"
+// )
 
 // func main() {
-// fmt.Println(calculate("1+(4+5+2) - 3"))
-// fmt.Println(calculate("(1+(4+5+2)-3)+(6+8)"))
-// fmt.Println(calculate(" ( 5*(4-2)+1-6)/5*2 "))
-// fmt.Println(calculate(" (12-1) + 12 "))
-// 	fmt.Println(calculate("(12-1)"))
+// 	// fmt.Println(calculate("1+(4+5+2) - 3"))
+// 	// fmt.Println(calculate("(1+(4+5+2)-3)+(6+8)"))
+// 	// fmt.Println(calculate(" ( 5*(4-2)+1-6)/5*2 "))
+// 	// fmt.Println(calculate(" (12-1) + 12+1+1 "))
+// 	// fmt.Println(calculate("(12-1)"))
+// 	fmt.Println(calculate("(12/3)"))
 // }
-
-/*
-	实现一个基本的计算器来计算一个简单的字符串表达式的值。
-	字符串表达式可以包含左括号 ( ，右括号 )，加号 + ，减号 -，乘号 *，除号 /，非负整数和空格  。
-
-*/
-
 /*
 	question 【处理复杂问题的思路】
 	（1）字符串转数字
@@ -32,24 +26,24 @@ func calculate(s string) int {
 	if len(s) == 0 {
 		return 0
 	}
-	return helper(s)
+	return helper(&s)
 }
 
-// question 遇到括号递归有问题
-func helper(s string) int {
+// ( question todo 两天都没搞定 😅 ) 遇到括号递归有问题
+func helper(s *string) int {
 	stack := make([]int, 0)
 	num := 0
 	sign := '+'
-	for len(s) > 0 {
-		c := s[0]
-		s = s[1:]
-		if isdigit(c) {
-			num = num*10 + int(c-'0')
+	fmt.Println(*s)
+	for len(*s) > 0 {
+		c := (*s)[0]
+		*s = (*s)[1:]
+		if c == ' ' {
+			continue
 		}
 		if c == '(' {
 			num = helper(s)
-		}
-		if (!isdigit(c) && c != ' ') || len(s) == 0 {
+		} else if !isdigit(c) || len(*s) == 0 {
 			if sign == '-' {
 				stack = append(stack, -num)
 			} else if sign == '+' {
@@ -61,18 +55,19 @@ func helper(s string) int {
 			} else if sign == '/' {
 				pre := stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
-				stack = append(stack, num/pre)
+				stack = append(stack, pre/num)
 			}
-
+			if c == ')' {
+				break
+			}
 			sign, _ = utf8.DecodeRune([]byte{c})
 			num = 0
 		}
-		if c == ')' {
-			break
+		if isdigit(c) {
+			num = num*10 + int(c-'0')
 		}
 	}
-	fmt.Println(stack)
-	return sum(stack)
+	return sum(stack) + num
 }
 
 func sum(stack []int) int {

@@ -1,10 +1,11 @@
-package main
+ 
 
 import (
 	"code-data-structure/Single_link"
 	"code-data-structure/double_link"
 	"fmt"
 )
+
 /*
 	build command-line-arguments: cannot find module for path _/D_/aprivate/code-data-structure/Single_link
 	参考：https://blog.csdn.net/sinat_23156865/article/details/100655475
@@ -16,7 +17,7 @@ import (
 
 	求链表位置：中间节点，三分之一位置，四分之一位置（快慢指针）
 */
-func main1()  {
+func main1() {
 	list := Single_link.NewSingleLinkList()
 	node1 := Single_link.NewSingleLinkNode(1)
 	node2 := Single_link.NewSingleLinkNode(2)
@@ -29,8 +30,8 @@ func main1()  {
 	list.InsertBack(node1)
 	list.InsertBack(node2)
 	list.InsertBack(node3)
-	list.InsertBefore(1,node4)
-	list.InsertAfter(3,node5)
+	list.InsertBefore(1, node4)
+	list.InsertAfter(3, node5)
 	fmt.Println(list)
 	fmt.Println(list.GetNodeAtIndex(2))
 	list.DeleteNode(2)
@@ -41,10 +42,11 @@ func main1()  {
 	list.Reverse()
 	fmt.Println(list)
 }
+
 /*
 	双链表
 */
-func main2()  {
+func main2() {
 	list := double_link.NewDoubleLink()
 	node1 := double_link.NewDoublelinkNode(1)
 	node2 := double_link.NewDoublelinkNode(2)
@@ -57,7 +59,7 @@ func main2()  {
 	fmt.Println(list.String())
 }
 
-func main()  {
+func main() {
 	list := double_link.NewDoubleLink()
 	node1 := double_link.NewDoublelinkNode(1)
 	node2 := double_link.NewDoublelinkNode(2)
@@ -70,7 +72,7 @@ func main()  {
 	fmt.Println(list.String())
 	node5 := double_link.NewDoublelinkNode(5)
 	node6 := double_link.NewDoublelinkNode(5)
-	list.InsertNodeBefore(node3,node5)
-	list.InsertNodeAfter(node3,node6)
+	list.InsertNodeBefore(node3, node5)
+	list.InsertNodeAfter(node3, node6)
 	fmt.Println(list.String())
 }

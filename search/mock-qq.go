@@ -1,4 +1,4 @@
-package main
+ 
 
 import (
 	"bufio"
@@ -36,25 +36,26 @@ func GenerateRandomNumber(start int, end int, count int) []int {
 	}
 	return nums
 }
+
 /*
 	mock一些数据，写入文件
 	269279025----269279025i
 	数字太大不行
 */
-func main()  {
+func main() {
 	const LEN = 666666
-	nums := GenerateRandomNumber(1000000,999999999,LEN)
-	letter:=[]rune{'a','b','c','d','e','f','g','h','i','j'}
+	nums := GenerateRandomNumber(1000000, 999999999, LEN)
+	letter := []rune{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
 	// 统计计算时间
 	t1 := time.Now()
 	// 新建文件并写入
-	path:="./mock-qq-password.txt"
-	saveFile,_:=os.Create(path)
+	path := "./mock-qq-password.txt"
+	saveFile, _ := os.Create(path)
 	defer saveFile.Close()
-	save:=bufio.NewWriter(saveFile)
-	for i:=0;i<LEN;i++{
+	save := bufio.NewWriter(saveFile)
+	for i := 0; i < LEN; i++ {
 		// 写入文件
-		fmt.Fprintln(save,fmt.Sprintf("%d", nums[i]) +"----"+fmt.Sprintf("%d", nums[i]) + string(letter[rand.Intn(10)]))
+		fmt.Fprintln(save, fmt.Sprintf("%d", nums[i])+"----"+fmt.Sprintf("%d", nums[i])+string(letter[rand.Intn(10)]))
 	}
 	save.Flush() // 刷新
 	fmt.Println(time.Since(t1))

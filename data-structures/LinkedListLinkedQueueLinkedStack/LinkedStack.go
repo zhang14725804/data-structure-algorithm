@@ -1,15 +1,15 @@
-package main
+ 
 
 /*
 	栈，先进先出(头插入头删除，或者尾插入尾删除)
 	链式栈
 */
-type Node struct{
+type Node struct {
 	data interface{}
 	Next *Node
 }
 
-type LinkedStack interface{
+type LinkedStack interface {
 	IsEmpty() bool
 	Push(data interface{})
 	Pop() interface{}
@@ -28,7 +28,7 @@ func (node *Node) IsEmpty() bool {
 	return false
 }
 
-func (node *Node) Length() int{
+func (node *Node) Length() int {
 	n := node
 	l := 0
 	// 循环链表
@@ -39,14 +39,14 @@ func (node *Node) Length() int{
 	return l
 }
 
-func (node *Node) Push(data interface{}){
-	n := &Node{data,nil}
+func (node *Node) Push(data interface{}) {
+	n := &Node{data, nil}
 	n.Next = node.Next
 	node.Next = n
 }
 
-func (node *Node) Pop() interface{}{
-	if node.IsEmpty(){
+func (node *Node) Pop() interface{} {
+	if node.IsEmpty() {
 		return nil
 	}
 	// 要弹出的数据
