@@ -7,30 +7,34 @@ func longestPalindrome1(s string) string {
 	res := ""
 	// 遍历每个字符，以每个字符为中心，像两边扩散
 	for i := 0; i < len(s); i++ {
-		// 数组长度是奇数
+		// 找到以 s[i] 为中心的回文串
 		l, r := i-1, i+1
-		// 两个指针同时向左向右背向移动
 		for l >= 0 && r < len(s) && s[l] == s[r] {
 			l--
 			r++
 		}
-		if len(res) < r-l-1 {
+		// question 边界范围为什么是 [l+1 : r]
+		if len(res) < r-(l+1) {
 			res = s[l+1 : r]
 		}
-		// 数组长度是偶数
+		// 找到以 s[i] 和 s[i+1] 为中心的回文串
 		l, r = i, i+1
 		for l >= 0 && r < len(s) && s[l] == s[r] {
 			l--
 			r++
 		}
-		if len(res) < r-l-1 {
+		//
+		if len(res) < r-(l+1) {
 			res = s[l+1 : r]
 		}
 	}
 	return res
 }
 
-// 当s[i,j]是回文串 且 s[i-1] == s[j+1]的时候 s[i-1, j+1] 也是回文串， 定义一个dp数组， 初始化dp[i][i] 与 dp[i][i+1]，然后动态规划
+/*
+	动态规划
+	当s[i,j]是回文串 且 s[i-1] == s[j+1]的时候 s[i-1, j+1] 也是回文串， 定义一个dp数组， 初始化dp[i][i] 与 dp[i][i+1]
+*/
 func longestPalindrome(s string) string {
 	sLen := len(s)
 	// 初始化判断
