@@ -9,6 +9,7 @@ func reverseList(head *ListNode) *ListNode {
 	cur := head
 	// 前一个位置
 	prev := head
+	// careful 【cur != nil】 而不是【cur.Next != nil】
 	for cur != nil {
 		// 占位符。存储next指针
 		next := cur.Next
@@ -19,7 +20,7 @@ func reverseList(head *ListNode) *ListNode {
 		// 移动cur指针
 		cur = next
 	}
-	// 切断循环链
+	// careful 【head.Next】 切断循环链
 	head.Next = nil
 	// 最后返回prev
 	return prev
@@ -29,7 +30,7 @@ func reverseList(head *ListNode) *ListNode {
 	方法2：递归方式
 */
 func reverseList(head *ListNode) *ListNode {
-	// base case
+	// careful：base case
 	if head == nil || head.Next == nil {
 		return head
 	}
