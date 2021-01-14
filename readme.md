@@ -33,6 +33,7 @@
 
 [手撕LeetCode--labuladong算法小炒（🔥🔥🔥）](https://labuladong.gitbook.io/algo/)
 
+[labuladong算法小炒公众号](https://mp.weixin.qq.com/s/AWsL7G89RtaHyHjRPNJENA)
 
 [数据结构和算法必知必会的50个代码实现](https://github.com/wangzheng0822/algo)
 
