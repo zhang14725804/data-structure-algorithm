@@ -1,6 +1,6 @@
 ### 1、动态规划
 
-todooooooooooooooooo: **1.3、1.4、1.5**,子集背包问题，
+todooooooooooooooooo: **1.5**
 
 ### 2、Top-K问题（四板斧）
 
