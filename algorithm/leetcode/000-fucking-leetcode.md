@@ -1,7 +1,5 @@
 ### 1、动态规划
 
-todooooooooooooooooo: **1.5**
-
 ### 2、Top-K问题（四板斧）
 
 ### 3、回溯算法

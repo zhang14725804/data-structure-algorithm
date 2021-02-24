@@ -9,7 +9,10 @@
 		s 可能为空，且只包含从 a-z 的小写字母。
 		p 可能为空，且只包含从 a-z 的小写字母，以及字符 ? 和 *。
 */
-// 方法1：动态规划（平平无奇的动态规划）
+
+/*
+	方法1：动态规划（平平无奇的动态规划）
+*/
 func isMatch1(s string, p string) bool {
 	m, n := len(s), len(p)
 	// 用 dp[i][j]dp[i][j] 表示字符串 ss 的前 ii 个字符和模式 pp 的前 jj 个字符是否能匹配
@@ -41,7 +44,9 @@ func isMatch1(s string, p string) bool {
 	return dp[m][n]
 }
 
-// 方法2：迭代（双指针），不太好理解（question）
+/*
+	方法2：迭代（双指针），不太好理解（question）
+*/
 func isMatch1(str string, pattern string) bool {
 	s, p, match, startIdx := 0, 0, 0, -1
 	for s < len(str) {
