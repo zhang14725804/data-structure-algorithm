@@ -7,6 +7,7 @@
 		卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。
 
 	k = +infinity with cooldown
+	dp[i][k][0] // 第i天，至多进行k次交易，目前没有(0/1)持有股票
 */
 func maxProfit1(prices []int) int {
 	n := len(prices)
@@ -17,15 +18,23 @@ func maxProfit1(prices []int) int {
 	for i := 0; i < n; i++ {
 		dp[i] = make([]int, 2)
 	}
+
 	// (question)，n-1和n-2，base case处理有问题😅
-	for i := 1; i < n; i++ {
-		// base case难点
-		if i-1 == -1 {
+	for i := 0; i < n; i++ {
+		// base case有问题😅
+		if i == 0 {
 			dp[i][0] = 0
-			dp[i][1] = -prices[i]
+			dp[i][1] = -(1 << 32)
 			continue
 		}
+		if i == 1 {
+			dp[i][0] = MaxInt(dp[0][0], dp[0][1]+prices[1])
+			dp[i][1] = MaxInt(dp[0][0]-prices[1], dp[0][1])
+			continue
+		}
+		// 未持有：前一天未持有（rest）、前一天持有（第i天sell）
 		dp[i][0] = MaxInt(dp[i-1][0], dp[i-1][1]+prices[i])
+		// 持有：前一天持有（rest）、前一天未持有（第i天buy）
 		dp[i][1] = MaxInt(dp[i-1][1], dp[i-2][0]-prices[i])
 	}
 	return dp[n-1][0]
