@@ -11,20 +11,15 @@
 */
 func maxProfit1(prices []int) int {
 	n := len(prices)
-	if n == 0 {
+	if n < 2 {
 		return 0
 	}
-	dp := make([][]int, n)
+	dp := make([][2]int, n)
+	// (question) base case
 	for i := 0; i < n; i++ {
-		dp[i] = make([]int, 2)
-	}
-
-	// (question)，n-1和n-2，base case处理有问题😅
-	for i := 0; i < n; i++ {
-		// base case有问题😅
 		if i == 0 {
 			dp[i][0] = 0
-			dp[i][1] = -(1 << 32)
+			dp[i][1] = -prices[0]
 			continue
 		}
 		if i == 1 {
@@ -32,9 +27,10 @@ func maxProfit1(prices []int) int {
 			dp[i][1] = MaxInt(dp[0][0]-prices[1], dp[0][1])
 			continue
 		}
+
 		// 未持有：前一天未持有（rest）、前一天持有（第i天sell）
 		dp[i][0] = MaxInt(dp[i-1][0], dp[i-1][1]+prices[i])
-		// 持有：前一天持有（rest）、前一天未持有（第i天buy）
+		// 持有：前一天持有（rest）、前前一天未持有（第i天buy）
 		dp[i][1] = MaxInt(dp[i-1][1], dp[i-2][0]-prices[i])
 	}
 	return dp[n-1][0]
