@@ -8,26 +8,28 @@
 	只要比较情况二和情况三就行了，因为这两种情况对于房子的选择余地比情况一大
 */
 var nums []int
-var n int
+var size int
 
 func rob(_nums []int) int {
 	nums = _nums
-	n = len(nums)
+	size = len(nums)
 	// 是否考虑第一家，分为两种情况
-	return MaxInt(helper(0, n-1), helper(1, n))
+	// 抢第一家：helper(0, size-1)
+	// 不抢第一家：helper(1, size)
+	return MaxInt(helper(0, size-1), helper(1, size))
 }
 
 func helper(start, end int) int {
-	if n == 0 {
+	if size == 0 {
 		return 0
 	}
-	if n == 1 {
+	if size == 1 {
 		return nums[0]
 	}
-
+	// base case
 	pre := 0
 	cur := nums[start]
-	// pre,cur
+
 	for i := start + 2; i <= end; i++ {
 		temp := cur
 		cur = MaxInt(pre+nums[i-1], cur)
