@@ -6,17 +6,17 @@
 /*
 	方法1：递归：自顶向下
 */
-var hash map[*TreeNode]int = make(map[*TreeNode]int, 0) // 备忘录
+var memo map[*TreeNode]int = make(map[*TreeNode]int, 0)
 
 func rob(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
 	// 避免重叠子问题导致的重复计算
-	if val, ok := hash[root]; ok {
+	if val, ok := memo[root]; ok {
 		return val
 	}
-	// 抢，然后抢下下家
+	// 抢，抢下下家
 	doRob := root.Val
 	if root.Left != nil {
 		doRob += rob(root.Left.Left) + rob(root.Left.Right)
@@ -24,10 +24,9 @@ func rob(root *TreeNode) int {
 	if root.Right != nil {
 		doRob += rob(root.Right.Left) + rob(root.Right.Right)
 	}
-	// 不抢，抢下一家
+	// 不抢，抢下家
 	donotRob := rob(root.Left) + rob(root.Right)
-
-	res := MaxInt(doRob, donotRob)
-	hash[root] = res
-	return res
+	// 取两者较大值
+	memo[root] = MaxInt(doRob, donotRob)
+	return memo[root]
 }
