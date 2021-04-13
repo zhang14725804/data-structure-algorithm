@@ -5,7 +5,7 @@
 [LeetCode-Go golang实现](https://github.com/halfrost/LeetCode-Go)
 
 [leetcode-Go (greyireland 循序渐进-算法模板)](https://github.com/greyireland/algorithm-pattern)
-[greyireland 循序渐进-算法模板](https://greyireland.gitbook.io/algorithm-pattern/shu-ju-jie-gou-pian/binary_tree)
+[greyireland 循序渐进-算法模板 🔥🔥🔥](https://greyireland.gitbook.io/algorithm-pattern/shu-ju-jie-gou-pian/binary_tree)
 
 
 [Algorithms & Data Structures in Go](https://github.com/arnauddri/algorithms)
