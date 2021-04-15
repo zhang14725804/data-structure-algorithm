@@ -4,66 +4,39 @@
 	思路：层序遍历之后，按照层级反转答案即可
 */
 func zigzagLevelOrder(root *TreeNode) [][]int {
-	var res [][]int
+	var ans [][]int
 	if root == nil {
-		return res
+		return ans
 	}
-	//
-	var q Queue
-	q.push(*root)
-	cnt := 0
-	//
+
+	q := make([]*TreeNode, 0)
+	q = append(q, root)
+	step := 0
+	// 层序遍历
 	for len(q) > 0 {
-		//
-		length := len(q)
+		ql := len(q)
 		var level []int
-		cnt++
-
-		for i := 0; i < length; i++ {
-			//
-			t := q.front()
-			level = append(level, t.Val)
-
-			//
-			if t.Left != nil {
-				q.push(*t.Left)
+		for i := 0; i < ql; i++ {
+			cur := q[0]
+			q = q[1:]
+			level = append(level, cur.Val)
+			if cur.Left != nil {
+				q = append(q, cur.Left)
 			}
-			if t.Right != nil {
-				q.push(*t.Right)
+			if cur.Right != nil {
+				q = append(q, cur.Right)
 			}
 		}
-		// 偶数行反转数组
-		if cnt%2 == 0 {
-			reverse(level)
+		// 根据奇偶反转
+		if step == 1 {
+			step = 0
+			for i, j := 0, len(level)-1; i < j; i, j = i+1, j-1 {
+				level[i], level[j] = level[j], level[i]
+			}
+		} else {
+			step = 1
 		}
-		res = append(res, level)
+		ans = append(ans, level)
 	}
-	return res
-}
-
-func reverse(res []int) {
-	// 反转数组
-	for i, j := 0, len(res)-1; i < j; i, j = i+1, j-1 {
-		res[i], res[j] = res[j], res[i]
-	}
-}
-
-// 利用slice实现队列
-type Queue []TreeNode
-
-// 入队
-func (s *Queue) push(node TreeNode) {
-	*s = append(*s, node)
-}
-
-// 出队（先进先出）并返回出队的元素。指针和地址
-func (s *Queue) front() *TreeNode {
-	theStack := *s
-	node := &TreeNode{}
-	if len(theStack) == 0 {
-		return node
-	}
-	node = &theStack[0]
-	*s = theStack[1:len(theStack)]
-	return node
+	return ans
 }

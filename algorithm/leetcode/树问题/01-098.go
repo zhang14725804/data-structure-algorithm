@@ -12,6 +12,7 @@
 	[5,4,6,null,null,3,7] 不通过
 	根据 BST 的定义，root 的整个左子树都要小于 root.val，整个右子树都要大于 root.val
 	(question)问题是，对于某一个节点 root，他只能管得了自己的左右子节点，怎么把 root 的约束传递给左右子树呢？
+	question 😅😅 [5,4,6,null,null,3,7] 测试不通过，逻辑毫无破绽
 */
 func isValidBST0(root *TreeNode) bool {
 	if root == nil {

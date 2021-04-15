@@ -4,14 +4,14 @@
 */
 
 /*
-	如何调整搜索二叉树，是个问题。（我想的复杂了）😅
+	如何调整搜索二叉树，是个问题。（我想的复杂了 ）😅😅😅😅
 	对数据结构的操作无非遍历 + 访问，遍历就是「找」，访问就是「改」。具体到这个问题，插入一个数，就是先找到插入位置，然后进行插入操作。
 */
 func insertIntoBST(root *TreeNode, val int) *TreeNode {
 	if root == nil {
 		return &TreeNode{Val: val}
 	}
-	// 递归左、右子树
+	// 递归重建左、右子树
 	if root.Val < val {
 		root.Right = insertIntoBST(root.Right, val)
 	}

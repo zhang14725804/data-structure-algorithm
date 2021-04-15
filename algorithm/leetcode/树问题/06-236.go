@@ -4,6 +4,7 @@
 
 /*
 	方法1：递归：本质上是二叉树的【后序遍历】
+	😅😅😅 没有思路
 	(question)前序遍历可以理解为是从上往下，而后序遍历是从下往上，就好比从p和q出发往上走，第一次相交的节点就是最近公共祖先
 */
 func lowestCommonAncestor1(root, p, q *TreeNode) *TreeNode {

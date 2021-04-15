@@ -14,20 +14,26 @@ func maxDepth(root *TreeNode) int {
 	return MaxInt(maxDepth(root.Left), maxDepth(root.Right)) + 1
 }
 
-// BFS  TODO 运行结果不正确
+// BFS 层序遍历
 func maxDepth(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
+
 	stack := make([]*TreeNode, 0)
 	stack = append(stack, root)
 	level := 0
+
 	for len(stack) > 0 {
-		fmt.Println(stack)
 		levelNum := len(stack)
 		for i := 0; i < levelNum; i++ {
-			current := stack[len(stack)-1]
-			stack = stack[:len(stack)-1]
+			/*
+				careful： 从队尾操作是错的😅，要从队头开始操作（ 为什么呢 question ）
+				current := stack[len(stack)-1]
+				stack = stack[:len(stack)-1]
+			*/
+			current := stack[0]
+			stack = stack[1:]
 			if current.Left != nil {
 				stack = append(stack, current.Left)
 			}

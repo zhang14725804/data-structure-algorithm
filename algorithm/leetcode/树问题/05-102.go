@@ -59,3 +59,33 @@ func (s *Queue) front() *TreeNode {
 	*s = theStack[1:len(theStack)]
 	return node
 }
+
+/*
+	202104151620
+*/
+func levelOrder(root *TreeNode) [][]int {
+	ans := make([][]int, 0)
+	if root == nil {
+		return ans
+	}
+	queue := make([]*TreeNode, 0)
+	queue = append(queue, root)
+
+	for len(queue) > 0 {
+		level := make([]int, 0)
+		ql := len(queue)
+		for i := 0; i < ql; i++ {
+			cur := queue[0]
+			queue = queue[1:]
+			level = append(level, cur.Val)
+			if cur.Left != nil {
+				queue = append(queue, cur.Left)
+			}
+			if cur.Right != nil {
+				queue = append(queue, cur.Right)
+			}
+		}
+		ans = append(ans, level)
+	}
+	return ans
+}

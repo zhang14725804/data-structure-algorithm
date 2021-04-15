@@ -1,5 +1,6 @@
 /*
 	给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
+	层序遍历的基础上，反转
 */
 
 func levelOrderBottom(root *TreeNode) [][]int {
@@ -28,6 +29,7 @@ func levelOrderBottom(root *TreeNode) [][]int {
 		}
 		res = append(res, level)
 	}
+	// 反转结果
 	for i, j := 0, len(res)-1; i < j; i, j = i+1, j-1 {
 		res[i], res[j] = res[j], res[i]
 	}
