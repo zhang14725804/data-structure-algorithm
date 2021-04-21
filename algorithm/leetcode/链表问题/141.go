@@ -3,13 +3,14 @@
 */
 
 /*
-	方法1：快慢指针
+	方法1：快慢指针 平平无奇
 */
 func hasCycle1(head *ListNode) bool {
 	fast, slow := head, head
 	for fast != nil && fast.Next != nil {
 		slow = slow.Next
 		fast = fast.Next.Next
+		// 比较指针是否相等（不要使用val比较！）
 		if fast == slow {
 			return true
 		}
