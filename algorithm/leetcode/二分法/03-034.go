@@ -1,38 +1,45 @@
 /*
 	给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置
 
-	需要两次二分
+	question  😅😅😅😅😅😅
 */
-func searchRange1(nums []int, target int) []int {
-	if len(nums) == 0 {
+func searchRange(nums []int, target int) []int {
+	n := len(nums)
+	if n == 0 {
 		return []int{-1, -1}
 	}
-	// 左边(模板1)
-	l, r := 0, len(nums)-1
-	for l < r {
-		mid := (l + r) >> 1
-		//
+
+	left, right := 0, n-1
+	// 使用模板1，找................vooooooooo中的v，这种情况😅😅😅
+	for left < right {
+		// 区间分为[l, mid]和[mid + 1, r]两部分 😅😅😅
+		mid := (left + right) >> 1
+		// check函数
 		if nums[mid] >= target {
-			r = mid
+			right = mid // 😅😅😅满足条件，移动有边界
 		} else {
-			l = mid + 1
+			left = mid + 1 // 😅😅😅不满足，移动左边界
 		}
 	}
-	if nums[r] != target {
+	// 判断并找到左端点 😅😅😅
+	if nums[left] != target {
 		return []int{-1, -1}
 	}
-	start := r
-	// 右边(模板2)
-	l, r := 0, len(nums)-1
-	for l < r {
-		mid := (r + l + 1) >> 1
-		//
+	start := left
+
+	left, right = 0, n-1
+	// 使用模板2，找oooooooov...................中的v，这种情况😅😅😅
+	for left < right {
+		// 区间分为[l, mid-1]和[mid, r]两部分 😅😅😅，此时为了防止死循环，计算mid时需要加1。
+		mid := (left + right + 1) >> 1
+		// check函数
 		if nums[mid] <= target {
-			l = mid
+			left = mid // 😅😅😅满足条件，移动左边界
 		} else {
-			r = mid - 1
+			right = mid - 1 // 😅😅😅不满足条件，移动有边界
 		}
 	}
-	end := r
+	// 打完收工
+	end := left
 	return []int{start, end}
 }

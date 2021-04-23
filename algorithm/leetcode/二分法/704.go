@@ -10,11 +10,15 @@
 		left <= right终止区间[right+1,right]
 		left < right终止区间[right,right],漏掉了一个数字
 */
+
+// 模板1：满足某种情况的最小的元素。是否存在一个目标值
 func search(nums []int, target int) int {
 	left, right := 0, len(nums)-1
+	// 区间分为[l, mid]和[mid + 1, r]两部分 😅😅😅
 	for left < right {
-		// 模板1：满足某种情况的最小的元素。是否存在一个目标值
+		// 计算mid时不需要加1 😅😅😅😅
 		mid := (left + right) >> 1
+		// check条件 😅😅😅
 		if nums[mid] >= target {
 			right = mid
 		} else {
@@ -23,41 +27,6 @@ func search(nums []int, target int) int {
 	}
 	if nums[left] == target {
 		return left
-	}
-	return -1
-}
-
-func search2(nums []int, target int) int {
-	left, right := 0, len(nums)-1
-	// 循环条件：开区间
-	for left < right {
-		mid := (left + right) >> 1
-		if nums[mid] == target {
-			return mid
-		} else if nums[mid] < target { // 跳过mid
-			left = mid + 1
-		} else if nums[mid] > target { // 跳过mid
-			right = mid - 1
-		}
-	}
-	if nums[left] == target {
-		return left
-	}
-	return -1
-}
-
-func search1(nums []int, target int) int {
-	left, right := 0, len(nums)-1
-	// 循环条件：闭区间
-	for left <= right {
-		mid := (left + right) >> 1
-		if nums[mid] == target {
-			return mid
-		} else if nums[mid] < target { // 跳过mid
-			left = mid + 1
-		} else if nums[mid] > target { // 跳过mid
-			right = mid - 1
-		}
 	}
 	return -1
 }
