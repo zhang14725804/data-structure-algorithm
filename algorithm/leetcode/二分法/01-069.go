@@ -1,11 +1,11 @@
 /*
 	求平方根
 */
+// 模板2：满足某种情况的最大的元素；[l, r]区间划分为[l, mid - 1] 和 [mid, r]
 func mySqrt1(x int) int {
 	l, r := 0, x
 	for l < r {
-		// 模板2；[l, r]区间划分为[l, mid - 1] 和 [mid, r]
-		// 满足某种情况的最大的元素
+		// 求mid的时候需要上取整
 		mid := (l + r + 1) >> 1
 		if mid*mid <= x {
 			l = mid
@@ -16,10 +16,10 @@ func mySqrt1(x int) int {
 	return l
 }
 
+// 模板1；[l, r]区间划分为[l, mid] 和 [mid+1, r]
 func mySqrt2(x int) int {
 	l, r := 0, x
 	for l < r {
-		// 模板1；[l, r]区间划分为[l, mid] 和 [mid+1, r]
 		mid := (l + r) >> 1
 		if mid*mid > x {
 			r = mid

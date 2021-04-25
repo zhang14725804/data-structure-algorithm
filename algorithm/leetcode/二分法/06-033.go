@@ -4,45 +4,46 @@
 	请你在数组中搜索 target ，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。
 */
 func search(nums []int, target int) int {
-	if len(nums) == 0 {
+	n := len(nums) - 1
+	if n <= 0 {
 		return -1
 	}
-	// 找到最小值
-	l, r := 0, len(nums)-1
-	for l < r {
-		// 模板1：满足某种情况的最小的元素。是否存在一个目标值
-		mid := (l + r) >> 1
-		if nums[mid] <= nums[len(nums)-1] {
-			r = mid
+	// 用模板1，找到最小值所在的位置
+	left, right := 0, n
+	for left < right {
+		mid := (left + right) >> 1
+		// 😅😅 注意check条件
+		if nums[mid] <= nums[n] {
+			right = mid
 		} else {
-			l = mid + 1
+			left = mid + 1
 		}
 	}
 
-	// 判断目标值范围
-	if target <= nums[len(nums)-1] {
+	// 判断目标值范围在最小值左边还是右边, 判断条件是 😅【<=】
+	if target <= nums[n] {
 		// 在右边
-		r = len(nums) - 1
+		right = n
 	} else {
 		// 在左边
-		l = 0
-		r--
+		left = 0
+		right--
 	}
 
-	// 寻找目标值
-	for l < r {
-		// 模板1：满足某种情况的最小的元素。是否存在一个目标值
-		mid := (l + r) >> 1
+	// 采用模板1，查找精确值
+	for left < right {
+		mid := (left + right) >> 1
+		// 😅😅 注意check条件
 		if nums[mid] >= target {
-			r = mid
+			right = mid
 		} else {
-			l = mid + 1
+			left = mid + 1
 		}
 	}
 
 	// 注意:这里只能用l
-	if nums[l] == target {
-		return l
+	if nums[left] == target {
+		return left
 	}
 	return -1
 }
