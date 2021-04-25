@@ -1,32 +1,37 @@
 /*
 	求平方根
 */
-// 模板2：满足某种情况的最大的元素；[l, r]区间划分为[l, mid - 1] 和 [mid, r]
-func mySqrt1(x int) int {
-	l, r := 0, x
-	for l < r {
-		// 求mid的时候需要上取整
-		mid := (l + r + 1) >> 1
+// 模板2：【满足某种情况的最大的元素】；[l, r]区间划分为[l, mid - 1] 和 [mid, r]
+func mySqrt(x int) int {
+	left, right := 0, x
+	for left < right {
+		mid := (left + right + 1) >> 1
+		// 注意check条件 😅
 		if mid*mid <= x {
-			l = mid
+			left = mid
 		} else {
-			r = mid - 1
+			right = mid - 1
 		}
 	}
-	return l
+	return left
 }
 
-// 模板1；[l, r]区间划分为[l, mid] 和 [mid+1, r]
-func mySqrt2(x int) int {
-	l, r := 0, x
-	for l < r {
-		mid := (l + r) >> 1
+// 模板1：【满足某种情况的最小的元素】；[l, r]区间划分为[l, mid] 和 [mid+1, r]
+func mySqrt(x int) int {
+	// 0，1 特殊处理 😅
+	if x == 0 || x == 1 {
+		return x
+	}
+	left, right := 0, x
+	for left < right {
+		mid := (left + right) >> 1
+		// 注意check条件 😅
 		if mid*mid > x {
-			r = mid
+			right = mid
 		} else {
-			l = mid + 1
+			left = mid + 1
 		}
 	}
-	// (question)这里为什么减1，x是零的情况还需要特殊处理
-	return l - 1
+	// 😅😅😅 question 为什么返回left-1
+	return left - 1
 }
