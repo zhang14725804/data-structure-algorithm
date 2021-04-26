@@ -50,28 +50,6 @@ func reverse(a []interface{}) []interface{} {
 	return a
 }
 
-/*************************quickSort*******************************/
-func quickSort(array []int) []int {
-	if len(array) < 2 {
-		return array
-	}
-
-	// 基准元素
-	pivot := array[0]
-	var small, large, result []int
-	for _, value := range array[1:] {
-		if value <= pivot {
-			small = append(small, value)
-		} else {
-			large = append(large, value)
-		}
-	}
-	result = append(result, quickSort(small)...)
-	result = append(result, pivot)
-	result = append(result, quickSort(large)...)
-	return result
-}
-
 /*************************math.pow*******************************/
 func pow(base, exp int) int {
 	res := 1
@@ -92,17 +70,6 @@ func absInt(num int) int {
 /**************************int最大值，最小值 -9223372036854775808 9223372036854775807*******************************/
 const INT_MAX = int(^uint(0) >> 1)
 const INT_MIN = ^INT_MAX
-
-/**************************冒泡排序*******************************/
-func sort(arr []int) {
-	for i := 0; i < len(arr)-1; i++ {
-		for j := 0; j < len(arr)-1-i; j++ {
-			if arr[j] > arr[j+1] {
-				arr[j], arr[j+1] = arr[j+1], arr[j]
-			}
-		}
-	}
-}
 
 /**************************栈*******************************/
 type Stack struct {
