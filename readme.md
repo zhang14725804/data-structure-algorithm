@@ -39,7 +39,7 @@
 
 [leetcode300](https://leetcode.wang/)
 
-### 数据结构和算法
+### 数据结构和算法（🔥🔥🔥）
 
 [Go Data Structures](https://github.com/emirpasic/gods)
 
@@ -50,7 +50,7 @@
 [golang数据结构与算法导论-尹成（多一半）](https://ke.qq.com/course/455577) 
 [数据结构与算法导论-尹成(全部😅)](https://edu.51cto.com/course/20394.html)
 
-[极客学院算法](http://wiki.jikexueyuan.com/list/sort/)
+[极客学院算法](https://wiki.jikexueyuan.com/project/step-by-step-learning-algorithm/)
 
 ### 数据结构
 

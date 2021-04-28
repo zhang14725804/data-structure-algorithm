@@ -13,40 +13,47 @@
 	方法1：迭代实现(question 😅)，看不懂
 */
 func reverseKGroup1(head *ListNode, k int) *ListNode {
-	// 虚拟头节点
+	// 😅😅😅 虚拟头节点
 	dummy := &ListNode{}
 	dummy.Next = head
 	cur := dummy
 
 	for cur != nil {
-		// 判断是否够k个节点
-		s := 0
+		// 😅 判断是否够k个节点
+		cLen := 0
 		for i := cur.Next; i != nil; i = i.Next {
-			s++
+			cLen++
 		}
-		if s < k {
+		// 不足k个，无需反转；
+		if cLen < k {
 			break
 		}
 
-		s = 0
-		// 双指针记录相邻节点
-		a := cur.Next
-		b := a.Next
-		// 反转k-1次
-		for s < k-1 {
-			s++
-			// 真乱😅
-			c := b.Next
-			b.Next = a
-			a = b
-			b = c
+		cLen = 0
+		// 😅😅😅 双指针记录相邻节点
+		prev := cur.Next
+		prevNext := prev.Next
+		// 😅 反转k-1次
+		for cLen < k-1 {
+			cLen++
+			// 缓存下个节点
+			temp := prevNext.Next
+			// 😅 反转指针
+			prevNext.Next = prev
+			// prev向前走一步
+			prev = prevNext
+			// prevNext向前走一步
+			prevNext = temp
 		}
 
-		// 更乱了尴尬
-		p := cur.Next
-		cur.Next.Next = b
-		cur.Next = a
-		cur = p
+		// 缓存下个节点
+		next := cur.Next
+		// 😅 question 反转指针
+		cur.Next.Next = prevNext
+		// 😅 question
+		cur.Next = prev
+		// next 向前走一步
+		cur = next
 	}
 	return dummy.Next
 }
@@ -56,9 +63,9 @@ func reverseKGroup1(head *ListNode, k int) *ListNode {
 */
 func reverseKGroup(head *ListNode, k int) *ListNode {
 	if head == nil {
-		return nil
+		return head
 	}
-	// 区间[left,right)包含k个待反转元素
+	// 😅😅😅 区间[left,right)包含k个待反转元素
 	left, right := head, head
 	for i := 0; i < k; i++ {
 		// 不足k个，无需反转；base case
@@ -67,18 +74,18 @@ func reverseKGroup(head *ListNode, k int) *ListNode {
 		}
 		right = right.Next
 	}
-	// 反转前k个元素
+	// 😅😅😅 反转[left,right)之间的元素
 	dummy := reverse(left, right)
-	// 递归反转后续链表，并连接起来
+	// 😅😅😅 递归反转后续链表，并链接
 	left.Next = reverseKGroup(right, k)
 	return dummy
 }
 
-// 反转[a,b)之间的元素，左闭右开
-func reverse(a, b *ListNode) *ListNode {
-	var prev, cur, next *ListNode
-	cur, next = a, a
-	for cur != b {
+// 反转[left,right)之间的元素 😅
+func reverse(left, right *ListNode) *ListNode {
+	cur := left
+	var prev, next *ListNode
+	for cur != right {
 		next = cur.Next
 		cur.Next = prev
 		prev = cur

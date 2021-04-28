@@ -18,17 +18,17 @@ func reverseBetween1(head *ListNode, m int, n int) *ListNode {
 
 	mPrev := dummy // m的前一个节点
 	nNode := dummy // n节点
-	// 找到m上一个节点
+	// 😅😅😅找到m上一个节点
 	for i := 0; i < m-1; i++ {
 		mPrev = mPrev.Next
 	}
-	// 找到n下一个节点
+	// 😅😅😅找到n下一个节点
 	for i := 0; i < n; i++ {
 		nNode = nNode.Next
 	}
 
-	mNode := mPrev.Next // m节点
-	nNext := nNode.Next // n节点的下一个节点
+	mNode := mPrev.Next // 😅😅😅 m节点
+	nNext := nNode.Next // 😅😅😅 n节点的下一个节点
 
 	// 反转m到n之间的元素
 	prev := mNode
@@ -50,11 +50,11 @@ func reverseBetween1(head *ListNode, m int, n int) *ListNode {
 	将链表反转某一段，改为反转链表的前n个节点
 */
 func reverseBetween(head *ListNode, m int, n int) *ListNode {
-	// base case，相当于反转前n个元素
+	// 😅 base case，反转前n个元素
 	if m == 1 {
 		return reverseN(head, n)
 	}
-	// 前进到反转的起点触发 base case
+	// 😅 前进到反转的起点触发 base case
 	head.Next = reverseBetween(head.Next, m-1, n-1)
 	return head
 }
@@ -65,9 +65,9 @@ func reverseBetween(head *ListNode, m int, n int) *ListNode {
 var last *ListNode // 记录后续的节点
 
 func reverseN(head *ListNode, n int) *ListNode {
-	// base case
+	// 😅 base case
 	if n == 1 {
-		// 缓存第n+1个节点的指针 😅😅😅
+		// 😅😅😅 缓存第n+1个节点的指针
 		last = head.Next
 		return head
 	}
