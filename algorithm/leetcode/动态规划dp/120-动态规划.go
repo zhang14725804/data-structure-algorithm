@@ -1,8 +1,3 @@
-import (
-	"fmt"
-	"math"
-)
-
 /*
 	给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。
 	相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1
@@ -14,47 +9,48 @@ import (
 		{6, 5, 7},
 		{4, 1, 8, 3},
 	}
-
-	思路：动态规划（我居然因为这个坐标问题困惑）
+*/
+/*
+	思路：动态规划（我居然因为这个坐标问题困惑 😅😅😅）
 		（1）状态表示：包括集合（所有从起点走到[i][j]的路径）、属性（Max，所有路径上的数的和的最大值）
 		（2）状态计算：最后一步从左上角下来，最后一步从右上角下来
-
 */
 func minimumTotal(triangle [][]int) int {
 	n := len(triangle)
+	if n == 0 || len(triangle[0]) == 0 {
+		return 0
+	}
 	// 二维数组
 	dp := make([][]int, n)
 	for i := 0; i < n; i++ {
 		dp[i] = make([]int, len(triangle[i]))
 	}
-	// 第一个点
+	// 初始值，第一个点
 	dp[0][0] = triangle[0][0]
+	// question 😅，i,j 起始值
 	for i := 1; i < n; i++ {
 		for j := 0; j <= i; j++ {
-			// 声明一个比较大的值
-			dp[i][j] = math.MaxInt64
-			// 左上角下来[i-1][j-1]
+			dp[i][j] = (1 << 32)
+			// question 😅左上角下来[i-1][j-1]
 			if j > 0 {
-				dp[i][j] = compare(dp[i][j], dp[i-1][j-1]+triangle[i][j], true)
+				dp[i][j] = MinInt(dp[i][j], dp[i-1][j-1]+triangle[i][j])
 			}
-			//右上角[i-1][j]
+			// question 😅右上角[i-1][j]
 			if j < i {
-				dp[i][j] = compare(dp[i][j], dp[i-1][j]+triangle[i][j], true)
+				dp[i][j] = MinInt(dp[i][j], dp[i-1][j]+triangle[i][j])
 			}
 		}
 	}
-	// 声明一个比较大的值
-	res := math.MaxInt64
+	res := (1 << 32)
 	// 遍历最后一行，取最大值
 	for i := 0; i < n; i++ {
-		res = compare(res, dp[n-1][i], true)
+		res = MinInt(res, dp[n-1][i])
 	}
-	fmt.Println(res)
 	return res
 }
 
 /*
-	todo：这个骚操作，不懂
+	question ： 状态压缩 😅😅😅
 	每一行的状态只和上一行相关，用2行就可以表示
 */
 func minimumTotal(triangle [][]int) int {
@@ -69,39 +65,39 @@ func minimumTotal(triangle [][]int) int {
 	// 所有的点都除以2，也就是 "& 1",骚操作
 	for i := 1; i < n; i++ {
 		for j := 0; j <= i; j++ {
-			// 声明一个比较大的值
-			dp[i&1][j] = math.MaxInt64
+			dp[i&1][j] = (1 << 32)
 			// 左上角下来[i-1][j-1]
 			if j > 0 {
 				// 注意操作优先级
-				dp[i&1][j] = compare(dp[i&1][j], dp[(i-1)&1][j-1]+triangle[i][j], false)
+				dp[i&1][j] = MinInt(dp[i&1][j], dp[(i-1)&1][j-1]+triangle[i][j])
 			}
 			//右上角[i-1][j]
 			if j < i {
 				// 注意操作优先级
-				dp[i&1][j] = compare(dp[i&1][j], dp[(i-1)&1][j]+triangle[i][j], false)
+				dp[i&1][j] = MinInt(dp[i&1][j], dp[(i-1)&1][j]+triangle[i][j])
 			}
 		}
 	}
-	// 声明一个比较大的值
-	res := math.MaxInt64
+	res := (1 << 32)
 	// 遍历最后一行，取最大值
 	for i := 0; i < n; i++ {
 		// 注意操作优先级
-		res = compare(res, dp[(n-1)&1][i], false)
+		res = MinInt(res, dp[(n-1)&1][i])
 	}
 	return res
 }
 
-
-// 自下而上的做法，最简单！！！！
+/*
+	question: 自顶向下
+*/
 func minimumTotal(f [][]int) int {
-	// len(f)-2
-	for i := len(f)-2; i >=0; i-- {
-		// j <= i
+	// 行😅😅😅
+	for i := len(f) - 2; i >= 0; i-- {
+		// 列 😅😅😅
 		for j := 0; j <= i; j++ {
-			f[i][j] += compare(f[i+1][j+1],f[i+1][j],false)
+			f[i][j] += MinInt(f[i+1][j+1], f[i+1][j])
 		}
 	}
+	// result结果
 	return f[0][0]
 }
