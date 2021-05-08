@@ -6,6 +6,7 @@
 
 /*
 	贪婪算法：从前向后
+	question 😅😅😅
 	每次在可跳范围内选择可以使得跳的更远的位置。
 */
 func jump1(nums []int) int {

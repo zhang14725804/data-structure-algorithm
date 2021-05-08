@@ -3,11 +3,11 @@
 */
 
 /*
-	方法1：动态规划
+	方法1：动态规划 😄😄😄
 	状态定义：设 dp 为大小 m×n 矩阵，其中 dp[i][j] 的值代表直到走到 (i,j) 的最小路径和。
 */
 func minPathSum(grid [][]int) int {
-	// question 无需新建dp二维数组，直接在原数组操作。机智😄😄😄
+	// question 无需新建dp二维数组，直接在原数组操作。机智😄😄😄😄😄😄
 	n, m := len(grid), len(grid[0])
 	for i := 0; i < n; i++ {
 		for j := 0; j < m; j++ {
@@ -30,7 +30,7 @@ func minPathSum(grid [][]int) int {
 }
 
 /*
-	方法2：递归
+	方法2：递归 😄😄😄
 	dp[x][y]。这样的话， dp[x][y] = Min（dp[x][y+1] + dp[x+1][y]）+ grid[x][y]。当前点的右边和下边取一个和较小的，然后加上当前点的权值
 */
 var grid [][]int
