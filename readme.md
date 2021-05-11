@@ -39,6 +39,8 @@
 
 [leetcode300](https://leetcode.wang/)
 
+[算法整理](https://github.com/youngyangyang04/leetcode-master)
+
 ### 数据结构和算法（🔥🔥🔥）
 
 [Go Data Structures](https://github.com/emirpasic/gods)
@@ -50,17 +52,10 @@
 [golang数据结构与算法导论-尹成（多一半）](https://ke.qq.com/course/455577) 
 [数据结构与算法导论-尹成(全部😅)](https://edu.51cto.com/course/20394.html)
 
-[极客学院算法](https://wiki.jikexueyuan.com/project/step-by-step-learning-algorithm/)
-
-### 数据结构
 
 [浙大数据结构](https://github.com/CYBruce/DataStructure_Algorithm_ZJU)
 
 [浙大数据结构](https://www.bilibili.com/video/BV1JW411i731?p=54)
-
-### 项目（乱入😅）
-
-[程序员面试最常见问题TOP 48](https://zhuanlan.zhihu.com/p/45469008)
 
 
 ### 漫漫长路
@@ -72,6 +67,5 @@
     《计算机程序的构造和解释》
     《编译原理》
     《TCP/IP详解》
-    《程序员代码面试指南》
 
 
