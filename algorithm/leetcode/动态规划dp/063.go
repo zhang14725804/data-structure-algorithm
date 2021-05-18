@@ -32,6 +32,7 @@ func dfs(x, y int) int {
 	var n1, n2 int
 	key := fmt.Sprintf("%v", x+1) + "@" + fmt.Sprintf("%v", y)
 	if val, ok := visited[key]; !ok {
+		// 判断边界和障碍物
 		if x+1 <= m && obstacleGrid[x+1][y] == 0 {
 			n1 = dfs(x+1, y)
 		}
@@ -41,6 +42,7 @@ func dfs(x, y int) int {
 
 	key = fmt.Sprintf("%v", x) + "@" + fmt.Sprintf("%v", y+1)
 	if val, ok := visited[key]; !ok {
+		// 判断边界和障碍物
 		if y+1 <= n && obstacleGrid[x][y+1] == 0 {
 			n2 = dfs(x, y+1)
 		}

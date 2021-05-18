@@ -34,6 +34,7 @@ func dfs(x, y int) int {
 	key := fmt.Sprintf("%v", x+1) + "@" + fmt.Sprintf("%v", y)
 	// 😅 向右探索所有结果
 	if val, ok := visited[key]; !ok {
+		// 判断边界
 		if x+1 <= m {
 			n1 = dfs(x+1, y)
 		}
@@ -44,6 +45,7 @@ func dfs(x, y int) int {
 	key = fmt.Sprintf("%v", x) + "@" + fmt.Sprintf("%v", y+1)
 	// 😅 向下探索所有结果
 	if val, ok := visited[key]; !ok {
+		// 判断边界
 		if y+1 <= n {
 			n2 = dfs(x, y+1)
 		}
