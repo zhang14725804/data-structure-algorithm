@@ -32,14 +32,14 @@ func minDistance(str1 string, str2 string) int {
 	for i := 1; i <= n; i++ {
 		for j := 1; j <= m; j++ {
 			// insert和delete
-			dp[i][j] = common.Min(dp[i-1][j], dp[i][j-1]) + 1
+			dp[i][j] = MinInt(dp[i-1][j], dp[i][j-1]) + 1
 			// replace
 			var add int
 			// 第一个字符串的第i-1个字母和第二个字符串的j-1个字母不相等（两个字符串的最后一个字母不相等）
 			if str1[i-1] != str2[j-1] {
 				add = 1
 			}
-			dp[i][j] = common.Min(dp[i][j], dp[i-1][j-1]+add)
+			dp[i][j] = MinInt(dp[i][j], dp[i-1][j-1]+add)
 		}
 	}
 	return dp[n][m]

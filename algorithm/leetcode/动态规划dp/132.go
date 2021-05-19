@@ -4,48 +4,82 @@
 */
 
 /*
-	question
-	😅😅😅
-	难，动态规划的思路
-	todo：思路不懂，代码也有问题
-*/
-func minCut(s string) int {
-	s = " " + s
-	n := len(s)
-	f := make([]int, n+1)
-	for i := 0; i < n; i++ {
-		f[i] = INT_MAX
-	}
-	dp := make([][]bool, n+1)
-	for i := 0; i < n+1; i++ {
-		dp[i] = make([]bool, n+1)
-	}
-	// 考虑所有长度的子串（最小长度从1开始）
-	for len := 1; len <= n; len++ {
-		// 从每个下标开始
-		for i := 0; i <= n-len; i++ {
-			j := i + len - 1
-			// i + 1 <= j - 1 并且 j:=i+len-1，所有len<3
-			dp[i][j] = s[i] == s[j] && (len < 3 || dp[i+1][j-1])
-		}
-	}
+	方法1：【分治】+memoization
+	（可以改为动态规划 😅😅😅😅😅😅 ）
+	大问题化小问题，利用小问题的结果，解决当前大问题。
 
-	f[0] = 0
-	for i := 1; i <= n; i++ {
-		for j := 1; j <= i; j++ {
-			if dp[j][i] {
-				f[i] = MinInt(f[i], f[j-1]+1)
+	aabb
+	先考虑在第 1 个位置切割，a | abb
+	这样我们只需要知道 abb 的最小切割次数，然后加 1，记为 m1
+
+	aabb
+	再考虑在第 2 个位置切割，aa | bb
+	这样我们只需要知道 bb 的所有结果，然后加 1，记为 m2
+
+
+	aabb
+	再考虑在第 3 个位置切割，aab|b
+	因为 aab 不是回文串，所有直接跳过
+
+	aabb
+	再考虑在第 4 个位置切割，aabb |
+	因为 aabb 不是回文串，所有直接跳过
+
+	此时只需要比较 m1 和 m2 的大小，选一个较小的即可。
+*/
+var dp [][]bool // dp 把每个子串是否是回文串，提前存起来 😅😅😅
+var str string
+var memo map[int]int // 缓存重复解的计算
+
+func minCut(s string) int {
+	str = s
+	sLen := len(str)
+	dp = make([][]bool, sLen)
+	memo = make(map[int]int, 0)
+	for i := 0; i < sLen; i++ {
+		dp[i] = make([]bool, sLen)
+	}
+	//
+	for i := 1; i <= sLen; i++ {
+		for j := 0; j <= sLen-i; j++ {
+			// 没看懂😅😅😅
+			cut := i + j - 1
+			if str[j] == str[cut] && (i < 3 || dp[j+1][cut-1]) {
+				dp[j][cut] = true
 			}
 		}
 	}
-	return f[n] - 1
+	return helper(0)
+}
+
+func helper(start int) int {
+	if val, ok := memo[start]; ok {
+		return val
+	}
+	// base case，递归出口。长度是1，最小切割次数0
+	if dp[start][len(str)-1] {
+		return 0
+	}
+
+	min := (1 << 32)
+	for i := start; i < len(str); i++ {
+		// 只考虑回文串，
+		if dp[start][i] {
+			// 和之前的值比较选一个较小的
+			min = MinInt(min, 1+helper(i+1))
+		}
+	}
+	memo[start] = min
+	return min
 }
 
 /*
-	state: f[i] "前i"个字符组成的子字符串需要最少几次cut(个数-1为索引)
-    function: f[i] = MIN{f[j]+1}, j < i && [j+1 ~ i]这一段是一个回文串
-    intialize: f[i] = i - 1 (f[0] = -1)
-    answer: f[s.length()]
+	方法2：动态规划
+	question 😅😅😅
+	// state: dp[i] "前i"个字符组成的子字符串需要最少几次cut(个数-1为索引)
+	// function: dp[i] = MIN{dp[j]+1}, j < i && [j+1 ~ i]这一段是一个回文串
+	// intialize: dp[i] = i - 1 (dp[0] = -1)
+	// answer: dp[s.length()]
 */
 func minCut(s string) int {
 	sLen := len(s)
@@ -67,6 +101,7 @@ func minCut(s string) int {
 	return dp[sLen]
 }
 
+// 判断是否是回文串
 func isPalindrome(s string, i, j int) bool {
 	for i < j {
 		if s[i] != s[j] {

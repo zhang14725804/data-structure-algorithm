@@ -8,9 +8,8 @@
 */
 
 /*
-	方法1：递归（自顶向下），重叠子问题
-
-	todo：加cache缓存
+	方法1：递归（自顶向下），有重叠子问题
+	question memoization解决重叠子问题
 */
 func longestCommonSubsequence(s1 string, s2 string) int {
 	var dfs func(i, j int) int
@@ -31,7 +30,8 @@ func longestCommonSubsequence(s1 string, s2 string) int {
 
 /*
 	方法2：动态规划(自底向上)
-	todo：状态压缩
+	question 状态压缩 😅😅😅
+
 */
 func longestCommonSubsequence(s1 string, s2 string) int {
 	n, m := len(s1), len(s2)

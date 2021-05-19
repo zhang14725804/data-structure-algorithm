@@ -3,15 +3,18 @@
 
 	你算法的时间复杂度应该为 O(n2) 。
 	进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗?
-
-	动态规划思路：
-	（1）状态表示。集合（所有以i结尾的上升子序列），属性：长度最大值
-	（2）状态计算。
 */
 
+/*
+	方法1：动态规划
+	😅😅😅😅😅😅
+	动态规划思路：
+		（1）状态表示。集合（所有以i结尾的上升子序列），属性：长度最大值
+		（2）状态计算。
+*/
 func lengthOfLIS1(nums []int) int {
 	n := len(nums)
-	// 表示以第 i 个数字为结尾的最长上升子序列的长度
+	// dp[i]：表示以第 i 个数字为结尾的最长上升子序列的长度
 	dp := make([]int, n)
 	var res int
 	for i := 0; i < n; i++ {
@@ -31,7 +34,7 @@ func lengthOfLIS1(nums []int) int {
 
 /*
 	方法二：动态规划+二分查找
-	(question)没懂😅，难懂
+	( question ) 😅😅😅 没懂，难懂
 */
 func lengthOfLIS(nums []int) int {
 	res := 0 // tails当前长度
