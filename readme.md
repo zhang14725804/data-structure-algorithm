@@ -4,7 +4,7 @@
 
 [LeetCode-Go golang实现](https://github.com/halfrost/LeetCode-Go)
 
-[leetcode-Go (greyireland 循序渐进-算法模板)](https://github.com/greyireland/algorithm-pattern)
+[leetcode-Go 可参考性不大，没有详细思路 😅](https://github.com/greyireland/algorithm-pattern)
 
 [Algorithms & Data Structures in Go](https://github.com/arnauddri/algorithms)
 

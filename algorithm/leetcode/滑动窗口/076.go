@@ -59,7 +59,7 @@ func minWindow(s string, t string) string {
 }
 
 /*
-	方法2：滑动窗口（优化版）(question)没看懂
+	方法2：滑动窗口（优化版）(question) 😅😅😅
 	如何快速判断当前字串是否包含t中所有字母，hash或数组
 */
 func minWindow2(s1 string, t1 string) string {
