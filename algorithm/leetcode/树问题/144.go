@@ -2,17 +2,26 @@
 	二叉树前序遍历（根左右）
 */
 
-var ans []int
-
-// 方法1：递归
+/*
+	方法1：DFS-递归实现
+*/ 
 func preorderTraversal(root *TreeNode) []int {
-	if root == nil {
-		return ans
-	}
-	ans = append(ans, root.Val)
-	preorderTraversal(root.Left)
-	preorderTraversal(root.Right)
-	return ans
+    var res []int
+	// 确定递归函数的参数和返回值
+    var dfs func(root *TreeNode)
+    // 根左右
+    dfs = func(root *TreeNode){
+		// base case
+        if root ==nil{
+            return
+        }
+		// 单层递归的逻辑
+        res = append(res,root.Val)
+        dfs(root.Left)
+        dfs(root.Right)
+    } 
+    dfs(root)
+    return res
 }
 
 // 迭代实现前序遍历
