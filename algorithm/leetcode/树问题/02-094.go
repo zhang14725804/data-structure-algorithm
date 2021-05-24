@@ -50,7 +50,7 @@ func inorderTraversal(root *TreeNode) []int {
 }
 
 /*
-	思路2：迭代  question 😅😅😅😅
+	思路2：迭代实现  question 😅😅😅😅
 	(1) 将整棵树的最左边一条链压入栈
 	(2) 每次取出栈顶元素，如果它有右子树，将右子树压入栈中
 */
@@ -75,6 +75,44 @@ func inorderTraversal(root *TreeNode) []int {
 			// 根、右
             res = append(res,cur.Val)
             cur = cur.Right
+        }
+    }
+    return res
+}
+
+/*
+	思路2：迭代实现，标记法
+*/
+func inorderTraversal(root *TreeNode) []int {
+    stack :=make([]*TreeNode,0)
+    res:=make([]int,0)
+    if root!=nil{
+        stack = append(stack,root)
+    }
+    for len(stack)>0{
+		// 弹出顶部元素
+        cLen := len(stack)-1
+        cnode:=stack[cLen]
+        stack = stack[:cLen]
+        if cnode!=nil{
+			// 右
+            if cnode.Right!=nil{
+                stack = append(stack,cnode.Right)
+            }
+			// 根
+            stack = append(stack,cnode)
+			// question 😅😅😅😅😅😅 中节点访问过，但是还没有处理，加入空节点做为标记。
+            stack = append(stack,nil)
+			// 左
+            if cnode.Left!=nil{
+                stack = append(stack,cnode.Left)
+            }
+        }else{
+			// 只有遇到空节点的时候，才将下一个节点放进结果集
+            cLen  =  len(stack)-1
+            cnode = stack[cLen]
+            stack = stack[:cLen]
+            res = append(res,cnode.Val)
         }
     }
     return res

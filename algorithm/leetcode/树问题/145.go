@@ -27,11 +27,11 @@ func postorderTraversal1(root *TreeNode) []int {
 func postorderTraversal(root *TreeNode) []int {
     stack :=make([]*TreeNode,0)
     res:=make([]int,0)
-	// 判空
     if root ==nil{
         return res
     }
     stack = append(stack,root)
+	// 【根右左】的遍历结果
     for len(stack)>0{
         sLen := len(stack)
         for i:=0;i<sLen;i++{
@@ -50,6 +50,7 @@ func postorderTraversal(root *TreeNode) []int {
             }
         }
     }
+	// 反转数组
 	for i:=0;i<len(res)/2;i++{
         res[i],res[len(res)-i-1] = res[len(res)-i-1],res[i]
     }
@@ -60,30 +61,37 @@ func postorderTraversal(root *TreeNode) []int {
 	方法2：迭代实现（TODO 😅）
 */
 func postorderTraversal(root *TreeNode) []int {
-	result := make([]int, 0)
-	stack := make([]*TreeNode, 0)
-	if root == nil {
-		return nil
-	}
-	
-	// 通过lastVisit标识右子节点是否已经弹出
-	var lastVisit *TreeNode
-	for root != nil || len(stack) != 0 {
-		for root != nil {
-			stack = append(stack, root)
-			root = root.Left
-		}
-		// 这里先看看，先不弹出
-		node := stack[len(stack)-1]
-		// 根节点必须在右节点弹出之后，再弹出
-		if node.Right == nil || node.Right == lastVisit {
-			stack = stack[:len(stack)-1] // pop
-			result = append(result, node.Val)
-			// 标记当前这个节点已经弹出过
-			lastVisit = node
-		} else {
-			root = node.Right
-		}
-	}
-	return result
+    stack :=make([]*TreeNode,0)
+    res:=make([]int,0)
+    if root!=nil{
+        stack = append(stack,root)
+    }
+    for len(stack)>0{
+		// 弹出顶部元素
+        cLen := len(stack)-1
+        cnode:=stack[cLen]
+        stack = stack[:cLen]
+        if cnode!=nil{
+            // 根
+            stack = append(stack,cnode)
+			// question 😅😅😅😅😅😅 中节点访问过，但是还没有处理，加入空节点做为标记。
+            stack = append(stack,nil)
+			// 右
+            if cnode.Right!=nil{
+                stack = append(stack,cnode.Right)
+            }
+			// 左
+            if cnode.Left!=nil{
+                stack = append(stack,cnode.Left)
+            }
+        }else{
+			// 只有遇到空节点的时候，才将下一个节点放进结果集
+            cLen  =  len(stack)-1
+            cnode = stack[cLen]
+            stack = stack[:cLen]
+            res = append(res,cnode.Val)
+        }
+    }
+    return res
 }
+
