@@ -24,25 +24,35 @@ func preorderTraversal(root *TreeNode) []int {
     return res
 }
 
-// 迭代实现前序遍历
-var ans []int
-
+/*
+	方法2：迭代实现
+*/ 
 func preorderTraversal(root *TreeNode) []int {
-	if root == nil {
-		return ans
-	}
-	queue := make([]*TreeNode, 0)
-	queue = append(queue, root)
-	for len(queue) > 0 {
-		node := queue[0]
-		queue = queue[1:]
-		if node == nil {
-			continue
-		}
-		ans = append(ans, node.Val)
-		queue = append(queue, node.Left)
-		queue = append(queue, node.Right)
-	}
-	return ans
+    stack :=make([]*TreeNode,0)
+    res:=make([]int,0)
+	// 判空
+    if root ==nil{
+        return res
+    }
+    stack = append(stack,root)
+    for len(stack)>0{
+        sLen := len(stack)
+        for i:=0;i<sLen;i++{
+			// 栈，后进先出
+            cLen := len(stack)-1
+            cur:=stack[cLen]
+            stack = stack[:cLen]
+            res = append(res,cur.Val)
+			// 右子树先入栈
+            if cur.Right!=nil{
+                stack = append(stack,cur.Right)
+            }
+			// 左子树后入栈
+            if cur.Left!=nil{
+                stack = append(stack,cur.Left)
+            }
+        }
+    }
+    return res
 }
 
