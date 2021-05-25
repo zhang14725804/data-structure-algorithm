@@ -2,72 +2,56 @@
 	您需要在二叉树的每一行中找到最大的值。
 */
 
-// 方法1：BFS，遍历每一层，获取最大值
+/*
+	思路1：借助【队列】实现层序遍历 🔥🔥🔥
+*/
 func largestValues(root *TreeNode) []int {
-	queue := make([]*TreeNode, 0)
-	result := make([]int, 0)
+	var res []int
+	var queue []*TreeNode
 	if root != nil {
 		queue = append(queue, root)
 	}
-	for len(queue) != 0 {
+	for len(queue) > 0 {
+		cLen := len(queue)
+		// 😅负数的情况
 		max := -(1 << 32)
-		size := len(queue) // 每一层的数量
-		for i := 0; i < size; i++ {
-			node := queue[0]
+		for i := 0; i < cLen; i++ {
+			cnode := queue[0]
 			queue = queue[1:]
-			max = MaxInt(max, node.Val) // 获取较大值
-			if node.Left != nil {
-				queue = append(queue, node.Left)
+			max = MaxInt(max, cnode.Val)
+			if cnode.Left != nil {
+				queue = append(queue, cnode.Left)
 			}
-			if node.Right != nil {
-				queue = append(queue, node.Right)
+			if cnode.Right != nil {
+				queue = append(queue, cnode.Right)
 			}
 		}
-		result = append(result, max)
+		res = append(res, max)
 	}
-	return result
-}
-
-// 方法二：dfs；返回结果空数组（question）；没有用指针
-func largestValues(root *TreeNode) []int {
-	res := make([]int, 0)
-	dfs(root, res, 1)
 	return res
 }
 
-// lavel表示层数
-func dfs(root *TreeNode, res []int, level int) {
-	if root == nil {
-		return
-	}
-	if level == len(res)+1 {
-		res = append(res, root.Val)
-	} else {
-		// level是从1开始的
-		res[level-1] = MaxInt(res[level-1], root.Val)
-	}
-	dfs(root.Left, res, level+1)
-	dfs(root.Right, res, level+1)
-}
-
-// 方法二：dfs；需要用指针和地址🔥🔥🔥
-func dfs(root *TreeNode, res *[]int, level int) {
-
-	if root == nil {
-		return
-	}
-
-	if level == len(*res)+1 {
-		*res = append(*res, root.Val)
-	} else {
-		// type *[]int not support indexing
-		(*res)[level-1] = MaxInt((*res)[level-1], root.Val)
-	}
-	dfs(root.Left, res, level+1)
-	dfs(root.Right, res, level+1)
-}
+/*
+	方法2：递归
+*/
 func largestValues(root *TreeNode) []int {
-	res := make([]int, 0)
-	dfs(root, &res, 1)
+	var res []int
+	var dfs func(root *TreeNode, level int)
+	dfs = func(root *TreeNode, level int) {
+		if root == nil {
+			return
+		}
+		// 第一个元素直接加入结果集
+		if level == len(res) {
+			res = append(res, root.Val)
+		} else {
+			// 后续元素取较大值
+			res[level] = MaxInt(res[level], root.Val)
+		}
+		// 递归下一层
+		dfs(root.Left, level+1)
+		dfs(root.Right, level+1)
+	}
+	dfs(root, 0)
 	return res
 }
