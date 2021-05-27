@@ -7,10 +7,10 @@ var pos = make(map[int]int)
 func buildTree(inorder []int, postorder []int) *TreeNode {
 	n := len(inorder)
 	for i := 0; i < n; i++ {
-		// 重点：保存中序遍历节点的index
+		// 尴尬：保存中序遍历节点的index
 		pos[inorder[i]] = i
 	}
-	return build(inorder, postorder, 0, n-1, 0, n-1)
+	return dfs(inorder, postorder, 0, n-1, 0, n-1)
 }
 
 /*
@@ -19,7 +19,7 @@ func buildTree(inorder []int, postorder []int) *TreeNode {
 	il，ir    中序遍历起点终点
 	pl，pr    后序遍历起点终点
 */
-func build(inorder []int, postorder []int, il, ir, pl, pr int) *TreeNode {
+func dfs(inorder []int, postorder []int, il, ir, pl, pr int) *TreeNode {
 	// base case
 	if pl > pr {
 		return nil
@@ -30,8 +30,11 @@ func build(inorder []int, postorder []int, il, ir, pl, pr int) *TreeNode {
 	k := pos[val]
 	// 根节点，对应后序遍历的pr对应的节点
 	root := &TreeNode{val, nil, nil}
-	// 后序遍历左右子节点的长度和中序遍历左右节点长度相等，ps：k-1-il是左子树长度
-	root.Left = build(inorder, postorder, il, k-1, pl, pl+(k-1-il))
-	root.Right = build(inorder, postorder, k+1, ir, pl+(k-1-il+1), pr-1)
+	/*
+		中序遍历根据【k】值分割，后序遍历较难分割
+		ps: 【k-1-il】 是左子树长度(🔥🔥🔥)
+	*/
+	root.Left = dfs(inorder, postorder, il, k-1, pl, pl+(k-1-il))
+	root.Right = dfs(inorder, postorder, k+1, ir, pl+(k-1-il)+1, pr-1)
 	return root
 }

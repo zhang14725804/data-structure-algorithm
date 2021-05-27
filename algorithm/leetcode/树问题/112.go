@@ -5,7 +5,7 @@
 
 /*
 	方法1：DFS-递归+回溯
-	隐藏了回溯的细节 😅😅😅
+	question 隐藏了回溯的细节 😅😅😅
 */
 func hasPathSum(root *TreeNode, targetSum int) bool {
 	if root == nil {
@@ -28,7 +28,7 @@ type Pair struct {
 	First  *TreeNode
 	Second int
 }
-******************** 😅😅😅 😅😅😅 😅😅😅 😅😅😅 😅😅😅********************************
+
 func hasPathSum(root *TreeNode, targetSum int) bool {
 	if root == nil {
 		return false
@@ -37,11 +37,19 @@ func hasPathSum(root *TreeNode, targetSum int) bool {
 	stack = append(stack, &Pair{First: root, Second: root.Val})
 	for len(stack) > 0 {
 		cLen := len(stack) - 1
+
 		cnode := stack[cLen]
 		stack = stack[:cLen]
 
-		if cnode.First != nil && cnode.First.Left == nil && cnode.First.Right == nil {
-			return cnode.Second == targetSum
+		/*
+			这么写只判断一次叶子节点 😅😅😅
+			if cnode.First.Left == nil && cnode.First.Right == nil {
+				return cnode.Second == targetSum
+			}
+		*/
+		// 叶子节点，判断是否符合条件“路径上所有节点值相加等于目标和 targetSum”
+		if cnode.First.Left == nil && cnode.First.Right == nil && cnode.Second == targetSum {
+			return true
 		}
 		if cnode.First.Right != nil {
 			stack = append(stack, &Pair{First: cnode.First.Right, Second: cnode.Second + cnode.First.Right.Val})
