@@ -8,11 +8,12 @@
 */
 
 /*
-	刚开始的想法，直接一个递归，看起来是对的，其实错了
-	[5,4,6,null,null,3,7] 不通过
-	根据 BST 的定义，root 的整个左子树都要小于 root.val，整个右子树都要大于 root.val
+	😅😅😅 一顿操作猛如虎
 	(question)问题是，对于某一个节点 root，他只能管得了自己的左右子节点，怎么把 root 的约束传递给左右子树呢？
-	question 😅😅 [5,4,6,null,null,3,7] 测试不通过，逻辑毫无破绽
+	question 😅😅 [5,4,6,null,null,3,7] 测试不通过
+
+	陷阱1：不能单纯的比较左节点小于中间节点，右节点大于中间节点就完事了。
+	陷阱2：样例中最小节点 可能是int的最小值，如果这样使用最小的int来比较也是不行的。
 */
 func isValidBST0(root *TreeNode) bool {
 	if root == nil {
@@ -28,84 +29,109 @@ func isValidBST0(root *TreeNode) bool {
 }
 
 /*
+	方法1：DFS-递归
+	前序遍历：根左右
 	根据 BST 的定义，root 的整个左子树都要小于 root.val，整个右子树都要大于 root.val
-	通过使用辅助函数，增加函数参数列表，在参数中携带额外信息，将这种约束传递给子树的所有节点
+	😅😅😅 通过使用辅助函数，增加函数参数列表，在参数中携带额外信息，将这种约束传递给子树的所有节点
 */
 func isValidBST(root *TreeNode) bool {
-	return helper(root, nil, nil)
+	return dfs(root, nil, nil)
 }
-func helper(root, min, max *TreeNode) bool {
+
+func dfs(root, min, max *TreeNode) bool {
+	// base case
 	if root == nil {
 		return true
 	}
+	// 😅 不满足约束条件的情况
 	if min != nil && root.Val <= min.Val {
 		return false
 	}
 	if max != nil && root.Val >= max.Val {
 		return false
 	}
-
-	return helper(root.Left, min, root) && helper(root.Right, root, max)
+	// 递归执行，并传递【约束条件】😅
+	return dfs(root.Left, min, root) && dfs(root.Right, root, max)
 }
 
 /*
-	方法1：自顶向下
+	方法2：中序遍历
+	二叉树中序遍历，判断遍历结果是否【有序】，是否有重复元素
+*/
+
+/*
+	DFS-递归 😄😄😄 机智
 	***************左右子树的值都要在一个区间当中********************
 */
-func isValidBST1(root *TreeNode) bool {
-	const MaxInt = (1 << 32)
-	const MinInt = -MaxInt - 1
-	return dfs1(root, MinInt, MaxInt)
+func isValidBST(root *TreeNode) bool {
+	min := -(1 << 32)
+	return dfs(root, min, -min)
 }
-
-func dfs1(root *TreeNode, minv, maxv int) bool {
+func dfs(root *TreeNode, min, max int) bool {
 	if root == nil {
 		return true
 	}
-	if root.Val < minv || root.Val > maxv {
+	if root.Val < min || root.Val > max {
 		return false
 	}
-	return dfs1(root.Left, minv, root.Val-1) && dfs1(root.Right, root.Val+1, maxv)
+	return dfs(root.Left, min, root.Val-1) && dfs(root.Right, root.Val+1, max)
 }
 
 /*
-	方法2：自底向上(question 😅，这种做法代码有问题)
-	todo
-	分别求左右子树最大值和最小值，根节点的值大于左子树最大值，小于右子树最小值
+	方法3：DFS-递归
+	利用二叉搜索树性质，【中序遍历】是排序数组
 */
-func isValidBST2(root *TreeNode) bool {
+var prev *TreeNode
+
+func isValidBST(root *TreeNode) bool {
+	return dfs(root)
+}
+func dfs(root *TreeNode) bool {
+	// base case
 	if root == nil {
 		return true
 	}
-	var maxv int
-	var minv int
-	return dfs2(root, maxv, minv)
+	// 左
+	lv := dfs(root.Left)
+	// 根
+	if prev != nil && root.Val <= prev.Val {
+		return false
+	}
+	// 跟新前一个节点
+	prev = root
+	// 右
+	rv := dfs(root.Right)
+	return lv && rv
 }
 
-func dfs2(root *TreeNode, maxv, minv int) bool {
-	maxv = root.Val
-	minv = root.Val
-	if root.Left != nil {
-		var nowMax, nowMin int
-		if dfs2(root.Left, nowMax, nowMin) == false {
-			return false
+/*
+	方法4：DFS-迭代法
+	利用二叉搜索树性质，【中序遍历】是排序数组
+	question： 没懂 😅😅😅
+*/
+func isValidBST(root *TreeNode) bool {
+	var prev *TreeNode
+	var stack []*TreeNode
+	cnode := root
+	// 为什么不直接把root 放入stack
+	for cnode != nil || len(stack) > 0 {
+		if cnode != nil {
+			// 入栈 😅
+			stack = append(stack, cnode)
+			// 左
+			cnode = cnode.Left
+		} else {
+			cLen := len(stack) - 1
+			cnode = stack[cLen]
+			stack = stack[:cLen]
+			if prev != nil && cnode.Val <= prev.Val {
+				return false
+			}
+			// 跟新prev节点
+			prev = cnode
+			// 右
+			cnode = cnode.Right
 		}
-		if nowMax >= root.Val {
-			return false
-		}
-		maxv = compare(maxv, nowMax, true)
-		minv = compare(minv, nowMin, false)
-	}
-	if root.Right != nil {
-		var nowMax, nowMin int
-		if dfs2(root.Right, nowMax, nowMin) == false {
-			return false
-		}
-		if nowMin <= root.Val {
-			return false
-		}
-		maxv = compare(maxv, nowMax, true)
-		minv = compare(minv, nowMin, false)
 	}
 	return true
 }

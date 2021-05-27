@@ -6,28 +6,29 @@
 	右子树是通过数组中最大值右边部分构造出的最大二叉树。
 	通过给定的数组构建最大二叉树，并且输出这个树的根节点。
 */
-func constructMaximumBinaryTree(nums []int) *TreeNode {
-	// 前序遍历构造
-	return build(nums, 0, len(nums)-1)
-}
 
-func build(nums []int, left, right int) *TreeNode {
+/*
+	方法1：DFS-递归
+*/
+func constructMaximumBinaryTree(nums []int) *TreeNode {
+	nLen := len(nums)
 	// base case
-	if left > right {
+	if nLen == 0 {
 		return nil
 	}
-	// 找到最大的元素，和其索引
-	index, max := -1, -(1 << 32)
-	// 注意临界点
-	for i := left; i <= right; i++ {
-		if nums[i] > max {
+	// 找到最大值和最大值索引
+	midx := 0
+	max := nums[0]
+	for i := 1; i < nLen; i++ {
+		if max < nums[i] {
 			max = nums[i]
-			index = i
+			midx = i
 		}
 	}
-	root := &TreeNode{Val: max}
-	// 递归构造左右子树
-	root.Left = build(nums, left, index-1)
-	root.Right = build(nums, index+1, right)
+	// 😁 前序遍历：根左右
+	root := &TreeNode{max, nil, nil}
+	// 根据最大值索引切割左右子树
+	root.Left = constructMaximumBinaryTree(nums[:midx])
+	root.Right = constructMaximumBinaryTree(nums[midx+1:])
 	return root
 }

@@ -4,8 +4,6 @@
 
 [LeetCode-Go golang实现](https://github.com/halfrost/LeetCode-Go)
 
-[leetcode-Go 可参考性不大，没有详细思路 😅](https://github.com/greyireland/algorithm-pattern)
-
 [Algorithms & Data Structures in Go](https://github.com/arnauddri/algorithms)
 
 [用动画的形式呈现解LeetCode题目的思路](https://github.com/MisterBooo/LeetCodeAnimation)
@@ -34,7 +32,7 @@
 [leetcode919之前所有题目](https://github.com/grandyang/leetcode)
 
 
-😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄 [LeetCode 刷题攻略 🔥🔥🔥](https://github.com/youngyangyang04/leetcode-master) 😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄
+🔥🔥🔥 [LeetCode 刷题攻略 🔥🔥🔥](https://github.com/youngyangyang04/leetcode-master) 🔥🔥🔥
 
 ### 数据结构和算法（🔥🔥🔥）
 
@@ -63,4 +61,10 @@
     《编译原理》
     《TCP/IP详解》
 
+### 常用表情
 
+😄😄😄
+🔥🔥🔥
+😅😅😅
+🐷🐷🐷
+🉑🉑🉑
