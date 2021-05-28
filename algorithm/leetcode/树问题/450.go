@@ -7,7 +7,13 @@
 
 	说明： 要求算法时间复杂度为 O(h)，h 为树的高度。
 */
+
+/*
+	方法1：DFS-递归
+	😅😅😅 val和root.Val三种情况，五种删除逻辑
+*/
 func deleteNode(root *TreeNode, target int) *TreeNode {
+	// （1）没找到删除的节点，遍历到空节点直接返回了
 	if root == nil {
 		return nil
 	}
@@ -21,22 +27,27 @@ func deleteNode(root *TreeNode, target int) *TreeNode {
 		if root.Right == nil {
 			return root.Left
 		}
-		// （3）目标节点同时存在左右节点；必须找到左子树中最大的那个节点，或者右子树中最小的那个节点来接替自己
-		minNode := getMinNodeOfBST(root.Right)           // 找到右子树最小节点
-		root.Val = minNode.Val                           // 把root改为minNode
-		root.Right = deleteNode(root.Right, minNode.Val) // 删除minNode（替换）
+		// （3）目标节点同时存在左右节点；必须找到【左子树中最大的节点】，或者【右子树中最小的节点】来接替自己
+		// （3.1）找到右子树最小节点
+		cnode := root.Right
+		for cnode.Left != nil {
+			cnode = cnode.Left
+		}
+		// （3.2）把root改为cnode
+		root.Val = cnode.Val
+		// （3.3）删除cnode（替换）
+		root.Right = deleteNode(root.Right, cnode.Val)
 	} else if root.Val > target {
+		// 😅 要删除的点在左子树，不是return 哦
 		root.Left = deleteNode(root.Left, target)
 	} else if root.Val < target {
+		// 😅 要删除的点在右子树，不是return 哦
 		root.Right = deleteNode(root.Right, target)
 	}
 	return root
 }
 
-// 找到BST最小节点
-func getMinNodeOfBST(root *TreeNode) *TreeNode {
-	for root.Left != nil {
-		root = root.Left
-	}
-	return root
-}
+/*
+	方法2：DFS-迭代
+	TODO 😅
+*/

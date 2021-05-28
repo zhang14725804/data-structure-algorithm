@@ -10,47 +10,36 @@
 */
 
 /*
-	方法1：递归
+	方法1：DFS-递归
+
+	在有序树里，如果判断一个节点的左子树里有p，右子树里有q呢？
+	🔥🔥🔥其实只要从上到下遍历的时候，cur节点是数值在[p, q]区间中则说明该节点cur就是最近公共祖先了。
 
 	如果给定的两个节点的值都小于根节点的值，那么最近的共同祖先一定在左子树
 	如果给定的两个节点的值都大于根节点的值，那么最近的共同祖先一定在右子树
 	如果一个大于等于、一个小于等于根节点的值，那么当前根节点就是最近的共同祖先了
 */
-
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
-	// 保持p.val < q.val，省去复杂的判断（妙啊😄）
-	if p.Val > q.Val {
-		return lowestCommonAncestor(root, q, p)
-	}
-	if p.Val == root.Val || q.Val == root.Val {
-		return root
-	}
-
-	if q.Val < root.Val { // 较大的值小于root
-		return lowestCommonAncestor(root.Left, p, q)
-	} else if p.Val > root.Val { // 较小的值大于root
+	if root.Val < p.Val && root.Val < q.Val {
 		return lowestCommonAncestor(root.Right, p, q)
+	} else if root.Val > p.Val && root.Val > q.Val {
+		return lowestCommonAncestor(root.Left, p, q)
 	}
 	return root
 }
 
-// 方法2：迭代
+/*
+	方法2：DFS-迭代
+*/
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
-	pVal, qVal := p.Val, q.Val
-	if pVal == root.Val || qVal == root.Val {
-		return root
-	}
-	if pVal > qVal {
-		pVal, qVal = qVal, pVal
-	}
-	// 最后如果不使用else，直接使用return，二者有什么区别（todo）
-	for {
-		if qVal < root.Val {
+	for root != nil {
+		if root.Val > p.Val && root.Val > q.Val {
 			root = root.Left
-		} else if pVal > root.Val {
+		} else if root.Val < p.Val && root.Val < q.Val {
 			root = root.Right
 		} else {
 			return root
 		}
 	}
+	return nil
 }
