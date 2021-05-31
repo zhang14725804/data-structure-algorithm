@@ -5,40 +5,75 @@
 	说明：
 	所有数字（包括 target）都是正整数。
 	解集不能包含重复的组合。
-
-	思路：暴力搜索（考虑搜索顺序）
-
-	todo:看着好像没有问题，但是测试不通过
 */
-var ans = make([][]int, 0)
-var path = make([]int, 0)
 
-func combinationSum(c []int, target int) [][]int {
-	dfs(c, 0, target)
+/*
+	方法1：回溯
+	本题没有组合数量要求，仅仅是总和的限制，所以递归没有层数的限制，只要选取的元素总和超过target
+*/
+var candidates []int
+var target int
+var path []int
+var ans [][]int
+
+func combinationSum(_candidates []int, target int) [][]int {
+	candidates = _candidates
+	backtrack(target, 0)
 	return ans
 }
 
-// u 当前枚举到的位置
-func dfs(c []int, u int, target int) {
-	// 满足要求
-	if target == 0 {
-		// 这里path是对的
-		ans = append(ans, path)
+/*
+	n：目标和和已经收集到的元素和的差值。😅😅😅 这个参数有故事：targetSum和sum差值
+	start：start来控制for循环的起始位置
+*/
+func backtrack(n int, start int) {
+	// base case
+	if n < 0 {
 		return
 	}
-	// 已经枚举到最后一个数
-	if u == len(c) {
+	if n == 0 {
+		c := make([]int, len(path))
+		copy(c, path)
+		ans = append(ans, c)
+	}
+	for i := start; i < len(candidates); i++ {
+		path = append(path, candidates[i])
+		// 😅😅😅 关键点:不用i+1了，表示可以重复读取当前的数
+		backtrack(n-candidates[i], i)
+		path = path[:len(path)-1]
+
+		/*
+			🐷🐷🐷 也可以这么写，这个backtrack中有两个回溯条件
+			sum += candidates[i];
+			path.push_back(candidates[i]);
+			backtracking(candidates, target, sum, i); // 关键点:不用i+1了，表示可以重复读取当前的数
+			sum -= candidates[i];   // 回溯
+			path.pop_back();        // 回溯
+		*/
+	}
+}
+
+/*
+	😅😅😅 【剪枝】
+
+	对于sum已经大于target的情况，其实是依然进入了下一层递归，只是下一层递归结束判断的时候，会判断sum > target的话就返回。
+	其实如果已经知道下一层的sum会大于target，就没有必要进入下一层递归了。
+*/
+func backtrack(n int, start int) {
+	// base case
+	if n < 0 {
 		return
 	}
-	// 枚举取每个数字的个数
-	for i := 0; c[u]*i <= target; i++ {
-		// 枚举下一个位置
-		dfs(c, u+1, target-c[u]*i)
-		// 每取一个数字，都添加到当前集合
-		path = append(path, c[u])
+	if n == 0 {
+		c := make([]int, len(path))
+		copy(c, path)
+		ans = append(ans, c)
 	}
-	// 恢复现场
-	for i := 0; c[u]*i <= target; i++ {
+	// 如果 n-candidates[i] < 0  就终止遍历
+	for i := start; i < len(candidates) && n-candidates[i] >= 0; i++ {
+		path = append(path, candidates[i])
+		// 😅😅😅 关键点:不用i+1了，表示可以重复读取当前的数
+		backtrack(n-candidates[i], i)
 		path = path[:len(path)-1]
 	}
 }
