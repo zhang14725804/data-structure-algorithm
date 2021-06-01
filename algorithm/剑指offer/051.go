@@ -8,6 +8,7 @@
 
 var ans [][]int
 var path []int
+
 func permutation(nums []int) [][]int {
 	//  non-constant array bound len(nums)
 	// path = [len(nums)][]int😅
@@ -15,33 +16,23 @@ func permutation(nums []int) [][]int {
 	path = make([]int, len(nums))
 	// 排序
 	BubbleSort(nums)
-	dfs(nums,0,0,0)
+	dfs(nums, 0, 0, 0)
 	return ans
 }
+
 // todo：用二进制骚操作
-func dfs(nums []int,u,start,state int){
-	if u == len(nums){
+func dfs(nums []int, u, start, state int) {
+	if u == len(nums) {
 		ans = append(ans, path)
 		return
 	}
-	if u == 0 || nums[u] != nums[u-1]{
+	if u == 0 || nums[u] != nums[u-1] {
 		start = 0
 	}
-	for i:=start; i<len(nums); i++{
-		if (state >> i & 1) == 0{
+	for i := start; i < len(nums); i++ {
+		if (state >> i & 1) == 0 {
 			path[i] = nums[u]
-			dfs(nums, u+1, i+1, state+(1 << i))
-		}
-	}
-}
-
-func BubbleSort(nums []int){
-	for i := 0; i < len(nums); i++ {
-		// 
-		for j := 0; j < len(nums)-i-1; j++ {
-			if nums[j] > nums[j+1]{
-				nums[j],nums[j+1] = nums[j+1],nums[j]
-			}
+			dfs(nums, u+1, i+1, state+(1<<i))
 		}
 	}
 }

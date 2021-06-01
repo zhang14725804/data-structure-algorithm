@@ -13,7 +13,7 @@ func BubbleSort(nums []int) []int {
 	for i := 0; i < l; i++ {
 		// 算法优化
 		needChange := false
-		// 注意j取值范围，😅😅😅
+		// 注意j取值范围【j < l-i-1】，😅😅😅
 		for j := 0; j < l-i-1; j++ {
 			if nums[j] > nums[j+1] {
 				nums[j], nums[j+1] = nums[j+1], nums[j]
