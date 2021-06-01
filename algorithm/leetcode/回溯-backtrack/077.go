@@ -23,6 +23,7 @@ var n, k int
 
 func combine(_n int, _k int) [][]int {
 	n, k = _n, _k
+	ans = make([][]int, 0) // 只是为了提交，leetcode提交时，ans 会拼接之前提交的结果
 	// 😅 为什么要有这个start呢？
 	backtrack(1)
 	return ans

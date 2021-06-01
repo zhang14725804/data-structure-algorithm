@@ -18,6 +18,7 @@ var ans [][]int
 
 func combinationSum(_candidates []int, target int) [][]int {
 	candidates = _candidates
+	ans = make([][]int, 0) // 只是为了提交，leetcode提交时，ans 会拼接之前提交的结果
 	backtrack(target, 0)
 	return ans
 }

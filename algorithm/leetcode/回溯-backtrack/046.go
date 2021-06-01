@@ -13,6 +13,7 @@ var used []bool // 😅 需要used数组记录path里都放了哪些元素了
 func permute(_nums []int) [][]int {
 	nums = _nums
 	used = make([]bool, len(nums))
+	ans = make([][]int, 0) // 只是为了提交，leetcode提交时，ans 会拼接之前提交的结果
 	backtrack()
 	return ans
 }

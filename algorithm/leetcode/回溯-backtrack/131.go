@@ -25,6 +25,7 @@ var str string
 
 func partition(s string) [][]string {
 	str = s
+	ans = make([][]string, 0) // 只是为了提交，leetcode提交时，ans 会拼接之前提交的结果
 	backtrack(0)
 	return ans
 }

@@ -11,7 +11,7 @@ import "fmt"
 */
 
 /*
-	方法：回溯+剪枝+标记数组
+	方法：回溯+剪枝+ used数组去重
 
 	都知道组合问题可以抽象为树形结构，那么“使用过”在这个树形结构上是有两个维度的，一个维度是同一树枝上“使用过”，一个维度是同一树层上“使用过”。
 	回看一下题目，元素在同一个组合内是可以重复的，怎么重复都没事，但两个组合不能相同。
@@ -27,7 +27,8 @@ var used []bool
 func combinationSum2(_candidates []int, target int) [][]int {
 	candidates = BubbleSort(_candidates) // 数组排序
 	used = make([]bool, len(candidates)) // 数组中的数字是否使用过
-	backtrack(target, 0, used)
+	ans = make([][]int, 0)               // 只是为了提交，leetcode提交时，ans 会拼接之前提交的结果
+	backtrack(target, 0)
 	return ans
 }
 
@@ -36,7 +37,7 @@ func combinationSum2(_candidates []int, target int) [][]int {
 	start：start来控制for循环的起始位置
 	used：数组中的数字是否使用过
 */
-func backtrack(sum int, start int, used []bool) {
+func backtrack(sum int, start int) {
 	// base case
 	if sum == 0 {
 		c := make([]int, len(path))
@@ -53,7 +54,7 @@ func backtrack(sum int, start int, used []bool) {
 		}
 		used[i] = true
 		path = append(path, candidates[i])
-		backtrack(sum-candidates[i], i+1, used)
+		backtrack(sum-candidates[i], i+1)
 		used[i] = false
 		path = path[:len(path)-1]
 	}
@@ -88,5 +89,45 @@ func backtrack(sum int, start int) {
 		// 这里是i+1，每个数字在每个组合中只能使用一次
 		backtrack(sum-candidates[i], i+1)
 		path = path[:len(path)-1]
+	}
+}
+
+/*
+	方法1：回溯
+	😅😅😅 使用map去重
+*/
+var ans [][]int
+var path []int
+var candidates []int
+
+func combinationSum2(_candidates []int, target int) [][]int {
+	candidates = BubbleSort(_candidates) // 数组排序
+	ans = make([][]int, 0)
+	backtrack(target, 0)
+	return ans
+}
+
+/*
+	sum：目标和和已经收集到的元素和的差值。😅😅😅 这个参数有故事：targetSum和sum差值
+	start：start来控制for循环的起始位置
+*/
+func backtrack(sum int, start int) {
+	// base case
+	if sum == 0 {
+		c := make([]int, len(path))
+		copy(c, path)
+		ans = append(ans, c)
+	}
+	usedMap := make(map[int]bool, 0)
+	// 递归+剪枝
+	for i := start; i < len(candidates) && sum-candidates[i] >= 0; i++ {
+		if usedMap[candidates[i]] {
+			continue
+		}
+		usedMap[candidates[i]] = true
+		path = append(path, candidates[i])
+		backtrack(sum-candidates[i], i+1)
+		path = path[:len(path)-1]
+		// 😅😅😅 这里不需要回溯
 	}
 }

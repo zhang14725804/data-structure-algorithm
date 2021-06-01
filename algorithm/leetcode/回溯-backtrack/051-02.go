@@ -1,25 +1,26 @@
 /*
 	n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
-
-	思路：全排列问题，要考虑对角线（正反两个方向）
 */
 var (
-	n            int
-	col, dg, udg []bool
-	path         [][]byte
-	ans          [][]string
+	n                        int
+	colUsed, dgUsed, udgUsed []bool
+	board                    [][]byte
+	ans                      [][]string
 )
 
 func solveNQueens(_n int) [][]string {
 	n = _n
-	col = make([]bool, n)
-	// 斜线，反斜线
-	dg, udg = make([]bool, n*2), make([]bool, n*2)
-	path = make([][]byte, n)
+	// 列，斜线，反斜线
+	colUsed = make([]bool, n)
+	dgUsed = make([]bool, n*2)
+	udgUsed = make([]bool, n*2)
+
+	board = make([][]byte, n)
+	ans = make([][]string, 0)
 	for i := 0; i < n; i++ {
-		path[i] = make([]byte, n)
+		board[i] = make([]byte, n)
 		for j := 0; j < n; j++ {
-			path[i][j] = '.'
+			board[i][j] = '.'
 		}
 	}
 
@@ -27,23 +28,23 @@ func solveNQueens(_n int) [][]string {
 	return ans
 }
 
-func backtrack(u int) {
-	if u == n {
-		spath := make([]string, 0)
+// 用row来记录当前遍历到棋盘的第几层了
+func backtrack(row int) {
+	if row == n {
+		str := make([]string, 0)
 		for i := 0; i < n; i++ {
-			// []byte转string
-			spath = append(spath, string(path[i][:]))
+			str = append(str, string(board[i]))
 		}
-		ans = append(ans, spath)
+		ans = append(ans, str)
 		return
 	}
-	for i := 0; i < n; i++ {
-		if !col[i] && !dg[u-i+n] && !udg[u+i] {
-			col[i], dg[u-i+n], udg[u+i] = true, true, true
-			path[u][i] = 'Q'
-			backtrack(u + 1)
-			col[i], dg[u-i+n], udg[u+i] = false, false, false
-			path[u][i] = '.'
+	for col := 0; col < n; col++ {
+		if !colUsed[col] && !dgUsed[row-col+n] && !udgUsed[row+col] {
+			colUsed[col], dgUsed[row-col+n], udgUsed[row+col] = true, true, true
+			board[row][col] = 'Q'
+			backtrack(row + 1)
+			colUsed[col], dgUsed[row-col+n], udgUsed[row+col] = false, false, false
+			board[row][col] = '.'
 		}
 	}
 }

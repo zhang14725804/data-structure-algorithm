@@ -13,7 +13,10 @@
 	给定数独永远是 9x9 形式的。
 */
 
-// 难点是每行每列每个小九宫格标记遍历，backtrack中的for循环那一块
+/*
+	方法：回溯
+*/
+// 难点是每行，每列，每个小九宫格标记遍历，backtrack中的for循环那一块
 var row [9][9]bool     // 每行
 var col [9][9]bool     // 每列
 var cell [3][3][9]bool // 每个小九宫格3*3
@@ -22,8 +25,9 @@ func solveSudoku(board [][]byte) {
 	for i := 0; i < 9; i++ {
 		for j := 0; j < 9; j++ {
 			if board[i][j] != '.' {
-				t := board[i][j] - '1' // 下表从0开始，所以要和'1'比较
-				// 标记已经存在
+				// 😅 下表从0开始，所以要和'1'比较
+				t := board[i][j] - '1'
+				// 😅 标记已经存在
 				row[i][t], col[j][t], cell[i/3][j/3][t] = true, true, true
 			}
 		}
@@ -33,22 +37,22 @@ func solveSudoku(board [][]byte) {
 }
 
 func backtrack(board [][]byte, x, y int) bool {
-	// 遍历到最右端（最后一列），遍历下一个位置（下一行第一个位置）
+	// 😅 遍历到最右端（最后一列），遍历下一个位置（下一行第一个位置）
 	if y == 9 {
 		x++
 		y = 0
 	}
-	// base case，遍历完所有行
+	// 😅 base case，遍历完所有行
 	if x == 9 {
 		return true
 	}
-	// 已经填了数字，遍历下一个位置（右移）
+	// 😅 已经填了数字，遍历下一个位置（右移）
 	if board[x][y] != '.' {
 		return backtrack(board, x, y+1)
 	}
-	// 当前这个位置没有填数字，枚举当前位置可以填那个数字
+	// 😅 当前这个位置没有填数字，枚举当前位置可以填那个数字
 	for i := 0; i < 9; i++ {
-		// 保证每行、每列、每个九宫格没有出现过这个数字
+		// 😅😅😅 保证每行、每列、每个九宫格没有出现过这个数字
 		if row[x][i] == false && col[y][i] == false && cell[x/3][y/3][i] == false {
 			// 选择
 			board[x][y] = byte('1' + i)

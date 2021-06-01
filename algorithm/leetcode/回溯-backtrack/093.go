@@ -17,6 +17,7 @@ func restoreIpAddresses(s string) []string {
 		return ans
 	}
 	str = s
+	ans = make([]string, 0) // 只是为了提交，leetcode提交时，ans 会拼接之前提交的结果
 	backtrack(0, 0)
 	return ans
 }
