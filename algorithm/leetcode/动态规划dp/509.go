@@ -1,11 +1,10 @@
 /*
 	斐波那契数列
-
-	方法：动态规划（自底向上）、递归（自顶向下）
 */
 
 /*
 	方法1：迭代
+	递归（自顶向下）
 */
 func fib(n int) int {
 	if n == 0 {
@@ -32,7 +31,7 @@ func fib(N int) int {
 	if N < 2 {
 		return N
 	}
-	// question 为什么需要N+1
+	// 😅 question 为什么需要N+1
 	memo = make([]int, N+1) // 备忘录
 	return dfs(N)
 }
@@ -50,18 +49,26 @@ func dfs(N int) int {
 
 /*
 	方法3：动态规划（自底向上）
+
 */
-func fib(N int) int {
-	if N < 2 {
-		return N
+func fib(n int) int {
+	if n < 2 {
+		return n
 	}
-	dp := make([]int, N+1)
-	dp[1], dp[2] = 1, 1
-	// n从3开始，n+1个而不是n个 😅😅😅
-	for i := 3; i <= N; i++ {
+	// （1）dp[i]的定义为：第i个数的斐波那契数值是dp[i]
+	// 😅 数组长度n+1
+	dp := make([]int, n+1)
+	// （3）dp数组初始化
+	dp[0] = 0
+	dp[1] = 1
+	// （4）确定遍历顺序。dp[i]是依赖 dp[i - 1] 和 dp[i - 2]，那么遍历的顺序一定是从前到后遍历的
+	// 😅 从2开始到n，包括n
+	for i := 2; i <= n; i++ {
+		// （2）状态转移方程 dp[i] = dp[i - 1] + dp[i - 2];
 		dp[i] = dp[i-1] + dp[i-2]
 	}
-	return dp[N]
+	// （5）举例推导dp数组。n=10时，0 1 1 2 3 5 8 13 21 34 55
+	return dp[n]
 }
 
 /*
@@ -75,7 +82,7 @@ func fib(n int) int {
 	if n == 1 || n == 2 {
 		return 1
 	}
-	// 根据斐波那契数列的状态转移方程，当前状态只和之前的两个状态有关，其实并不需要DP table 来存储所有的状态
+	// 😅😅😅 当前状态只和之前的两个状态有关，其实并不需要DP table 来存储所有的状态
 	prev, cur := 1, 1
 	for i := 3; i <= n; i++ {
 		sum := prev + cur

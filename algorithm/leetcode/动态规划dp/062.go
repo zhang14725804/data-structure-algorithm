@@ -5,7 +5,8 @@
 */
 
 /*
-	方法2，递归 😅😅😅😅😅😅
+	方法2：自底向上的递归 😅😅😅😅😅😅
+
 	求 ( 0 , 0 ) 点到（ m - 1 , n - 1） 点的走法。
 
 	（0，0）点到（m - 1 , n - 1） 点的走法等于（0，0）点【右边】的点 （1，0）到（m - 1 , n - 1）的走法加上（0，0）点【下边】的点（0，1）到（m - 1 , n - 1）的走法。
@@ -26,20 +27,21 @@ func uniquePaths(_m int, _n int) int {
 }
 
 func dfs(x, y int) int {
-	// base case 递归出口
+	// 😅 base case 递归出口
 	if x == m-1 && y == n-1 {
 		return 1
 	}
-	n1, n2 := 0, 0
+	// 向左、向下的走法
+	right, bottom := 0, 0
 	key := fmt.Sprintf("%v", x+1) + "@" + fmt.Sprintf("%v", y)
 	// 😅 向右探索所有结果
 	if val, ok := visited[key]; !ok {
 		// 判断边界
 		if x+1 <= m {
-			n1 = dfs(x+1, y)
+			right = dfs(x+1, y)
 		}
 	} else {
-		n1 = val
+		right = val
 	}
 
 	key = fmt.Sprintf("%v", x) + "@" + fmt.Sprintf("%v", y+1)
@@ -47,45 +49,47 @@ func dfs(x, y int) int {
 	if val, ok := visited[key]; !ok {
 		// 判断边界
 		if y+1 <= n {
-			n2 = dfs(x, y+1)
+			bottom = dfs(x, y+1)
 		}
 	} else {
-		n2 = val
+		bottom = val
 	}
 
 	key = fmt.Sprintf("%v", x) + "@" + fmt.Sprintf("%v", y)
-	visited[key] = n1 + n2
-	return n2 + n1
+	visited[key] = right + bottom
+	return bottom + right
 }
 
 /*
-	方法2：动态规划😄😄😄
+	方法1：动态规划
 */
 func uniquePaths(m int, n int) int {
-	// 初始化二维数组
-	vector := make([][]int, m)
+	// 😅😅😅 dp[i][j] ：表示从（0 ，0）出发，到(i, j) 有dp[i][j]条不同的路径。
+	dp := make([][]int, m)
 	for i := 0; i < m; i++ {
-		vector[i] = make([]int, n)
+		dp[i] = make([]int, n)
 	}
-	// 😄 初始化第一行第一列
+	// 😄 dp数组的初始化 首先dp[i][0]一定都是1，因为从(0, 0)的位置到(i, 0)的路径只有一条，那么dp[0][j]也同理
 	for row := 0; row < m; row++ {
-		vector[row][0] = 1
+		dp[row][0] = 1
 	}
 	for col := 0; col < n; col++ {
-		vector[0][col] = 1
+		dp[0][col] = 1
 	}
-	// 😄 中间的部分
+	// 遍历顺序：从左到右从上到下
 	for i := 1; i < m; i++ {
 		for j := 1; j < n; j++ {
-			vector[i][j] = vector[i-1][j] + vector[i][j-1]
+			// 想要求dp[i][j]，只能有两个方向来推导出来，即dp[i - 1][j] 和 dp[i][j - 1]
+			// 😅 我想成了 dp[i][j] = dp[i+1][j] + dp[i][j+1]
+			dp[i][j] = dp[i-1][j] + dp[i][j-1]
 		}
 	}
-	return vector[m-1][n-1]
+	return dp[m-1][n-1]
 }
 
 /*
 	方法3，动态规划
-	question 😄😄😄😄😄😄
+	😄😄😄 question 状态压缩
 */
 func uniquePaths(m int, n int) int {
 	dp := make([]int, m)
@@ -93,7 +97,7 @@ func uniquePaths(m int, n int) int {
 	for i := 0; i < m; i++ {
 		dp[i] = 1
 	}
-	// 从右向左更新所有列
+	// 😅😅😅 从右向左更新所有列 或者 从左向右都可以
 	for i := n - 2; i >= 0; i-- {
 		for j := m - 2; j >= 0; j-- {
 			dp[j] = dp[j] + dp[j+1]
