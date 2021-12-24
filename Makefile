@@ -1,5 +1,5 @@
 workplace = ~/Desktop/fubao-learning/mysql45
-commit_reason = "删除链表的第n个节点"
+commit_reason = "链表"
 push:
 	cd $(workplace)
 	git status
