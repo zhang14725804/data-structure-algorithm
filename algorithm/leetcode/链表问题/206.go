@@ -1,5 +1,6 @@
 /*
 	迭代方式
+	question 解释不通
 */
 func reverseList(head *ListNode) *ListNode {
 	if head == nil {
@@ -26,6 +27,10 @@ func reverseList(head *ListNode) *ListNode {
 	return prev
 }
 
+/*
+	方法1 2021-12-24
+	这个可以解释通
+*/
 func reverseList(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
@@ -38,9 +43,13 @@ func reverseList(head *ListNode) *ListNode {
 	// 缓存下一个指针
 	var next *ListNode
 	for cur != nil {
+		// 存储next指针
 		next = cur.Next
+		// 改变当前节点指针指向
 		cur.Next = prev
+		// pre向前走
 		prev = cur
+		// cur向前走
 		cur = next
 	}
 

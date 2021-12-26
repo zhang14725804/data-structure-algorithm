@@ -12,18 +12,16 @@
 */
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	// 快慢指针，初始位置都在head
-	fast := head
-	slow := head
+	fast, slow := head, head
 	// （1）快的指针先走n步
 	for i := 0; i < n; i++ {
 		fast = fast.Next
 	}
 	// （2）n 等于链表长度
 	if fast == nil {
-		head = head.Next
-		return head
+		return head.Next
 	}
-	// （3）同时向后移动快慢指针，注意这里要判断【fast】是否走到结尾位置
+	// （3）同时向后移动快慢指针，注意这里要判断【fast.Next】是否走到结尾位置
 	for fast.Next != nil {
 		fast = fast.Next
 		slow = slow.Next
@@ -36,7 +34,8 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 /*
 	方法2：两次遍历
 	删除一个结点，无非是遍历链表找到那个结点前边的结点，然后改变下指向就好了。
-	但由于它是链表，它的长度我们并不知道，我们得先遍历一遍得到它的长度，之后用长度减去 n 就是要删除的结点的位置，然后遍历到结点的前一个位置就好了。
+	（1）但由于它是链表，它的长度我们并不知道，我们得先遍历一遍得到它的长度，
+	（2）之后用长度减去 n 就是要删除的结点的位置，然后遍历到结点的前一个位置就好了。
 */
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	lLen := 0

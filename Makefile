@@ -1,5 +1,5 @@
 workplace = ~/Desktop/fubao-learning/mysql45
-commit_reason = "链表"
+commit_reason = "leetcoding"
 push:
 	cd $(workplace)
 	git status
