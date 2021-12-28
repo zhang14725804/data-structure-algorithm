@@ -1,6 +1,5 @@
 /*
 	你最多可以完成 两笔 交易。你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
-
 	k=2
 */
 
@@ -47,7 +46,7 @@ func maxProfit(prices []int) int {
 		// 对交易次数进行穷举
 		for k := max_k; k >= 1; k-- {
 			// 处理base case
-			if i-1 == -1 {
+			if i == 0 {
 				dp[i][k][0] = 0
 				dp[i][k][1] = -prices[i]
 				continue

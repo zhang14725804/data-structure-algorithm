@@ -30,7 +30,7 @@ func maxProfit(max_k int, prices []int) int {
 		// 对交易次数进行穷举
 		for k := max_k; k >= 1; k-- {
 			// 处理base case
-			if i-1 == -1 {
+			if i == 0 {
 				dp[i][k][0] = 0
 				dp[i][k][1] = -prices[i]
 				continue

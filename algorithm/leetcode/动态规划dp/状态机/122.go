@@ -5,8 +5,8 @@
 
 /*
 	方法2：状态机
-	dp[][][]
-	如果 k 为正无穷，那么就可以认为 k 和 k - 1 是一样的
+	dp[n][k][j]
+	如果 k 为正无穷，那么就可以认为 k 和 k - 1 是一样的，k可以忽略
 */
 func maxProfit2(prices []int) int {
 	n := len(prices)

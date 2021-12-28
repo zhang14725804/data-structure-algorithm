@@ -5,6 +5,7 @@
 
 /*
 	方法1：暴力做法
+	1227，我居然没想到暴力解法
 */
 func maxProfit1(prices []int) int {
 	res := 0
@@ -25,11 +26,12 @@ func maxProfit2(prices []int) int {
 		return 0
 	}
 	res := 0
+	// 初始最小值为prices[0]，而不是0
 	minp := prices[0]
-	// 一边扫描一边记录最小值，一遍扫描搞定
+	// 一次循环一边扫描一边记录【最小值】和【结果】
 	for i := 0; i < len(prices); i++ {
 		res = MaxInt(res, prices[i]-minp)
-		minp = MaxInt(minp, prices[i])
+		minp = MinInt(minp, prices[i])
 	}
 	return res
 }
@@ -39,9 +41,9 @@ func maxProfit2(prices []int) int {
 
 	😅😅😅 😅😅😅
 	每天都有三种「选择」：买入、卖出、无操作
-	这个问题的「状态」有三个，第一个是天数，第二个是当天允许交易的最大次数，第三个是当前的持有状态
-
-	dp[i][k][0] // 第i天，至多进行k次交易，目前没有(0/1)持有股票
+	这个问题的「状态」有三个:
+		i:天数; k交易次数; 0/1是否持有股票(当前持有状态)
+	dp[i][k][0]
 
 	buy（买）、sell（卖）、rest（无操作）
 
@@ -54,12 +56,14 @@ func maxProfit3(prices []int) int {
 	if n == 0 {
 		return 0
 	}
-	// 初始化操作
+	// 初始化操作。
+	// ps: n行两列(持有状态0/1)的slice
 	dp := make([][]int, n)
 	for i := 0; i < n; i++ {
 		dp[i] = make([]int, 2)
 	}
 
+	// 遍历天数
 	for i := 0; i < n; i++ {
 		// base case
 		if i == 0 {
@@ -70,6 +74,8 @@ func maxProfit3(prices []int) int {
 		// 第i天未持有：前一天未持有（rest）、前一天持有（第i天sell）
 		dp[i][0] = MaxInt(dp[i-1][0], dp[i-1][1]+prices[i])
 		// 第i天持有：前一天持有（rest）、前一天未持有（第i天buy）
+		// question 为什么前一天未持有不是： dp[i-1][0]-prices[i])
+		// ps: dp[i-1][0][0] = 0
 		dp[i][1] = MaxInt(dp[i-1][1], -prices[i])
 	}
 	return dp[n-1][0]

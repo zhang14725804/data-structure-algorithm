@@ -23,7 +23,7 @@
 [golang-leetcode一部分](https://github.com/heiy/LeetCode)
 
 
-[手撕LeetCode](https://github.com/labuladong/fucking-algorithm)、[手撕LeetCode--labuladong算法小炒（🔥🔥🔥）](https://labuladong.gitbook.io/algo/)、[labuladong算法小炒公众号](https://mp.weixin.qq.com/s/AWsL7G89RtaHyHjRPNJENA)
+[手撕LeetCode](https://github.com/labuladong/fucking-algorithm)、[手撕LeetCode--labuladong算法小炒（🔥🔥🔥）](https://labuladong.gitee.io/algo/)、[labuladong算法小炒公众号](https://mp.weixin.qq.com/s/AWsL7G89RtaHyHjRPNJENA)
 
 [leetcode300 🔥🔥🔥](https://leetcode.wang/)
 
