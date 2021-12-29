@@ -4,6 +4,29 @@
 */
 
 /*
+	滑动窗口
+*/
+func lengthOfLongestSubstring(s string) int {
+	window := make(map[byte]int, 0)
+	left, right, res := 0, 0, 0
+	for right < len(s) {
+		c := s[right]
+		// 移动右指针
+		right++
+		window[c]++
+		// 存在重复元素，收缩窗口【左边】，直到没有重复的元素位置
+		for window[c] > 1 {
+			d := s[left]
+			left++
+			window[d]--
+		}
+		// 在收缩窗口完成后更新
+		res = MaxInt(res, right-left)
+	}
+	return res
+}
+
+/*
 	滑动窗口，优化版(question)（看不懂😅）
 */
 func lengthOfLongestSubstring1(s string) int {
@@ -22,27 +45,4 @@ func lengthOfLongestSubstring1(s string) int {
 		hash[c] = j + 1
 	}
 	return ans
-}
-
-/*
-	滑动窗口
-*/
-func lengthOfLongestSubstring(s string) int {
-	window := make(map[byte]int, 0)
-	left, right, res := 0, 0, 0
-	for right < len(s) {
-		c := s[right]
-		// 移动右指针
-		right++
-		window[c]++
-		// 重复的情况
-		for window[c] > 1 {
-			d := s[left]
-			left++
-			window[d]--
-		}
-		// 在收缩窗口完成后更新 res，因为窗口收缩的 while 条件是存在重复元素，换句话说收缩完成后一定保证窗口中没有重复嘛
-		res = MaxInt(res, right-left)
-	}
-	return res
 }

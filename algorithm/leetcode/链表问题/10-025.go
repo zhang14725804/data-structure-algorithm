@@ -4,13 +4,12 @@
 	如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。
 
 	注意：
-
 	你的算法只能使用常数的额外空间。
 	你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。
 */
 
 /*
-	方法1：迭代实现(question 😅)，看不懂
+	方法1：整体迭代实现 （难懂）
 */
 func reverseKGroup1(head *ListNode, k int) *ListNode {
 	// 😅😅😅 虚拟头节点
@@ -59,7 +58,7 @@ func reverseKGroup1(head *ListNode, k int) *ListNode {
 }
 
 /*
-	方法2：递归+迭代
+	方法2：整体递归+部分迭代
 */
 func reverseKGroup(head *ListNode, k int) *ListNode {
 	if head == nil {
@@ -68,8 +67,9 @@ func reverseKGroup(head *ListNode, k int) *ListNode {
 	// 😅😅😅 区间[left,right)包含k个待反转元素
 	left, right := head, head
 	for i := 0; i < k; i++ {
-		// 不足k个，无需反转；base case
+		// base case： 不足k个，无需反转；
 		if right == nil {
+			// 😅😅😅 返回head
 			return head
 		}
 		right = right.Next
