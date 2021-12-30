@@ -3,22 +3,27 @@
 */
 
 /*
-	思路：借助【队列】实现层序遍历 🔥🔥🔥
+	思路：借助【队列】实现层序遍历
+	12.30 面试遇到
 */
 func levelOrder(root *TreeNode) [][]int {
 	res := make([][]int, 0)
+	// 初始化队列
 	queue := make([]*TreeNode, 0)
 	if root != nil {
 		queue = append(queue, root)
 	}
 	for len(queue) > 0 {
 		level := make([]int, 0)
+		// 当前队列长度
 		cLen := len(queue)
 		for i := 0; i < cLen; i++ {
-			// 😅😅😅 用队列（先进先出）辅助数据结构
+			// 出队
 			cnode := queue[0]
 			queue = queue[1:]
+			// 【根】
 			level = append(level, cnode.Val)
+			// 【左右】
 			if cnode.Left != nil {
 				queue = append(queue, cnode.Left)
 			}

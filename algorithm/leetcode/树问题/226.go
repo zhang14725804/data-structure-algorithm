@@ -1,10 +1,11 @@
 /*
 	翻转一棵二叉树。
+	12.30面试遇到
 */
 
 /*
 	方法1：dfs-深度优先遍历，递归实现（自顶向下）
-	前序遍历和后序遍历都可以 😅
+	【前序遍历】和【后序遍历】都可以 😅
 */
 func invertTree(root *TreeNode) *TreeNode {
 	var dfs func(root *TreeNode)
