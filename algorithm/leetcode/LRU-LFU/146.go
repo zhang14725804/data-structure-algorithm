@@ -1,5 +1,6 @@
 /*
-	运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
+	运用你所掌握的数据结构，设计和实现一个  LRU (Least Recently Used 最近最少使用) 缓存机制。
+	它应该支持以下操作： 获取数据 get 和 写入数据 put 。
 	LRU认为最近使用过的数据应该是是「有用的」，很久都没用过的数据应该是无用的，内存满了就优先删那些很久没用过的数据。
 
 	获取数据 get(key) - 如果关键字 (key) 存在于缓存中，则获取关键字的值（总是正数），否则返回 -1。
@@ -8,39 +9,47 @@
 
 	进阶:
 		你是否可以在 O(1) 时间复杂度内完成这两种操作？
-
-
 */
 
 /*
 	方法1：哈希表 + 双向链表（todo）
+	12.30
 */
-type DoubleLinkedNode struct {
-	key, value int
-	Prev, Next *DoubleLinkedNode
-}
 
-// ps：在双向链表的实现中，使用一个伪头部（dummy head）和伪尾部（dummy tail）标记界限，这样在添加节点和删除节点的时候就不需要检查相邻的节点是否存在。
+// 双向链表节点
+type DoubleLinkedListNode struct{
+    key int
+    value int
+    Prev *DoubleLinkedListNode
+    Next *DoubleLinkedListNode
+}
+// ps：在双向链表的实现中，使用一个伪头部（dummy head）和伪尾部（dummy tail）标记界限，
+// 这样在添加节点和删除节点的时候就不需要检查相邻的节点是否存在。
 type LRUCache struct {
-	size       int
-	capacity   int
-	cache      map[int]*DoubleLinkedNode
-	head, tail *DoubleLinkedNode // head表示最近使用，tail表示最久未使用
+	size       int // 实际大小
+	capacity   int // 总容量
+	cache      map[int]*DoubleLinkedListNode // 缓存
+	head *DoubleLinkedListNode // head表示最近使用
+	tail *DoubleLinkedListNode// tail表示最久未使用
 }
 
-func initDoubleLinkedNode(key, value int) *DoubleLinkedNode {
-	return &DoubleLinkedNode{
-		key:   key,
-		value: value,
-	}
+func initDoubleLinkedListNode(key,value int)*DoubleLinkedListNode{
+    return &DoubleLinkedListNode{
+        key:key,
+        value:value,
+    }
 }
+
+// 初始化LRU
 func Constructor(capacity int) LRUCache {
 	l := LRUCache{
-		cache:    map[int]*DoubleLinkedNode{},
-		head:     initDoubleLinkedNode(0, 0),
-		tail:     initDoubleLinkedNode(0, 0),
+		// cache:make(map[int]*DoubleLinkedListNode),
+		cache:    map[int]*DoubleLinkedListNode{},
+		head:     initDoubleLinkedListNode(0, 0),
+		tail:     initDoubleLinkedListNode(0, 0),
 		capacity: capacity,
 	}
+	// 连接头尾
 	l.head.Next = l.tail
 	l.tail.Prev = l.head
 	return l
@@ -48,20 +57,20 @@ func Constructor(capacity int) LRUCache {
 
 func (this *LRUCache) Get(key int) int {
 	// 判断是否存在
-	if _, ok := this.cache[key]; !ok {
+	if node, ok := this.cache[key]; !ok {
 		return -1
+	}else{
+		// 最近使用；添加到头
+		this.moveToHead(node)
+		return node.value
 	}
-	node := this.cache[key]
-	// 最近使用
-	this.moveToHead(node)
-	return node.value
 }
 
 func (this *LRUCache) Put(key int, value int) {
-	if _, ok := this.cache[key]; !ok {
-		node := initDoubleLinkedNode(key, value)
-		this.cache[key] = node
-		this.addToHead(node)
+	if cnode, ok := this.cache[key]; !ok {
+		cnode = initDoubleLinkedListNode(key, value)
+		this.cache[key] = cnode
+		this.addToHead(cnode)
 		this.size++
 		if this.size > this.capacity {
 			removed := this.removeTail()
@@ -70,28 +79,20 @@ func (this *LRUCache) Put(key int, value int) {
 			this.size--
 		}
 	} else {
-		// 若key存在，覆盖
-		node := this.cache[key]
-		node.value = value
-		this.moveToHead(node)
+		// 若key存在，覆盖；添加到头
+		cnode.value = value
+		this.moveToHead(cnode)
 	}
 }
 
-/********************************** 为链表提供一层抽象API **********************************************/
-// 移动到头步，表示最近使用
-func (this *LRUCache) moveToHead(node *DoubleLinkedNode) {
+// 原来的节点，移动到头部，表示最近使用
+func (this *LRUCache) moveToHead(node *DoubleLinkedListNode) {
 	this.removeNode(node)
 	this.addToHead(node)
 }
 
-// 删除节点
-func (this *LRUCache) removeNode(node *DoubleLinkedNode) {
-	node.Prev.Next = node.Next
-	node.Next.Prev = node.Prev
-}
-
-// 添加到头步，表示最近使用
-func (this *LRUCache) addToHead(node *DoubleLinkedNode) {
+// 新节点，添加到头部
+func (this *LRUCache) addToHead(node *DoubleLinkedListNode) {
 	// 改变node节点Prev,Next指针
 	node.Prev = this.head
 	node.Next = this.head.Next
@@ -100,16 +101,15 @@ func (this *LRUCache) addToHead(node *DoubleLinkedNode) {
 	this.head.Next = node
 }
 
+// 删除节点
+func (this *LRUCache) removeNode(node *DoubleLinkedListNode) {
+	node.Prev.Next = node.Next
+	node.Next.Prev = node.Prev
+}
+
 // 删除最后一个元素
-func (this *LRUCache) removeTail() *DoubleLinkedNode {
+func (this *LRUCache) removeTail() *DoubleLinkedListNode {
 	node := this.tail.Prev
 	this.removeNode(node)
 	return node
 }
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * obj := Constructor(capacity);
- * param_1 := obj.Get(key);
- * obj.Put(key,value);
- */
