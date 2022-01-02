@@ -20,6 +20,7 @@ func maxProfit1(prices []int) int {
 
 /*
 	方法1：暴力做法优化
+	0102
 */
 func maxProfit2(prices []int) int {
 	if len(prices) == 0 {

@@ -10,7 +10,8 @@
 
 // 平平无奇的方法1
 func findKthLargest(nums []int, k int) int {
-    nums=quickSort(nums)
+	nums=quickSort(nums)
+	// 返回第k个数
     return nums[k-1]
 }
 
@@ -60,6 +61,7 @@ func helper(start, end, k int) int {
 	// 基准点
 	pivot := nums[end] 
 	for j := start; j < end; j++ {
+		// 大的放左边，小的放右边
 		if nums[j] > pivot {
 			nums[j], nums[i] = nums[i], nums[j]
 			i++
@@ -70,12 +72,14 @@ func helper(start, end, k int) int {
 
 	c := i - start + 1
 	if c == k {
-		// ps： 返回i位置的元素
+		// 😅😅😅 返回【i】位置的元素
 		return nums[i]
 	} else if c < k {
-		// 从右边去继续寻找， 😅😅😅 注意参数取值
+		// 从右边去继续寻找， 
+		// 😅😅😅 【i+1, end, k-c】
 		return helper(i+1, end, k-c)
 	} 
-	// 从左边去继续寻找， 😅😅😅 注意参数取值
+	// 从左边去继续寻找，
+	//  😅😅😅 【start, i-1, k】
 	return helper(start, i-1, k)
 }

@@ -5,32 +5,36 @@
 		左括号必须以正确的顺序闭合。
 		注意空字符串可被认为是有效字符串。
 
-	思路：遍历字符串，存入栈中，和栈顶元素进行比较。思路经典
+	思路：遍历字符串，存入【栈】中，和栈顶元素进行比较。
+	0102 懵逼状态
 */
 func isValid(s string) bool {
-	stack := make([]byte, 0)
-	// for循环字符串 byte类型；range循环字符串rune类型
-	for i := 0; i < len(s); i++ {
-		c := s[i]
-		if c == '(' || c == '{' || c == '[' {
-			stack = append(stack, c)
-		} else {
-			if len(stack) > 0 && leftOf(c) == stack[len(stack)-1] {
-				stack = stack[:len(stack)-1]
-			} else {
-				return false
-			}
-		}
-	}
-	return len(stack) == 0
+    var stack []byte
+    for i:=0;i<len(s);i++{
+		c:=s[i]
+		// （1）左括号直接入栈
+        if c == '(' ||  c == '['||  c == '{'{
+            stack = append(stack,c)
+        }else{
+			// （2）右括号判断，是否和栈顶括号匹配。
+			// 若匹配出栈继续判断下一个；不匹配直接返回false
+            if len(stack)>0 && leftOff(c) == stack[len(stack)-1]{
+				// 出栈
+                stack = stack[:len(stack)-1]
+            }else{
+                return false
+            }
+        }
+    }
+    return len(stack) == 0
 }
 
-func leftOf(c byte) byte {
-	if c == '}' {
-		return '{'
-	}
-	if c == ']' {
-		return '['
-	}
-	return '('
+func leftOff(c byte) byte{
+    if c == '}'{
+        return '{'
+    }
+    if c == ']'{
+        return '['
+    }
+    return '('
 }

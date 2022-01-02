@@ -31,6 +31,7 @@ func threeSum(nums []int) [][]int {
 				// 符合条件
 				if nums[i]+nums[start]+nums[end] == 0 {
 					res = append(res, []int{nums[i], nums[start], nums[end]})
+					// 0102 把这一步忘了
 					start++
 					end--
 					// 排除重复的情况

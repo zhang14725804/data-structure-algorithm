@@ -3,10 +3,12 @@
 */
 
 /*
-	方法1：DFS-递归，
+	方法1：DFS-递归， 
+	0102 此方法没想到 其他方法更懵逼
 	后序遍历：根左右
 	求最小公共祖先，需要从底向上遍历，那么二叉树，只能通过【后序遍历】（即：回溯）实现从低向上的遍历方式
-	(question) 前序遍历可以理解为是从上往下，而【后序遍历】是从下往上，就好比从p和q出发往上走，第一次相交的节点就是最近公共祖先
+	(question) 重点理解下面这句话
+	前序遍历可以理解为是从上往下，而【后序遍历】是从下往上，就好比从p和q出发往上走，第一次相交的节点就是最近公共祖先
 */
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	// 😅 base case，终止条件
@@ -29,7 +31,8 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 }
 
 /*
-	方法2：迭代方式(todo)
+	方法2：迭代方式
+	(todo)
 */
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {}
 
@@ -66,7 +69,10 @@ func lowestCommonAncestor(root, _p, _q *TreeNode) *TreeNode {
 	return root
 }
 
-// 【递归+回溯】 😄😄😄 ，寻找root到某个节点的路径
+/*
+	【递归+回溯】 
+	😄😄😄 ，寻找root到某个节点的路径
+*/ 
 func findPath(root *TreeNode) {
 	if root == nil {
 		return

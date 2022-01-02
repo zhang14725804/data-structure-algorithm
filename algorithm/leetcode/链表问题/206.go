@@ -32,12 +32,8 @@ func reverseList(head *ListNode) *ListNode {
 	这个可以解释通
 */
 func reverseList(head *ListNode) *ListNode {
-	if head == nil || head.Next == nil {
-		return head
-	}
-
 	// 前一个指针
-	var prev *ListNode = nil
+	var prev *ListNode
 	// 当前指针
 	cur := head
 	// 缓存下一个指针

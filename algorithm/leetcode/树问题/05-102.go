@@ -13,10 +13,11 @@ func levelOrder(root *TreeNode) [][]int {
 	if root != nil {
 		queue = append(queue, root)
 	}
+	// （1）遍历每一层
 	for len(queue) > 0 {
 		level := make([]int, 0)
-		// 当前队列长度
 		cLen := len(queue)
+		// （2）遍历每一层的每个节点
 		for i := 0; i < cLen; i++ {
 			// 出队
 			cnode := queue[0]

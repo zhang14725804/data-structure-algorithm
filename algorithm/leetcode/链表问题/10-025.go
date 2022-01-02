@@ -59,6 +59,7 @@ func reverseKGroup1(head *ListNode, k int) *ListNode {
 
 /*
 	方法2：整体递归+部分迭代
+	好懂一些
 */
 func reverseKGroup(head *ListNode, k int) *ListNode {
 	if head == nil {
@@ -77,6 +78,8 @@ func reverseKGroup(head *ListNode, k int) *ListNode {
 	// 😅😅😅 反转[left,right)之间的元素
 	dummy := reverse(left, right)
 	// 😅😅😅 递归反转后续链表，并链接
+	// 😅😅😅 left.Next 
+	// 0102 这里搞错了
 	left.Next = reverseKGroup(right, k)
 	return dummy
 }

@@ -1,6 +1,5 @@
 /*
 	给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
-
 */
 
 /*
@@ -10,15 +9,15 @@ func lengthOfLongestSubstring(s string) int {
 	window := make(map[byte]int, 0)
 	left, right, res := 0, 0, 0
 	for right < len(s) {
-		c := s[right]
+		cw := s[right] // current word
 		// 移动右指针
 		right++
-		window[c]++
+		window[cw]++
 		// 存在重复元素，收缩窗口【左边】，直到没有重复的元素位置
-		for window[c] > 1 {
-			d := s[left]
+		for window[cw] > 1 {
+			dw := s[left] // delete word
 			left++
-			window[d]--
+			window[dw]--
 		}
 		// 在收缩窗口完成后更新
 		res = MaxInt(res, right-left)
@@ -27,7 +26,8 @@ func lengthOfLongestSubstring(s string) int {
 }
 
 /*
-	滑动窗口，优化版(question)（看不懂😅）
+	滑动窗口，优化版
+	question （看不懂😅）
 */
 func lengthOfLongestSubstring1(s string) int {
 	n, ans := len(s), 0

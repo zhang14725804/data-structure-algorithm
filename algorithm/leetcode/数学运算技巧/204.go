@@ -1,8 +1,36 @@
 /*
-	统计所有小于非负整数 n 的质数的数量。
+	统计所有【小于】非负整数 n 的质数的数量。
+	12.31 面试遇到
 */
 
-// 方法1：逐个判断
+// 12.30 我做出来的 超出时间限制
+func countPrimes(n int) int {
+    if n<2{
+        return 0
+    }
+    var res int
+    for i:=2;i<n;i++{
+        flag:=0
+        for j:=2;j<i;j++{
+            if i%j == 0{
+				flag++
+				break
+            }
+        }
+        if flag==0{
+            res++
+        }
+    }
+    return res
+}
+
+
+/*
+	方法1：逐个判断优化
+	技巧：
+		（1）判断是否是质数的时候，只需要判断到Sqrt(n)就好了；
+		（2）只要有一个数能被 2～Sqrt(n) 整除就不是质数
+*/ 
 func countPrimes1(n int) int {
 	count := 0
 	// 判断 2 到 sqrt(n) 是否是 n 的因子，如果有一个是，那就表明 n 不是素数。

@@ -14,6 +14,7 @@
 /*
 	方法1：哈希表 + 双向链表（todo）
 	12.30
+	12.31
 */
 
 // 双向链表节点
@@ -23,93 +24,100 @@ type DoubleLinkedListNode struct{
     Prev *DoubleLinkedListNode
     Next *DoubleLinkedListNode
 }
-// ps：在双向链表的实现中，使用一个伪头部（dummy head）和伪尾部（dummy tail）标记界限，
-// 这样在添加节点和删除节点的时候就不需要检查相邻的节点是否存在。
-type LRUCache struct {
-	size       int // 实际大小
-	capacity   int // 总容量
-	cache      map[int]*DoubleLinkedListNode // 缓存
-	head *DoubleLinkedListNode // head表示最近使用
-	tail *DoubleLinkedListNode// tail表示最久未使用
-}
-
-func initDoubleLinkedListNode(key,value int)*DoubleLinkedListNode{
+// 初始化双向链表节点
+func initDoubleLinkedListNode(key,value int) *DoubleLinkedListNode{
     return &DoubleLinkedListNode{
         key:key,
         value:value,
     }
 }
 
-// 初始化LRU
-func Constructor(capacity int) LRUCache {
-	l := LRUCache{
-		// cache:make(map[int]*DoubleLinkedListNode),
-		cache:    map[int]*DoubleLinkedListNode{},
-		head:     initDoubleLinkedListNode(0, 0),
-		tail:     initDoubleLinkedListNode(0, 0),
-		capacity: capacity,
-	}
-	// 连接头尾
-	l.head.Next = l.tail
-	l.tail.Prev = l.head
-	return l
+type LRUCache struct {
+    size int // 当前大小
+    capacity int // 总容量
+    memory map[int]*DoubleLinkedListNode // 缓存
+    head *DoubleLinkedListNode
+    tail *DoubleLinkedListNode
 }
+
+
+func Constructor(capacity int) LRUCache {
+    l:=LRUCache{
+        capacity:capacity,
+        memory:make(map[int]*DoubleLinkedListNode),
+        head:initDoubleLinkedListNode(0,0),
+        tail:initDoubleLinkedListNode(0,0),
+	}
+	// ps 这里需要注意
+    l.head.Next = l.tail
+    l.tail.Prev = l.head
+    return l
+}
+
 
 func (this *LRUCache) Get(key int) int {
-	// 判断是否存在
-	if node, ok := this.cache[key]; !ok {
-		return -1
-	}else{
-		// 最近使用；添加到头
-		this.moveToHead(node)
-		return node.value
-	}
+    if node,ok:=this.memory[key];ok{
+		// 更新头节点
+        this.moveToHead(node)
+        return node.value
+    }else{
+        return -1
+    }
 }
 
-func (this *LRUCache) Put(key int, value int) {
-	if cnode, ok := this.cache[key]; !ok {
-		cnode = initDoubleLinkedListNode(key, value)
-		this.cache[key] = cnode
-		this.addToHead(cnode)
+
+func (this *LRUCache) Put(key int, value int)  {
+    if node,ok:=this.memory[key];ok{
+        // 存在的情况下覆盖
+		node.value = value
+		// 更新头节点
+        this.moveToHead(node)
+    }else{
+		node = initDoubleLinkedListNode(key,value)
+		// (1) 加缓存
+		this.memory[key]=node
+		// (2) 更新头节点
+		this.addToHead(node)
+		// (3) 更新size
 		this.size++
-		if this.size > this.capacity {
-			removed := this.removeTail()
-			// 从hash表中删除
-			delete(this.cache, removed.key)
-			this.size--
-		}
-	} else {
-		// 若key存在，覆盖；添加到头
-		cnode.value = value
-		this.moveToHead(cnode)
-	}
+		// 超出容量的情况
+        if this.capacity<this.size{
+			// (1) 更新尾节点
+			mnode:=this.removeTail()
+			// (2) 删缓存
+			delete(this.memory,mnode.key)
+			// (3) 更新size
+            this.size--
+        }
+    }
 }
 
-// 原来的节点，移动到头部，表示最近使用
-func (this *LRUCache) moveToHead(node *DoubleLinkedListNode) {
+// 将节点移动到头 
+func (this *LRUCache) moveToHead(node *DoubleLinkedListNode){
+	// （1） 删除节点
 	this.removeNode(node)
-	this.addToHead(node)
+	// （2） 加到头结点
+    this.addToHead(node)
 }
 
-// 新节点，添加到头部
-func (this *LRUCache) addToHead(node *DoubleLinkedListNode) {
-	// 改变node节点Prev,Next指针
-	node.Prev = this.head
-	node.Next = this.head.Next
-	// 改变head节点Prev,Next指针
-	this.head.Next.Prev = node
-	this.head.Next = node
+func (this *LRUCache) addToHead(node *DoubleLinkedListNode){
+	// 更新node节点指针
+    node.Next = this.head.Next
+    node.Prev = this.head
+    // question 更新head节点next和以前节点的prev； 顺序不能反
+    this.head.Next.Prev = node
+    this.head.Next = node
+    
 }
 
-// 删除节点
-func (this *LRUCache) removeNode(node *DoubleLinkedListNode) {
-	node.Prev.Next = node.Next
-	node.Next.Prev = node.Prev
+// 删除一个节点 改变node节点左右两边的指针指向
+func (this *LRUCache) removeNode(node *DoubleLinkedListNode){
+    node.Prev.Next = node.Next
+    node.Next.Prev = node.Prev
 }
-
-// 删除最后一个元素
+// 删除尾节点；返回被删除的节点，用来删除缓存
 func (this *LRUCache) removeTail() *DoubleLinkedListNode {
-	node := this.tail.Prev
-	this.removeNode(node)
-	return node
+    node:=this.tail.Prev
+    this.removeNode(node)
+    return node
 }
