@@ -15,24 +15,22 @@ func longestPalindrome1(s string) string {
 	res := ""
 	// 遍历每个字符，以每个字符为中心，像两边扩散
 	for i := 0; i < len(s); i++ {
-		// 找到以 s[i] 为中心的回文串
+		// (1) 找到以 s[i] 为中心的回文串
 		l, r := i-1, i+1
 		for l >= 0 && r < len(s) && s[l] == s[r] {
 			l--
 			r++
 		}
-		// question 边界范围为什么是 [l+1 : r]
-		if len(res) < r-(l+1) {
+		if len(res) < r-l {
 			res = s[l+1 : r]
 		}
-		// 找到以 s[i] 和 s[i+1] 为中心的回文串
+		// (2) 找到以 s[i] 和 s[i+1] 为中心的回文串
 		l, r = i, i+1
 		for l >= 0 && r < len(s) && s[l] == s[r] {
 			l--
 			r++
 		}
-		// question 边界范围为什么是 [l+1 : r]
-		if len(res) < r-(l+1) {
+		if len(res) < r-l {
 			res = s[l+1 : r]
 		}
 	}

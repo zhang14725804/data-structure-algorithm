@@ -1,5 +1,8 @@
 /*
 	链表反转某一段
+	0103 
+	（1）迭代难懂，注意的细节特别多（画图，画图之后就清晰了）
+	（2）递归要理解思想，才能理解细节
 */
 
 /*
@@ -12,25 +15,27 @@ func reverseBetween1(head *ListNode, m int, n int) *ListNode {
 	if m == n {
 		return head
 	}
-
-	dummy := &ListNode{} // 第一个头节点有可能变
+	// （1）保存头结点指针，第一个头节点有可能变
+	dummy := &ListNode{} 
 	dummy.Next = head    // 为什么需要这一步 😅😅😅
 
+	// （2）
 	mPrev := dummy // m的前一个节点
 	nNode := dummy // n节点
-	// 😅😅😅找到m上一个节点
+	// 😅😅😅 找到m上一个节点
 	for i := 0; i < m-1; i++ {
 		mPrev = mPrev.Next
 	}
-	// 😅😅😅找到n下一个节点
+	// 😅😅😅 找到n下一个节点
 	for i := 0; i < n; i++ {
 		nNode = nNode.Next
 	}
 
+	// （3）
 	mNode := mPrev.Next // 😅😅😅 m节点
 	nNext := nNode.Next // 😅😅😅 n节点的下一个节点
 
-	// 反转m到n之间的元素
+	// （4）反转m到n之间的元素
 	prev := mNode
 	cur := mNode
 	for cur != nNext {
@@ -39,7 +44,7 @@ func reverseBetween1(head *ListNode, m int, n int) *ListNode {
 		prev = cur
 		cur = next
 	}
-	// 😅😅😅 careful 改变反转链表的前后指针
+	// （5）😅😅😅  改变反转链表的前后指针
 	mNode.Next = nNext
 	mPrev.Next = nNode
 	return dummy.Next
@@ -59,10 +64,8 @@ func reverseBetween(head *ListNode, m int, n int) *ListNode {
 	return head
 }
 
-/*
-	反转链表的前n个节点
-*/
-var last *ListNode // 记录后续的节点
+// （1） 记录后续的节点
+var last *ListNode 
 
 func reverseN(head *ListNode, n int) *ListNode {
 	// 😅 base case
