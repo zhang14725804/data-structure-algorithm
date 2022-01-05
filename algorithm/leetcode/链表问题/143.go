@@ -2,7 +2,7 @@
 	给定一个单链表 L：L0→L1→…→Ln-1→Ln ，
 	将其重新排列后变为： L0→Ln→L1→Ln-1→L2→Ln-2→…
 	你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
-
+	0105 懵逼
 	question 😅😅😅😅😅😅
 */
 
@@ -21,11 +21,13 @@ func reorderList(head *ListNode) {
 	// 双指针遍历数组，依次改变指针方向（注意指针指向 😅😅😅）
 	start, end := 0, len(list)-1
 	for start < end {
+		// （1）改变 start 指针
 		list[start].Next = list[end]
 		start++
 		if start == end {
 			break
 		}
+		// （2）改变 end 指针
 		list[end].Next = list[start]
 		end--
 	}
@@ -42,7 +44,7 @@ func reorderList(head *ListNode) {
 
 	dummy := new(ListNode)
 	dummy.Next = head
-	// 快慢指针，找到中间节点
+	// （1）快慢指针，找到中间节点
 	fast, slow := dummy, dummy
 	for fast != nil && fast.Next != nil {
 		slow = slow.Next
@@ -52,8 +54,9 @@ func reorderList(head *ListNode) {
 	tail := slow.Next
 	// 切断前后两段之间的链接
 	slow.Next = nil
-	// 反转后半部分
+	// （2）反转后半部分
 	tail = reverseList(tail)
+
 	// 拼接前后两部分（顺序不能乱 最绕的 😅😅😅😅😅😅😅😅）
 	for tail != nil {
 		tNext := tail.Next    // 缓存

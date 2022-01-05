@@ -1,5 +1,6 @@
 /*
 	二叉树中序序遍历
+	0105
 */
 
 /*
@@ -41,6 +42,7 @@ func inorderTraversal(root *TreeNode) []int {
 		if root == nil {
 			return
 		}
+		// 左、跟、右
 		dfs(root.Left)
 		res = append(res, root.Val)
 		dfs(root.Right)
@@ -50,7 +52,8 @@ func inorderTraversal(root *TreeNode) []int {
 }
 
 /*
-	思路2：DFS-迭代实现  question 😅😅😅😅
+	思路2：DFS-迭代实现
+	question 😅😅😅😅
 	(1) 将整棵树的最左边一条链压入栈
 	(2) 每次取出栈顶元素，如果它有右子树，将右子树压入栈中
 */
@@ -61,18 +64,18 @@ func inorderTraversal(root *TreeNode) []int {
 		return res
 	}
 	cur := root
-	// 迭代条件 😅
+	// 迭代条件 😅😅😅
 	for cur != nil || len(stack) > 0 {
 		if cur != nil {
-			// 将整棵树的最左边一条链压入栈
+			// （1）将整棵树的最左边一条链压入栈
 			stack = append(stack, cur)
 			cur = cur.Left
 		} else {
-			// 从栈里弹出最后一个元素
+			// （2）从栈里弹出最后一个元素
 			cLen := len(stack) - 1
 			cur = stack[cLen]
 			stack = stack[:cLen]
-			// 根、右
+			// （3）根、右
 			res = append(res, cur.Val)
 			cur = cur.Right
 		}
@@ -90,11 +93,12 @@ func inorderTraversal(root *TreeNode) []int {
 		stack = append(stack, root)
 	}
 	for len(stack) > 0 {
-		// 弹出顶部元素
+		// （1）弹出顶部元素
 		cLen := len(stack) - 1
 		cnode := stack[cLen]
 		stack = stack[:cLen]
 		if cnode != nil {
+			// （2） 😅😅😅
 			// 右
 			if cnode.Right != nil {
 				stack = append(stack, cnode.Right)

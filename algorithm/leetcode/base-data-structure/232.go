@@ -1,5 +1,6 @@
 /*
 	用栈实现队列
+	TODO 使用两个栈实现一个队列
 */
 type MyQueue struct {
 	list []int
