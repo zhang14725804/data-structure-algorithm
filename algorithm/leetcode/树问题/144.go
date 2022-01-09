@@ -25,7 +25,7 @@ func preorderTraversal(root *TreeNode) []int {
 }
 
 /*
-	方法2：DFS-迭代实现
+	方法2：迭代【栈】实现
 */
 func preorderTraversal(root *TreeNode) []int {
 	stack := make([]*TreeNode, 0)
@@ -42,7 +42,7 @@ func preorderTraversal(root *TreeNode) []int {
 			cLen := len(stack) - 1
 			cur := stack[cLen]
 			stack = stack[:cLen]
-
+			// 根节点
 			res = append(res, cur.Val)
 			// 右子树先入栈
 			if cur.Right != nil {
@@ -58,7 +58,8 @@ func preorderTraversal(root *TreeNode) []int {
 }
 
 /*
-	迭代实现，使用空节点作为标记
+	迭代【队列】实现，使用【空节点】作为标记
+	（TODO 😅）
 */
 func preorderTraversal(root *TreeNode) []int {
 	stack := make([]*TreeNode, 0)
@@ -71,6 +72,7 @@ func preorderTraversal(root *TreeNode) []int {
 		cLen := len(stack) - 1
 		cnode := stack[cLen]
 		stack = stack[:cLen]
+
 		if cnode != nil {
 			// 右
 			if cnode.Right != nil {

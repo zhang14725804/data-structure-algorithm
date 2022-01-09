@@ -7,28 +7,27 @@ func deleteDuplicates(head *ListNode) *ListNode {
 		return head
 	}
 	dummy := &ListNode{}
-	//  question 这一步什么作用  😅😅😅
-	temp := dummy
+	//  😅😅😅 遍历指针
+ 	cur := dummy
 
 	for head != nil && head.Next != nil {
 		if head.Val == head.Next.Val {
-			// 循环删除重复节点
+			// 循环删除重复节点，这里是 for 而不是 if
 			for head.Next != nil && head.Val == head.Next.Val {
 				head = head.Next
 			}
 			head = head.Next
 		} else {
 			// 指向新的头节点
-			temp.Next = head
+			cur.Next = head
 			// 移动指针
-			temp = temp.Next
+			cur = cur.Next
 			// 移动指针
 			head = head.Next
 		}
 	}
-	// question 没看懂  😅😅😅
-	// dummy全程观看，最后还是正确的
-	temp.Next = head
-	// careful：返回跳过头部虚拟节点之后的头节点
+	// 处理最后一个节点
+	cur.Next = head
+	// 返回跳过头部虚拟节点之后的头节点
 	return dummy.Next
 }

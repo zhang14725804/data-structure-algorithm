@@ -3,21 +3,31 @@
 
 	三种方法：
 		（1）硬编码
-		（2）状态机
-		（3）正则表达式
-
+		（2）正则表达式
+		（3）状态机
 */
 
 /*
-	方法1：有限状态机（question😅），机智啊
+	方法1：有限状态机（question😅😅😅），机智啊
 
 	字符串处理的题目往往涉及复杂的流程以及条件情况，如果直接上手写程序，一不小心就会写出极其臃肿的代码。
-
 	因此，为了有条理地分析每个输入字符的处理方法，我们可以使用自动机这个概念：
 
-	我们的程序在每个时刻有一个状态 s，每次从序列中输入一个字符 c，并根据字符 c 转移到下一个状态 s'。这样，我们只需要建立一个覆盖所有情况的从 s 与 c 映射到 s' 的表格即可解决题目中的问题。
+	我们的程序在每个时刻有一个状态 s，每次从序列中输入一个字符 c，并根据字符 c 转移到下一个状态 s'。
+	这样，我们只需要建立一个覆盖所有情况的从 s 与 c 映射到 s' 的表格即可解决题目中的问题。
 
 */
+
+var MAX int = (1 << 31) - 1
+var MIN int = -(1 << 31)
+
+type Automaton struct {
+	Sign  int // 符号
+	Ans   int // 当前结果
+	state string // 当前状态
+	table map[string][]string // 状态表
+}
+
 func myAtoi(str string) int {
 	auto := &Automaton{
 		Sign:  1,
@@ -34,16 +44,6 @@ func myAtoi(str string) int {
 		auto.get(str[i])
 	}
 	return auto.Sign * auto.Ans
-}
-
-var MAX int = (1 << 31) - 1
-var MIN int = -(1 << 31)
-
-type Automaton struct {
-	Sign  int
-	Ans   int
-	state string
-	table map[string][]string
 }
 
 // 这里需要传递指针（要改变struct的值）
@@ -81,9 +81,11 @@ func (auto Automaton) getCol(c byte) int {
 }
 
 /*
-	方法2：正则表达式（todo）
+	方法2：正则表达式
+	question 难懂
 */
 func myAtoi(str string) int {
+	// [][]string类型
 	arr := regexp.MustCompile(`[\+\-]?\d+`).FindAllStringSubmatch(str, -1)
 	if arr[0] != nil {
 		res := 0
@@ -107,6 +109,47 @@ func myAtoi(str string) int {
 		return res
 	}
 	return 0
+}
+
+
+// 硬编码实现，正确的代码
+func myAtoi(str string) int {
+	sign := 1        // 正负数
+	ans := 0         // 当前答案
+	pop := 0         // 当前数字
+	hasSign := false // 是否开始转换数字
+	MAX := (1 << 31) - 1
+	MIN := -(1 << 31)
+	for i := 0; i < len(str); i++ {
+		if str[i] == '-' && !hasSign {
+			sign = -1
+			hasSign = true
+			continue
+		}
+		if str[i] == '+' && !hasSign {
+			sign = 1
+			hasSign = true
+			continue
+		}
+		if str[i] == ' ' && !hasSign {
+			continue
+		}
+		if str[i] >= '0' && str[i] <= '9' {
+			hasSign = true
+			pop = int(str[i] - '0')
+			// 极值处理
+			if ans*sign > MAX/10 || (ans*sign == MAX/10 && pop*sign > 7) {
+				return MAX
+			}
+			if ans*sign < MIN/10 || (ans*sign == MIN/10 && pop*sign < -8) {
+				return MIN
+			}
+			ans = ans*10 + pop
+		} else {
+			return ans * sign
+		}
+	}
+	return ans * sign
 }
 
 // 自己的方法，是错的😅
@@ -163,44 +206,4 @@ func myAtoi1(str string) int {
 		}
 	}
 	return 0
-}
-
-// 硬编码实现，正确的代码
-func myAtoi(str string) int {
-	sign := 1        // 正负数
-	ans := 0         // 当前答案
-	pop := 0         // 当前数字
-	hasSign := false // 是否开始转换数字
-	MAX := (1 << 31) - 1
-	MIN := -(1 << 31)
-	for i := 0; i < len(str); i++ {
-		if str[i] == '-' && !hasSign {
-			sign = -1
-			hasSign = true
-			continue
-		}
-		if str[i] == '+' && !hasSign {
-			sign = 1
-			hasSign = true
-			continue
-		}
-		if str[i] == ' ' && !hasSign {
-			continue
-		}
-		if str[i] >= '0' && str[i] <= '9' {
-			hasSign = true
-			pop = int(str[i] - '0')
-			// 极值处理
-			if ans*sign > MAX/10 || (ans*sign == MAX/10 && pop*sign > 7) {
-				return MAX
-			}
-			if ans*sign < MIN/10 || (ans*sign == MIN/10 && pop*sign < -8) {
-				return MIN
-			}
-			ans = ans*10 + pop
-		} else {
-			return ans * sign
-		}
-	}
-	return ans * sign
 }

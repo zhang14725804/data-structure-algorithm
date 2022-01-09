@@ -21,7 +21,7 @@ func postorderTraversal1(root *TreeNode) []int {
 }
 
 /*
-	方法2：迭代实现（ question 妙啊 😅😅）
+	方法2：迭代【栈】实现（ question 妙啊 😅😅）
 	先序遍历（根左右）-> 根右左 -> 反转数组->左右根
 */
 func postorderTraversal(root *TreeNode) []int {
@@ -58,7 +58,8 @@ func postorderTraversal(root *TreeNode) []int {
 }
 
 /*
-	方法2：迭代实现，使用空节点作为标记（TODO 😅）
+	方法2：迭代【队列】实现，使用空节点作为标记
+	（TODO 😅）
 */
 func postorderTraversal(root *TreeNode) []int {
 	stack := make([]*TreeNode, 0)
