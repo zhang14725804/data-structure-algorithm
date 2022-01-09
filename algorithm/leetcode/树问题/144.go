@@ -30,11 +30,11 @@ func preorderTraversal(root *TreeNode) []int {
 func preorderTraversal(root *TreeNode) []int {
 	stack := make([]*TreeNode, 0)
 	res := make([]int, 0)
-	// 判空
 	if root == nil {
 		return res
 	}
 	stack = append(stack, root)
+
 	for len(stack) > 0 {
 		sLen := len(stack)
 		for i := 0; i < sLen; i++ {
@@ -42,13 +42,13 @@ func preorderTraversal(root *TreeNode) []int {
 			cLen := len(stack) - 1
 			cur := stack[cLen]
 			stack = stack[:cLen]
-			// 根节点
+			// （1）根节点
 			res = append(res, cur.Val)
-			// 右子树先入栈
+			// （2）右子树先入栈
 			if cur.Right != nil {
 				stack = append(stack, cur.Right)
 			}
-			// 左子树后入栈
+			// （3）左子树后入栈
 			if cur.Left != nil {
 				stack = append(stack, cur.Left)
 			}
@@ -58,8 +58,7 @@ func preorderTraversal(root *TreeNode) []int {
 }
 
 /*
-	迭代【队列】实现，使用【空节点】作为标记
-	（TODO 😅）
+	迭代【栈】实现，使用【😅空节点😅】作为标记
 */
 func preorderTraversal(root *TreeNode) []int {
 	stack := make([]*TreeNode, 0)
@@ -72,17 +71,14 @@ func preorderTraversal(root *TreeNode) []int {
 		cLen := len(stack) - 1
 		cnode := stack[cLen]
 		stack = stack[:cLen]
-
+		// 右左根【空节点】的顺序入栈
 		if cnode != nil {
-			// 右
 			if cnode.Right != nil {
 				stack = append(stack, cnode.Right)
 			}
-			// 左
 			if cnode.Left != nil {
 				stack = append(stack, cnode.Left)
 			}
-			// 根
 			stack = append(stack, cnode)
 			// question 😅😅😅😅😅😅 中节点访问过，但是还没有处理，加入空节点做为标记。
 			stack = append(stack, nil)

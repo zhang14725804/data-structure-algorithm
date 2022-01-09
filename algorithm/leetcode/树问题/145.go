@@ -22,7 +22,7 @@ func postorderTraversal1(root *TreeNode) []int {
 
 /*
 	方法2：迭代【栈】实现（ question 妙啊 😅😅）
-	先序遍历（根左右）-> 根右左 -> 反转数组->左右根
+	先序遍历（根左右）： 根右左 -> 反转数组->左右根
 */
 func postorderTraversal(root *TreeNode) []int {
 	stack := make([]*TreeNode, 0)
@@ -39,6 +39,7 @@ func postorderTraversal(root *TreeNode) []int {
 			cLen := len(stack) - 1
 			cur := stack[cLen]
 			stack = stack[:cLen]
+			// 根
 			res = append(res, cur.Val)
 			// 左子树后入栈
 			if cur.Left != nil {
@@ -51,15 +52,14 @@ func postorderTraversal(root *TreeNode) []int {
 		}
 	}
 	// 反转数组
-	for i := 0; i < len(res)/2; i++ {
-		res[i], res[len(res)-i-1] = res[len(res)-i-1], res[i]
+	for i,j := 0,len(res)-1; i < j; i,j=i+1,j-1 {
+		res[i], res[j] = res[j], res[i]
 	}
 	return res
 }
 
 /*
-	方法2：迭代【队列】实现，使用空节点作为标记
-	（TODO 😅）
+	迭代【栈】实现，使用【😅空节点😅】作为标记
 */
 func postorderTraversal(root *TreeNode) []int {
 	stack := make([]*TreeNode, 0)
@@ -72,16 +72,14 @@ func postorderTraversal(root *TreeNode) []int {
 		cLen := len(stack) - 1
 		cnode := stack[cLen]
 		stack = stack[:cLen]
+		// 根【空节点】右左的顺序入栈
 		if cnode != nil {
-			// 根
 			stack = append(stack, cnode)
 			// question 😅😅😅😅😅😅 中节点访问过，但是还没有处理，加入空节点做为标记。
 			stack = append(stack, nil)
-			// 右
 			if cnode.Right != nil {
 				stack = append(stack, cnode.Right)
 			}
-			// 左
 			if cnode.Left != nil {
 				stack = append(stack, cnode.Left)
 			}
