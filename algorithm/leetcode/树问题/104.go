@@ -46,7 +46,7 @@ func maxDepth(root *TreeNode) int {
 
 /*
 	方法2：BFS-层序遍历，迭代法
-	careful： 从队尾操作是错的😅，要从队头开始操作（ 为什么呢 question ）
+	careful： 从队尾操作是错的😅，要从队头开始操作（ 为什么呢 队列先进先出嘛 ）
 */
 func maxDepth(root *TreeNode) int {
 	if root == nil {

@@ -1,12 +1,17 @@
 /*
-	155. Min Stack
-
-	前缀和（stack_min）
+	设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
+		push(x) —— 将元素 x 推入栈中。
+		pop() —— 删除栈顶的元素。
+		top() —— 获取栈顶元素。
+		getMin() —— 检索栈中的最小元素。
 */
+
 type MinStack struct {
 	stack []item
 }
-// 存储当前值和最小值
+/*
+	😅😅😅 存储当前值和最小值
+*/ 
 type item struct{
 	min,x int
 }
@@ -18,6 +23,7 @@ func Constructor() MinStack {
 
 // 入栈
 func (this *MinStack) Push(x int)  {
+	// 更新最小值
 	min:=x
 	if len(this.stack)>0 && this.GetMin() < x {
 		min = this.GetMin()

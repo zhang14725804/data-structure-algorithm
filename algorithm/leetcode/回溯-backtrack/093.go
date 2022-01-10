@@ -5,8 +5,8 @@
 */
 
 /*
-	方法1：回溯
-
+	方法1：回溯+判断字符串是合法ip段
+	0110 墨迹了一个小时才写完
 */
 var ans []string
 var path string
@@ -16,8 +16,10 @@ func restoreIpAddresses(s string) []string {
 	if len(s) > 12 {
 		return ans
 	}
-	str = s
-	ans = make([]string, 0) // 只是为了提交，leetcode提交时，ans 会拼接之前提交的结果
+	// 只是为了提交，leetcode提交时，ans 会拼接之前提交的结果
+	ans = make([]string,0)
+    path = ""
+    str = s
 	backtrack(0, 0)
 	return ans
 }
@@ -27,7 +29,7 @@ func restoreIpAddresses(s string) []string {
    pointNum: 添加逗点的数量
 */
 func backtrack(start int, pointNum int) {
-	// 逗点数量为3时，分隔结束；判断第四段子字符串是否合法，如果合法就放进path中
+	// 😅😅 base case 逗点数量为3时，分隔结束；判断第四段子字符串是否合法，如果合法就放进path中
 	if pointNum == 3 && valid(start, len(str)-1) {
 		// 😅😅 这里要拼接最后一步的合法字符串
 		path += str[start:len(str)]
@@ -41,8 +43,9 @@ func backtrack(start int, pointNum int) {
 			// 😅 注意slice取值，左闭右开，所以这里取【i+1】
 			path += str[start:i+1] + "."
 			pointNum++
+			// 😅 这里是i+1,如果写成i会死循环
 			backtrack(i+1, pointNum)
-			// 回溯。删除逗点和拼接的字符串
+			// 😅 回溯
 			pointNum--
 			path = path[:oLen]
 		} else {
@@ -66,7 +69,7 @@ func valid(start, end int) bool {
 		return false
 	}
 	num := 0
-	// 😅 包括start、end两个端点，所以这里【i<=end】
+	// 😅😅😅 包括start、end两个端点，所以这里【i<=end】
 	for i := start; i <= end; i++ {
 		// 非数字不合法
 		if str[i] > '9' || str[i] < '0' {

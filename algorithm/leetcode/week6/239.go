@@ -1,5 +1,6 @@
 /*
-	给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
+	给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。
+	你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
 	返回滑动窗口中的最大值。
 
 	进阶：你能在线性时间复杂度内解决此题吗？
@@ -7,7 +8,10 @@
 	单调队列问题（滑动窗口）
 */
 
-// 解法3：单调队列（todo，不懂）
+/*
+	解法3：单调队列
+	（todo，不懂）
+*/ 
 func maxSlidingWindow(nums []int, k int) []int {
 	res := make([]int, 0)
 	q := &Queue{}
@@ -27,22 +31,29 @@ func maxSlidingWindow(nums []int, k int) []int {
 	return res
 }
 
-// 解法一：暴力破解（超时）
+/*
+	解法一：暴力破解（超时）
+	0110 我居然没想到
+*/ 
 func maxSlidingWindow(nums []int, k int) []int {
 	n := len(nums)
 	if n == 0 {
 		return nums
 	}
+	// (1) 声明长度【n-k+1】 而不是 0
 	res := make([]int, n-k+1)
-	// 循环条件
+	// （2）循环条件【len(res)】 而不是 n
 	for i := 0; i < len(res); i++ {
 		max := INT_MIN
 		for j := 0; j < k; j++ {
 			max = MaxInt(max, nums[j+i])
 		}
+		// (3) 更新res，直接更新对应位置的值，而不是append
 		res[i] = max
 	}
 	return res
 }
 
-// 解法2：优先队列（todo）
+/*
+	解法2：优先队列（todo）
+*/ 

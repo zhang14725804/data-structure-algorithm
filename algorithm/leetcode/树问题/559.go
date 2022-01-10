@@ -46,6 +46,7 @@ func maxDepth(root *Node) int {
 		for i := 0; i < len(root.Children); i++ {
 			depth = MaxInt(depth, dfs(root.Children[i]))
 		}
+		// (4)
 		return depth + 1
 	}
 	return dfs(root)
