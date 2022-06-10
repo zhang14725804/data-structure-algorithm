@@ -36,12 +36,10 @@
 
 [CodeTop企业题库](https://codetop.cc/home)
 
-### 数据结构和算法（🔥🔥🔥）
+### 数据结构和算法
 
 [Go Data Structures](https://github.com/emirpasic/gods)
-
 [浙大数据结构](https://github.com/CYBruce/DataStructure_Algorithm_ZJU)
-
 [浙大数据结构](https://www.bilibili.com/video/BV1JW411i731?p=54)
 
 
@@ -55,7 +53,7 @@
     《编译原理》
     《TCP/IP详解》
 
-### 常用表情
+### 常用标记符
 
 😄😄😄
 🔥🔥🔥
