@@ -12,6 +12,7 @@ func reverseString(s []byte) {
 
 /*
 	方法二：递归
+	TODO 没理解递归
 */
 func reverseString(s []byte) {
 	res := make([]byte, 0)
