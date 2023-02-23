@@ -28,6 +28,3 @@
 
 https://codetop.cc/home
 
-### 笔试题讲解
-
-https://www.bilibili.com/video/BV1eg411w7gn/?vd_source=7729b7ed5590ea706aa1776774852022
