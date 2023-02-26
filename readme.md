@@ -36,12 +36,14 @@
 
 [CodeTop企业题库](https://codetop.cc/home)
 
+### 如何写简历
+
+[项目经历怎么写](https://www.zhihu.com/question/23491167)
+
 ### 数据结构和算法
 
 [Go Data Structures](https://github.com/emirpasic/gods)
 [浙大数据结构](https://github.com/CYBruce/DataStructure_Algorithm_ZJU)
-[浙大数据结构](https://www.bilibili.com/video/BV1JW411i731?p=54)
-
 
 ### 漫漫长路
 
