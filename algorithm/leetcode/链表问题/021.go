@@ -1,10 +1,9 @@
 /*
-	将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+	方法1：迭代（这种方法我会）
+	1. 当l1不为空且l2不为空时，依次遍历两个链，比较大小
+	2. 处理剩余部分
+	3. 比较难理解的是dummy部分
 */
-
-/*
-	方法1：迭代
-*/ 
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	// var dummy *ListNode  // nil 未初始化
 	dummy := &ListNode{} // &{0 <nil>} 初始化的情况
@@ -34,8 +33,11 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 }
 
 /*
-	方法2：递归 😅😅😅
-*/ 
+	方法2：递归 （喜欢这种方法）😅😅😅
+	1. 定义递归出口，l1或者l2位空时
+	2. 都不为空，那个小以那个为头
+
+*/
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	// base case
 	if l1 == nil {
@@ -48,7 +50,7 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l1.Val < l2.Val {
 		l1.Next = mergeTwoLists(l1.Next, l2)
 		return l1
-	} 
+	}
 	l2.Next = mergeTwoLists(l2.Next, l1)
 	return l2
 }
