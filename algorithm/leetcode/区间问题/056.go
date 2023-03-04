@@ -1,10 +1,10 @@
 /*
-	给出一个区间的集合，请合并所有重叠的区间。每个数组只有两个数
-
 	思路：
-	将所有数组按照数组第一个数字大小排序
-	定义curr，代表当前的数组，初始值是intervals[0]
-	如果curr[1] >= intervals[i][0],触发合并条件
+	1. 将所有数组按照数组第一个数字大小排序
+	2. 定义curr，代表当前的数组，初始值是intervals[0]
+	3. 如果curr[1] >= intervals[i][0],触发合并条件, curr取两个相交数组第二个元素最大值
+	4. 否则curr=intervals[i]
+	5. 处理剩余部分
 */
 func merge(intervals [][]int) [][]int {
 	if len(intervals) < 2 {
@@ -30,6 +30,7 @@ func merge(intervals [][]int) [][]int {
 		} else {
 			// 没有相交
 			res = append(res, curr)
+			// 处理下一个数组
 			curr = intervals[i]
 		}
 	}
