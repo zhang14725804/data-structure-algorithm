@@ -1,14 +1,31 @@
 /*
-	692. Top K Frequent Words（找出出现次数最多的K个单词）
-
-	todos：：堆的操作（如何实现一个堆）：
-	（1）查找最大值
-	（2）插入一个数
-	（3）删除一个数
-
-	["i", "love", "leetcode", "i", "love", "coding"]测试不通过
+	方法1: 哈希表 + 排序
+		1. 统计单词出现的频率
+		2. 单词去重
+		3. 相同频率按照字典序输出
 */
+func topKFrequent(words []string, k int) []string {
+	//
+	cnt := map[string]int{}
+	for _, w := range words {
+		cnt[w]++
+	}
+	uniqueWords := make([]string, 0, len(cnt))
+	for w := range cnt {
+		uniqueWords = append(uniqueWords, w)
+	}
+	sort.Slice(uniqueWords, func(i, j int) bool {
+		s, t := uniqueWords[i], uniqueWords[j]
+		// 首先按照频率，再根据字典序
+		return cnt[s] > cnt[t] || cnt[s] == cnt[t] && s < t
+	})
+	return uniqueWords[:k]
+}
 
+/*
+	方法2: 优先队列(当前采用此方法)
+	如何实现优先队列首先他就是个问题 😅😅😅
+*/
 func topKFrequent(words []string, k int) []string {
 	hash := make(map[string]int)
 	heap := newMinHeap()
@@ -94,3 +111,23 @@ func (h *minHeap) pop() *Node {
 	h.Heap = h.Heap[:len(h.Heap)-1]
 	return min
 }
+
+/*
+	方法1: 哈希表 + 排序
+*/
+func topKFrequent(words []string, k int) []string {
+	cnt := map[string]int{}
+	for _, w := range words {
+		cnt[w]++
+	}
+	uniqueWords := make([]string, 0, len(cnt))
+	for w := range cnt {
+		uniqueWords = append(uniqueWords, w)
+	}
+	sort.Slice(uniqueWords, func(i, j int) bool {
+		s, t := uniqueWords[i], uniqueWords[j]
+		return cnt[s] > cnt[t] || cnt[s] == cnt[t] && s < t
+	})
+	return uniqueWords[:k]
+}
+
