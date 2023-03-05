@@ -13,12 +13,12 @@ func deleteDuplicates(head *ListNode) *ListNode {
 	slow, fast := head, head
 	// 移动快慢指针
 	for fast != nil {
-		// 不重复的情况
+		// slow只有在不同元素的情况下才走
 		if fast.Val != slow.Val {
 			slow.Next = fast
 			slow = slow.Next
 		}
-		//
+		// fast每次都走
 		fast = fast.Next
 	}
 	// 😅 careful 断开后续重复数据。排除末尾有重复的情况（[1,1,2,3,3]）
@@ -32,7 +32,7 @@ func deleteDuplicates(head *ListNode) *ListNode {
 func deleteDuplicates(head *ListNode) *ListNode {
 	dummy := head
 	for head != nil {
-		// 这里不能用for，注意边界判定
+		// 😅 这里不能用for（为什么），注意边界判定
 		if head.Next != nil && head.Val == head.Next.Val {
 			// 过滤一个重复值
 			head.Next = head.Next.Next

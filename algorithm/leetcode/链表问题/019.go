@@ -1,11 +1,6 @@
 /*
-	给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
-	question 😅😅😅 能否用递归实现呢
-*/
-
-/*
-	方法1：双指针 😅😅😅😅😅😅, 
-	0109 居然做成了快慢指针（一个走一步，一个走两步，怎么想的） 
+	方法1：双指针 😅😅😅😅😅😅,
+	0109 居然做成了快慢指针（一个走一步，一个走两步，怎么想的）
 	依次遍历即可 😮😮😮
 	（1）建立虚拟头节点（省去判断是否是头节点）
 	（2）让某个指针（假设first）向后走n步
@@ -23,7 +18,8 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	if fast == nil {
 		return head.Next
 	}
-	// （3）同时向后移动快慢指针，注意这里要判断😅 【fast.Next】😅是否走到结尾位置
+	// （3）同时向后移动快慢指针
+	// 判断【fast.Next】而不是【fast】😅是否走到结尾位置
 	for fast.Next != nil {
 		fast = fast.Next
 		slow = slow.Next
