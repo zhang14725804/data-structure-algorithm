@@ -1,10 +1,6 @@
 /*
+	思路：借助【队列（先进先出）】实现层序遍历
 	给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
-*/
-
-/*
-	思路：借助【队列】实现层序遍历
-	12.30 面试遇到
 */
 func levelOrder(root *TreeNode) [][]int {
 	res := make([][]int, 0)
@@ -24,10 +20,11 @@ func levelOrder(root *TreeNode) [][]int {
 			queue = queue[1:]
 			// 【根】
 			level = append(level, cnode.Val)
-			// 【左右】
+			// 【左】
 			if cnode.Left != nil {
 				queue = append(queue, cnode.Left)
 			}
+			// 【右】
 			if cnode.Right != nil {
 				queue = append(queue, cnode.Right)
 			}

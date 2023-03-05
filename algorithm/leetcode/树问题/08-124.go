@@ -1,20 +1,10 @@
 /*
-	给定一个非空二叉树，返回其最大路径和。
-	本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点
-
-	向左走，向右走，不走（边的权重给定，不是1）
-	leetcode 无法通过
-	0106 懵逼
-*/
-
-/*
 	方法1：递归：自顶向下
+	不懂 😅😅😅
 */
-var res int
+var res int = -(1 << 32)
 
 func maxPathSum(root *TreeNode) int {
-	//
-	res = -(1 << 32)
 	dfs(root)
 	return res
 }
@@ -25,11 +15,13 @@ func dfs(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
-	// 递归左右节点
-	left := MaxInt(dfs(root.Left), 0)
-	right := MaxInt(dfs(root.Right), 0)
-	// 😅😅😅 更新ans值
-	res = MaxInt(res, root.Val+left+right)
-	// 😅😅😅  三种情况：向左走，向右走，不走
-	return root.Val + MaxInt(left, right)
+
+	// 递归计算左右子节点的最大贡献值
+	// 只有在最大贡献值大于 0 时，才会选取对应子节点
+	left := Max(dfs(root.Left), 0)
+	right := Max(dfs(root.Right), 0)
+	// 😅😅😅 更新ans值，节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值
+	res = Max(res, root.Val+left+right)
+	// 😅😅😅  三种情况：向左走，向右走，不走。返回节点的最大贡献值
+	return root.Val + Max(left, right)
 }
