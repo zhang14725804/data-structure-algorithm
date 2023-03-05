@@ -1,11 +1,6 @@
 /*
-	二叉树中序序遍历
-	0105
-*/
-
-/*
 	方法1：DFS-递归实现
-	指针、地址 😅😅
+	指针和地址是唯一的难点 😅😅
 */
 func inorderTraversal(root *TreeNode) []int {
 	res := make([]int, 0)
@@ -23,7 +18,7 @@ func dfs(node *TreeNode, res *[]int) {
 	}
 	// 左子树
 	dfs(node.Left, res)
-	// TODOS：：这个什么语法
+	// 指针
 	(*res) = append(*res, node.Val)
 	// 右子树
 	dfs(node.Right, res)
@@ -31,6 +26,7 @@ func dfs(node *TreeNode, res *[]int) {
 
 /*
 	方法1：DFS-递归实现
+	用全局变量替代指针地址
 */
 func inorderTraversal(root *TreeNode) []int {
 	res := make([]int, 0)
@@ -59,32 +55,31 @@ func inorderTraversal(root *TreeNode) []int {
 */
 func inorderTraversal(root *TreeNode) []int {
 	res := make([]int, 0)
+	// 栈
 	stack := make([]*TreeNode, 0)
-	if root == nil {
-		return res
-	}
-	cur := root
-	// 迭代条件 😅😅😅
-	for cur != nil || len(stack) > 0 {
-		if cur != nil {
-			// （1）将整棵树的最左边一条链压入栈
-			stack = append(stack, cur)
-			cur = cur.Left
+	for root != nil || len(stack) > 0 {
+		if root != nil {
+			// 左，将整棵树的最左边一条链压入栈
+			stack = append(stack, root)
+			root = root.Left
 		} else {
-			// （2）从栈里弹出最后一个元素
-			cLen := len(stack) - 1
-			cur = stack[cLen]
-			stack = stack[:cLen]
-			// （3）根、右
+			// 最后一个元素出栈
+			sLen := len(stack) - 1
+			cur := stack[sLen]
+			stack = stack[:sLen]
+			// 根
 			res = append(res, cur.Val)
-			cur = cur.Right
+			// 右，将整棵树的最右边一条链压入栈
+			root = cur.Right
 		}
 	}
 	return res
 }
 
 /*
-	思路2：DFS-迭代实现，使用空节点作为标记
+	思路2：DFS-迭代实现
+	右根左入栈，出栈刚好是：左根右
+	需要使用空节点作为标记 （不好理解）
 */
 func inorderTraversal(root *TreeNode) []int {
 	stack := make([]*TreeNode, 0)
@@ -98,8 +93,7 @@ func inorderTraversal(root *TreeNode) []int {
 		cnode := stack[cLen]
 		stack = stack[:cLen]
 		if cnode != nil {
-			// （2） 😅😅😅
-			// 右
+			// （2） 右 😅😅😅
 			if cnode.Right != nil {
 				stack = append(stack, cnode.Right)
 			}
@@ -112,7 +106,7 @@ func inorderTraversal(root *TreeNode) []int {
 				stack = append(stack, cnode.Left)
 			}
 		} else {
-			// 只有遇到空节点的时候，才将下一个节点放进结果集
+			// 😅😅😅 只有遇到空节点的时候，才将下一个节点放进结果集
 			cLen = len(stack) - 1
 			cnode = stack[cLen]
 			stack = stack[:cLen]

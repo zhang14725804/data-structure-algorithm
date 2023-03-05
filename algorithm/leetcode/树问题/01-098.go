@@ -1,13 +1,4 @@
 /*
-	给定一个二叉树，判断其是否是一个有效的二叉搜索树。
-
-	假设一个二叉搜索树具有如下特征：
-		节点的左子树只包含小于当前节点的数。
-		节点的右子树只包含大于当前节点的数。
-		所有左子树和右子树自身必须也是二叉搜索树。
-*/
-
-/*
 	😅😅😅 一顿操作猛如虎
 	(question)问题是，对于某一个节点 root，他只能管得了自己的左右子节点，怎么把 root 的约束传递给左右子树呢？
 	question 😅😅 [5,4,6,null,null,3,7] 测试不通过
@@ -43,21 +34,17 @@ func dfs(root, min, max *TreeNode) bool {
 	if root == nil {
 		return true
 	}
-	// 😅 不满足约束条件的情况
+	// 整个右子树都要大于 root.val
 	if min != nil && root.Val <= min.Val {
 		return false
 	}
+	// 整个左子树都要小于 root.val
 	if max != nil && root.Val >= max.Val {
 		return false
 	}
-	// 递归执行，并传递【约束条件】😅
+	// 递归执行，并传递【min、max约束条件】😅
 	return dfs(root.Left, min, root) && dfs(root.Right, root, max)
 }
-
-/*
-	方法2：中序遍历
-	二叉树中序遍历，判断遍历结果是否【有序】，是否有重复元素
-*/
 
 /*
 	DFS-递归 😄😄😄 机智
@@ -79,7 +66,10 @@ func dfs(root *TreeNode, min, max int) bool {
 
 /*
 	方法3：DFS-递归
-	利用二叉搜索树性质，【中序遍历】是排序数组
+	利用二叉搜索树性质，【中序遍历（左根右）】是排序数组
+	二叉树中序遍历，判断遍历结果是否【有序】，是否有重复元素
+	只需要进行一次中序遍历，将遍历结果保存，然后判断该数组是否是从小到大排列的即可。
+	由于我们只需要临近的两个数的相对关系，所以我们只需要在遍历过程中，把当前遍历的结果和上一个结果比较即可。
 */
 var prev *TreeNode
 
@@ -93,7 +83,7 @@ func dfs(root *TreeNode) bool {
 	}
 	// 左
 	lv := dfs(root.Left)
-	// 根
+	// 根。由于我们只需要临近的两个数的相对关系，所以我们只需要在遍历过程中，把当前遍历的结果和上一个结果比较即可
 	if prev != nil && root.Val <= prev.Val {
 		return false
 	}
@@ -107,7 +97,6 @@ func dfs(root *TreeNode) bool {
 /*
 	方法4：DFS-迭代法
 	利用二叉搜索树性质，【中序遍历】是排序数组
-	question： 没懂 😅😅😅
 */
 func isValidBST(root *TreeNode) bool {
 	var prev *TreeNode
@@ -124,6 +113,7 @@ func isValidBST(root *TreeNode) bool {
 			cLen := len(stack) - 1
 			cnode = stack[cLen]
 			stack = stack[:cLen]
+			// 😅 由于我们只需要临近的两个数的相对关系，所以我们只需要在遍历过程中，把当前遍历的结果和上一个结果比较即可
 			if prev != nil && cnode.Val <= prev.Val {
 				return false
 			}
