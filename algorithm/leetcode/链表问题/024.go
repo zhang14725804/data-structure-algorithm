@@ -1,30 +1,24 @@
 /*
-	24.Swap Nodes in Pairs
-	1->2->3->4
-	2->1->4->3
-*/
-/*
 	方法1：迭代 😅😅😅
-	question
+	question 😅😅😅
 */
 func swapPairs(head *ListNode) *ListNode {
-	// 虚拟头结点
+	// 😅 虚拟头结点
 	dummy := &ListNode{}
 	dummy.Next = head
 
 	p := dummy
 	for p.Next != nil && p.Next.Next != nil {
-		a := p.Next
-		b := p.Next.Next
-		// 😅😅😅
-		// 改变头节点
-		p.Next = b
-		// 改变头节点指向
-		a.Next = b.Next
-		// 改变下个节点指向
-		b.Next = a
-		// 遍历下个节点
-		p = a
+		first := p.Next
+		second := p.Next.Next
+		// 😅 反转头
+		p.Next = second
+		// 😅 反转第一个
+		first.Next = second.Next
+		// 😅 反转第二个
+		second.Next = first
+		// 😅 遍历下个节点，此时first指向下一组
+		p = first
 	}
 	return dummy.Next
 }
@@ -43,11 +37,12 @@ func helper(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
-	// 保存下一阶段的头指针
+	// 😅 保存下一阶段的头指针
 	nextHead := head.Next.Next
-	// 反转当前阶段指针
+	// 反转第二个
 	next := head.Next
 	next.Next = head
+	// 😅 反转下个阶段
 	head.Next = helper(nextHead)
 	// 返回next
 	return next

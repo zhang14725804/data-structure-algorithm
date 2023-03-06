@@ -1,6 +1,6 @@
 /*
 	迭代方式
-	question 解释不通
+	question 😅😅😅
 */
 func reverseList(head *ListNode) *ListNode {
 	if head == nil {
@@ -72,6 +72,9 @@ func reverseList(head *ListNode) *ListNode {
 
 /*
 	方法3 2021-12-24
+	😅😅😅
+	1. 用一个数组存储每个节点
+	2. 倒序数组，链接每个节点
 */
 func reverseList(head *ListNode) *ListNode {
 	// 用一个slice存储每个节点

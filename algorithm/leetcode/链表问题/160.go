@@ -1,27 +1,29 @@
 /*
-	思路1： 0102 依旧没思路
-	两个指针，一个从a开始遍历，走完a之后再从b开始走；
-	一个从b开始遍历，走完b之后再从a开始走，而这相遇的点就是相交的起始点。
+	思路1：
+	1. 两个指针first,second
+	2. 一个从a开始遍历，走完a之后再从b开始走；
+	3. 一个从b开始遍历，走完b之后再从a开始走
+	4. 而这相遇的点就是相交的起始点。
 */
 func getIntersectionNode(headA, headB *ListNode) *ListNode {
-	p := headA
-	q := headB
+	first := headA
+	second := headB
 
-	for p != q {
+	for first != second {
 		// 遍历a
-		if p != nil {
-			p = p.Next
+		if first != nil {
+			first = first.Next
 		} else {
 			// 指针指向b，再遍历b
-			p = headB
+			first = headB
 		}
 		// 遍历b
-		if q != nil {
-			q = q.Next
+		if second != nil {
+			second = second.Next
 		} else {
 			// 指针指向a，再遍历a
-			q = headA
+			second = headA
 		}
 	}
-	return p
+	return first
 }

@@ -1,11 +1,8 @@
 /*
-	链表反转某一段
-	0103 
+	再次遇到，还是懵逼😅😅😅，主要是206懵逼
+
 	（1）迭代难懂，注意的细节特别多（画图，画图之后就清晰了）
 	（2）递归要理解思想，才能理解细节
-*/
-
-/*
 	方法1：迭代实现
 	（1）保存m的前一个元素，保存n的下一个元素
 	（2）反转m-n之间的元素，
@@ -16,8 +13,8 @@ func reverseBetween1(head *ListNode, m int, n int) *ListNode {
 		return head
 	}
 	// （1）保存头结点指针，第一个头节点有可能变
-	dummy := &ListNode{} 
-	dummy.Next = head    // 为什么需要这一步 😅😅😅
+	dummy := &ListNode{}
+	dummy.Next = head // 为什么需要这一步 😅😅😅
 
 	// （2）
 	mPrev := dummy // m的前一个节点
@@ -53,6 +50,7 @@ func reverseBetween1(head *ListNode, m int, n int) *ListNode {
 /*
 	方法2：递归实现
 	将链表反转某一段，改为反转链表的前n个节点
+	两种解法都不会了 😅😅😅😅😅😅
 */
 func reverseBetween(head *ListNode, m int, n int) *ListNode {
 	// 😅 base case，反转前n个元素
@@ -65,7 +63,7 @@ func reverseBetween(head *ListNode, m int, n int) *ListNode {
 }
 
 // （1） 记录后续的节点
-var last *ListNode 
+var last *ListNode
 
 func reverseN(head *ListNode, n int) *ListNode {
 	// 😅 base case
