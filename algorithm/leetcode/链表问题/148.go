@@ -4,6 +4,10 @@
 	分治法将问题：
 		分(divide)成一些小的问题然后递归求解
 		治(conquer)的阶段则将分的阶段得到的各答案"修补"在一起，即分而治之
+	注意的点😅😅😅：
+		1. base case情况
+		2. dummy虚拟头节点
+
 	方法2（蠢办法）：将链表节点放入数组，将数组排序，之后再链接各个排序后的节点
 */
 func sortList(head *ListNode) *ListNode {
@@ -15,7 +19,7 @@ func mergeSort(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
-	// 😅😅😅 question 为什么这里需要虚拟头节点。不用会 out of memory
+	// 😅😅😅 虚拟头节点
 	dummy := new(ListNode)
 	dummy.Next = head
 	fast, slow := dummy, dummy
@@ -38,7 +42,7 @@ func mergeSort(head *ListNode) *ListNode {
 }
 
 func merge(head1, head2 *ListNode) *ListNode {
-	// 😅😅😅 又是虚拟头节点
+	// 😅😅😅 虚拟头节点
 	dummy := new(ListNode)
 	// 😅😅😅 这个节点是专门用来遍历的
 	tail := dummy
@@ -55,12 +59,13 @@ func merge(head1, head2 *ListNode) *ListNode {
 			head2 = head2.Next
 		}
 	}
-	//  😅 拼接剩余的部分
+	// 拼接剩余的部分
 	if head1 != nil {
 		tail.Next = head1
 	}
 	if head2 != nil {
 		tail.Next = head2
 	}
+	// 返回值
 	return dummy.Next
 }
