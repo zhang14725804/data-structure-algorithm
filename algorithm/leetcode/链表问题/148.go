@@ -1,10 +1,10 @@
 /*
-	给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。
-	进阶：你可以在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序吗？
-
-	12.31 懂啦！！！（懂得是递归原理） 
+	方法1:归并排序（这种方法优美）；
 	归并排序（MERGE-SORT）是利用归并的思想实现的排序方法，该算法采用经典的分治（divide-and-conquer）策略
-	（分治法将问题分(divide)成一些小的问题然后递归求解，而治(conquer)的阶段则将分的阶段得到的各答案"修补"在一起，即分而治之)
+	分治法将问题：
+		分(divide)成一些小的问题然后递归求解
+		治(conquer)的阶段则将分的阶段得到的各答案"修补"在一起，即分而治之
+	方法2（蠢办法）：将链表节点放入数组，将数组排序，之后再链接各个排序后的节点
 */
 func sortList(head *ListNode) *ListNode {
 	return mergeSort(head)
@@ -33,6 +33,7 @@ func mergeSort(head *ListNode) *ListNode {
 	head = mergeSort(head)
 	// 😅 递归后半部分tail
 	tail = mergeSort(tail)
+	// 合并前后两部分
 	return merge(head, tail)
 }
 

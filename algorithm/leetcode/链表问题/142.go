@@ -1,9 +1,8 @@
 /*
-	142. Linked List Cycle II
-
-	快慢指针，开始的时候每次fast走两步slow走一步，相遇之后，
-	【slow】的指针从开头继续走，快慢指针步调一致一起移动，相遇点即为入环点
-	0103 没有环的情况没想到
+	解题思路：快慢指针
+	1. 开始的时候每次fast走两步，slow走一步
+	2. 考虑没有环的情况
+	3. 相遇之后，【slow】的指针从开头继续走，快慢指针步调一致一起移动，相遇点即为入环点
 */
 func detectCycle(head *ListNode) *ListNode {
 	fast, slow := head, head
