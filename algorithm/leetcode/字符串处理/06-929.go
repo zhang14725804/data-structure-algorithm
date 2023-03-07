@@ -1,44 +1,35 @@
 /*
-	929. Unique Email Addresses
-
-	域名不变，需要处理用户名
-
-	golang没有set，所以用map替代set
+	1. 遍历邮箱
+	2. 根据@的位置切分，前半段是name本地名，后半段是domain
+	3. 遇到+号停止，遇到.点跳过
+	4. 拼接name@domain存入map
 */
 func numUniqueEmails(emails []string) int {
-	hash:= make(map[string]int,0)
-	for _,e := range emails{
-		email:=[]rune(e)
-		// 找到@位置
-		at:= find(email,'@')
-		var name string
-		// 排除”+“之后的内容和”.“，生成name
-		for _,c :=range(email[:at]){
-			if c == '+' {
+	hash := make(map[string]struct{}, 0)
+	for _, email := range emails {
+		//
+		at := find(email, '@')
+		pre := email[:at]
+		name := ""
+		//
+		for _, v := range pre {
+			if v == '+' {
 				break
-			}else if c!='.'{
-				name += string(c)
+			} else if v != '.' {
+				name += string(v)
 			}
 		}
-
-		// 域名
-		domain:=email[at+1:]
-		// 每个email存入hash表
-		emain :=name + "@" + string(domain) 
-		hash[emain] = 1
+		//
+		em := name + "@" + email[at+1:]
+		hash[em] = struct{}{}
 	}
-	// 统计hash表长度（办法好像有点蠢）
-	res:=0
-	for _,_=range hash{
-		res+=1
-	}
-	return res
+	return len(hash)
 }
-// rune中查找元素返回元素下标
-func find(arr []rune, char rune) int{
-	for i:=0;i<len(arr);i++{
+
+func find(arr string, char rune) int {
+	for i := 0; i < len(arr); i++ {
 		// 注意这里
-		if  arr[i] == char{
+		if rune(arr[i]) == char {
 			return i
 		}
 	}

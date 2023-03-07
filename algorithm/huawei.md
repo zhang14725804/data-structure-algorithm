@@ -44,11 +44,11 @@ LeetCode 49.Group Anagrams
 LeetCode 151.Reverse Words in a String  
 LeetCode 165.Compare Version Numbers 
 LeetCode 929.Unique Email Addresses 
-5 最长回文子串 
-6 zigzag 
-3. 无重复字符的最长子串
-208. 实现 Trie (前缀树) 
-273. 整数转换英文表示 
+LeetCode 5.最长回文子串 
+LeetCode 6.N 字形变换
+LeetCode 3. 无重复字符的最长子串
+LeetCode 208. 实现 Trie (前缀树) 
+LeetCode 273. 整数转换英文表示 
 
 ### dfs+回溯
 
