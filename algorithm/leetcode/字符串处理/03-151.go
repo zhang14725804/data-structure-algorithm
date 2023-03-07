@@ -2,11 +2,12 @@
 	1. k记录字符串最终长度
 	2. 遍历字符串
 	3. 反转每个单词
-	4. 再每个单词后添加空格
+	4. 在每个单词后添加空格
 	5. 确定每个字符最终位置
 	6. 去掉多余的部分
 	7. 反转整个字符串
 
+	还是不会 😅😅😅
 */
 func reverseWords(str string) string {
 	bstr := []rune(str)
@@ -36,7 +37,7 @@ func reverseWords(str string) string {
 			k++
 		}
 
-		// 确定每个单子最终位置
+		// 移动单个字符，确定每个单子最终位置
 		for i < j {
 			bstr[k] = bstr[i]
 			k++
