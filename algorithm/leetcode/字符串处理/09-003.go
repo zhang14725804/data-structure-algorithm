@@ -1,33 +1,43 @@
 /*
-	3. Longest Substring Without Repeating Characters
-
-	暴力是怎么写的，然后在对暴力做法进行优化
-	todo：思路理解：双指针法（同时向一个方向移动）
-
-	todos::"abcabcbb"测试通过，"pwwkew"无法通过
+	方法1:滑动窗口
+	1. 指针start,end，一个在前，一个在后，hash记录出现的字符
+	2. 从前向后遍历，若当前字符不存在，更新res，end向前走
+	3. 若当前字符存在，删除start字符，start向前走
 */
-func lengthOfLongestSubstring(str string) int {
-	s:=[]rune(str)
-	hash:=make(map[rune]int)
-	res:=0
-	// i指针在前，j指针在后
-	for i,j:=0,0; i<len(s); i++{
-		// 如果有重复的元素，一定是s[i]
-		hash[s[i]]+=1
-		// 有重复元素
-		for hash[s[i]] > 1{
-			j+=1
-			hash[s[j]]-=1
-			res = max(res, i-j+1)
+func lengthOfLongestSubstring(s string) int {
+	set := map[byte]struct{}{}
+	res := 0
+	start, end := 0, 0
+	for start < len(s) && end < len(s) {
+		if _, ok := set[s[end]]; !ok {
+			set[s[end]] = struct{}{}
+			res = Max(res, end-start+1)
+			end++
+		} else {
+			// 😅 删除start字符，start向前走
+			delete(set, s[start])
+			start++
 		}
 	}
 	return res
 }
 
-
-func max(a, b int) int {
-	if a > b {
-		return a
+/*
+	方法2: 滑动窗口优化 😅😅😅
+	set 改为 map ，将字符存为 key ，将对应的下标存到 value
+*/
+func lengthOfLongestSubstring(s string) int {
+	hash := map[byte]int{}
+	res := 0
+	start, end := 0, 0
+	for ; end < len(s); end++ {
+		// 更新start位置 😅
+		if idx, ok := hash[s[end]]; ok {
+			start = Max(idx, start)
+		}
+		res = Max(res, end-start+1)
+		// 😅😅😅 下标 + 1 代表 start 要移动的下个位置
+		hash[s[end]] = end + 1
 	}
-	return b
+	return res
 }
