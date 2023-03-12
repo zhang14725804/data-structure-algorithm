@@ -1,15 +1,9 @@
 /*
-	给定一个字符串 s 和一个非空字符串 p，找到 s 中所有是 p 的字母异位词的子串，返回这些子串的起始索引。
-	字符串只包含小写英文字母，并且字符串 s 和 p 的长度都不超过 20100。
-
-	说明：
-
-	字母异位词指字母相同，但排列不同的字符串。
-	不考虑答案输出的顺序。
+	滑动窗口还是生涩 😅😅😅
 */
 func findAnagrams(s string, p string) []int {
-	need, window := make(map[byte]int, 0), make(map[byte]int, 0)
-	left, right, valid, needSize := 0, 0, 0, 0
+	need := make(map[byte]int, 0)
+	needSize := 0
 	for i := 0; i < len(p); i++ {
 		c := p[i]
 		need[c]++
@@ -17,11 +11,15 @@ func findAnagrams(s string, p string) []int {
 			needSize++
 		}
 	}
+
+	window := make(map[byte]int, 0)
 	res := make([]int, 0)
+	left, right, valid := 0, 0, 0
 	for right < len(s) {
 		c := s[right]
 		// 移动右指针
 		right++
+		// 如果c在目标字符串中
 		if _, ok := need[c]; ok {
 			window[c]++
 			if need[c] == window[c] {
@@ -29,15 +27,17 @@ func findAnagrams(s string, p string) []int {
 			}
 		}
 
-		//(question) 判断左侧窗口是否要收缩
+		// 满足窗口大小
 		for right-left >= len(p) {
 			// 更新答案
 			if valid == needSize {
 				res = append(res, left)
 			}
+			// 要删除的字符
 			d := s[left]
 			// 移动左指针
 			left++
+			// 如果要删除的字符在目标字符串中
 			if _, ok := need[d]; ok {
 				if need[d] == window[d] {
 					valid--
@@ -45,6 +45,43 @@ func findAnagrams(s string, p string) []int {
 				window[d]--
 			}
 		}
+	}
+	return res
+}
+
+/*
+	我的滑动窗口，每一次都从零开始 😅😅😅
+	超出时间限制
+*/
+func findAnagrams(s string, p string) []int {
+	res := []int{}
+	need := make(map[byte]int, 0)
+	needTypes := 0
+	for _, c := range p {
+		bc := byte(c)
+		need[bc]++
+		if need[bc] == 1 {
+			needTypes++
+		}
+	}
+
+	left := 0
+	pLen := len(p)
+	right := len(s)
+	for left+pLen <= right {
+		window := make(map[byte]int, 0)
+		curTypes := 0
+		for i := left; i < left+pLen; i++ {
+			w := s[i]
+			window[w]++
+			if window[w] == need[w] {
+				curTypes++
+			}
+		}
+		if curTypes == needTypes {
+			res = append(res, left)
+		}
+		left++
 	}
 	return res
 }
