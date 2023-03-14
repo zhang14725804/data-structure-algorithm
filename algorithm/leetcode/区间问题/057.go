@@ -49,3 +49,48 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 	}
 	return res
 }
+
+/*
+	1. 按照数组第一个元素排序
+	2. 处理重叠部分
+	3. 处理没有重叠的情况
+	4. 处理剩余部分
+*/
+
+func insert(intervals [][]int, newInterval []int) [][]int {
+	// 合并两个区间
+	intervals = append(intervals, newInterval)
+	// 区间按照首个元素排序
+	sortByFirstNum(intervals)
+
+	ans := make([][]int, 0)
+	cur := intervals[0]
+	for i := 1; i < len(intervals); i++ {
+		// 重叠的情况
+		if cur[1] >= intervals[i][0] {
+			cur[1] = Max(cur[1], intervals[i][1])
+		} else {
+			// 没有重叠的情况
+			ans = append(ans, cur)
+			cur = intervals[i]
+		}
+	}
+
+	// 剩余部分
+	if len(cur) != 0 {
+		ans = append(ans, cur)
+	}
+
+	return ans
+}
+
+func sortByFirstNum(arr [][]int) {
+	for i := 0; i < len(arr); i++ {
+		// 居然不会排序了 😅😅😅
+		for j := 0; j < len(arr)-i-1; j++ {
+			if arr[j+1][0] < arr[j][0] {
+				arr[j+1], arr[j] = arr[j], arr[j+1]
+			}
+		}
+	}
+}
