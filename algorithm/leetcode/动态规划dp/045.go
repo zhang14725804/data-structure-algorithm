@@ -1,22 +1,45 @@
 /*
-	给定一个非负整数数组，你最初位于数组的第一个位置。
-	数组中的每个元素代表你在该位置可以跳跃的最大长度(可以小于这个数)。
-	你的目标是使用最少的跳跃次数到达数组的最后一个位置。
+	方法1:
+	question 😅😅😅
 */
+func jump(nums []int) int {
+	ans := 0
+	start := 0
+	//
+	end := 1
+	for end < len(nums) {
+		// 能跳到的最远距离
+		maxPos := 0
+		for i := start; i < end; i++ {
+			maxPos = Max(maxPos, i+nums[i])
+		}
+		// 更新起跳范围
+		start = end
+		end = maxPos + 1
+		// 跳跃次数
+		ans++
+	}
+	return ans
+}
 
 /*
 	贪婪算法：从前向后
+	方法一优化版本
 	question 😅😅😅
 	每次在可跳范围内选择可以使得跳的更远的位置。
 */
-func jump1(nums []int) int {
-	// end:当前能跳的边界，farthest：能跳最远的距离，steps：步数
-	end, farthest, steps := 0, 0, 0
+func jump(nums []int) int {
+	// end:当前能跳的边界，，
+	end := 0
+	// maxPos：能跳最远的距离
+	maxPos := 0
+	// steps：步数
+	steps := 0
 	for i := 0; i < len(nums)-1; i++ {
-		farthest = MaxInt(farthest, nums[i]+i)
+		maxPos = MaxInt(maxPos, nums[i]+i)
 		// 遇到边界，更新边界，更新步数
 		if i == end {
-			end = farthest
+			end = maxPos
 			steps++
 		}
 	}
