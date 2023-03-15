@@ -1,15 +1,13 @@
-/*
-	根据一棵树的中序遍历与后序遍历构造二叉树。
-*/
-
-var pos = make(map[int]int)
+var pos = make(map[int]int, 0)
 
 func buildTree(inorder []int, postorder []int) *TreeNode {
-	n := len(inorder)
-	for i := 0; i < n; i++ {
-		// 尴尬：保存中序遍历节点的index
-		pos[inorder[i]] = i
+	// 保存【中序遍历】节点的index
+	for idx, v := range inorder {
+		pos[v] = idx
 	}
+
+	n := len(inorder)
+	// 本质上是前序遍历：根左右(🔥🔥🔥)
 	return dfs(inorder, postorder, 0, n-1, 0, n-1)
 }
 
@@ -19,22 +17,35 @@ func buildTree(inorder []int, postorder []int) *TreeNode {
 	il，ir    中序遍历起点终点
 	pl，pr    后序遍历起点终点
 */
-func dfs(inorder []int, postorder []int, il, ir, pl, pr int) *TreeNode {
+func dfs(inorder, postorder []int, il, ir, pl, pr int) *TreeNode {
 	// base case
-	if pl > pr {
+	if il > ir {
 		return nil
 	}
-	// 后序遍历的节点值，根节点
+
+	// 根节点
 	val := postorder[pr]
-	// 找到对应中序遍历的index
-	k := pos[val]
-	// 根节点，对应后序遍历的pr对应的节点
-	root := &TreeNode{val, nil, nil}
+	node := &TreeNode{val, nil, nil}
+	// 中序遍历根节点位置
+	idx := pos[val]
+
 	/*
-		中序遍历根据【k】值分割，后序遍历较难分割
-		ps: 【k-1-il】 是左子树长度(🔥🔥🔥)
+		左子树：取后序遍历左边，取中序遍历左边。ps:【ir-idx】 是右子树长度(🔥🔥🔥)
+		il,
+		idx-1,
+		pl,
+		pr-(ir-idx)-1
 	*/
-	root.Left = dfs(inorder, postorder, il, k-1, pl, pl+(k-1-il))
-	root.Right = dfs(inorder, postorder, k+1, ir, pl+(k-1-il)+1, pr-1)
-	return root
+	node.Left = dfs(inorder, postorder, il, idx-1, pl, pr-(ir-idx)-1)
+
+	/*
+		右子树：取后序遍历右边，取中序遍历右边。ps:【ir-idx】 是右子树长度(🔥🔥🔥)
+		idx+1,
+		ir,
+		pr-(ir-idx),
+		pr-1
+	*/
+	node.Right = dfs(inorder, postorder, idx+1, ir, pr-(ir-idx), pr-1)
+
+	return node
 }
