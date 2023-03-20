@@ -1,14 +1,10 @@
 /*
-	实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
-
 	前缀树的用例：词频统计，前缀匹配，路由匹配
-
-	todo：代码和算法都不懂😅
 */
 type Trie struct {
-	end  bool
-	val  byte
-	sons [26]*Trie
+	end  bool      // 判断是否以这个字母结尾
+	val  byte      // 父层字母
+	sons [26]*Trie // 子层出现的字母
 }
 
 /** Initialize your data structure here. */
@@ -58,11 +54,3 @@ func (node *Trie) StartsWith(prefix string) bool {
 	}
 	return true
 }
-
-/**
- * Your Trie object will be instantiated and called as such:
- * obj := Constructor();
- * obj.Insert(word);
- * param_2 := obj.Search(word);
- * param_3 := obj.StartsWith(prefix);
- */
