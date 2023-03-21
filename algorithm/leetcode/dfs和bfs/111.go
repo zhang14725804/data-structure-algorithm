@@ -1,32 +1,22 @@
 /*
-	给定一个二叉树，找出其最小深度。
-
-	最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
-
-	说明: 叶子节点是指没有子节点的节点。
-
-	时间复杂度O(n)
-*/
-
-/*
 	方法1：DFS-递归
 	后序遍历：左右根
-	求二叉树的【最小深度】和求二叉树的【最大深度】的差别主要在于处理左右孩子不为空的逻辑
-	question，再次遇到还是不会，😅😅😅
+	😅 求二叉树的【最小深度】和求二叉树的【最大深度】的差别主要在于处理左右孩子不为空的逻辑
+	question，再次遇到还是不会，😅 😅 😅 😅
 */
 func minDepth(root *TreeNode) int {
 	// base case
 	if root == nil {
 		return 0
 	}
-	// 😅 计算左右子树
+	// 计算左右子树
 	left := minDepth(root.Left)
 	right := minDepth(root.Right)
-	// 😅 左边或者右边是空，【+1】
+	// 😅😅 左边或者右边是空，【+1】
 	if left == 0 || right == 0 {
 		return left + right + 1
 	}
-	// 😅 左右子树都不为空，【+1】
+	// 😅😅 左右子树都不为空，【+1】
 	return MinInt(left, right) + 1
 }
 
