@@ -10,6 +10,16 @@ var dir4 = []pair{
 	{0, 1},
 }
 
+/*
+	岛屿问题 😅😅😅 😅😅😅 😅😅😅
+	1. 定义四个方向【上下左右】
+	2. m，n为方格长宽
+	3. 遍历每行每列
+	4. 遇到岛屿，进行递归
+		a. 遇到边界ans++
+		b. 已经走过的跳过，标记已经走过
+		c. 遍历上下左右四个方向
+*/
 func islandPerimeter(grid [][]int) (ans int) {
 	n, m := len(grid), len(grid[0])
 	var dfs func(x, y int)
@@ -32,9 +42,9 @@ func islandPerimeter(grid [][]int) (ans int) {
 		}
 	}
 	for i, row := range grid {
-		for j, v := range row {
+		for j, col := range row {
 			// 如果是岛屿
-			if v == 1 {
+			if col == 1 {
 				dfs(i, j)
 			}
 		}
