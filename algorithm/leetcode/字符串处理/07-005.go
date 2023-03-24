@@ -1,7 +1,7 @@
 /*
 	马拉车算法
-		1. 选一个点向两边扩散【j, k := i, i】
-		2. 选两个点，向两边扩散 【j, k := i, i+1】
+		1. 选一个点😅向两边扩散【j, k := i, i】
+		2. 选两个点😅😅向两边扩散 【j, k := i, i+1】
 		3. 若符合条件，更新结果s[j : k+1]
 */
 func longestPalindrome(s string) string {
