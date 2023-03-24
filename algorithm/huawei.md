@@ -117,4 +117,21 @@ Strange Printer
 14. leetCode-486  
 
 
-https://codetop.cc/home 华为 最近考察时间
+https://leetcode.cn/problems/longest-substring-without-repeating-characters/
+https://leetcode.cn/problems/letter-case-permutation/
+https://leetcode.cn/problems/valid-parentheses/
+https://leetcode.cn/problems/longest-palindromic-substring/
+https://leetcode.cn/problems/utf-8-validation/
+https://leetcode.cn/problems/subarray-sum-equals-k/
+https://leetcode.cn/problems/diagonal-traverse/
+https://leetcode.cn/problems/find-k-closest-elements/
+https://leetcode.cn/problems/sort-array-by-parity/
+https://leetcode.cn/problems/permutations/
+https://leetcode.cn/problems/two-city-scheduling/
+https://leetcode.cn/problems/maximum-profit-in-job-scheduling/
+https://leetcode.cn/problems/longest-word-in-dictionary/
+https://leetcode.cn/problems/asteroid-collision/
+https://leetcode.cn/problems/subsets/
+https://leetcode.cn/problems/binary-tree-inorder-traversal/
+https://leetcode.cn/problems/decode-string/
+https://leetcode.cn/problems/basic-calculator/
