@@ -1,23 +1,22 @@
-/*
-	方法1：找到大于等于target得最左边的数（模板1）
-*/
+// 寻找左侧边界的二分搜索
 func searchInsert(nums []int, target int) int {
-	// 边界条件
-	if len(nums) == 0 || nums[len(nums)-1] < target {
-		return len(nums)
+	if len(nums) == 0 {
+		return -1
 	}
-	l, r := 0, len(nums)-1
-	// 使用模板1，找................vooooooooo中的v，这种情况😅😅😅
-	for l < r {
-		mid := (l + r) >> 1
-		// [l, r]区间划分为[l, mid] 和 [mid+1, r]
-		if nums[mid] >= target {
-			r = mid
-		} else {
-			l = mid + 1
+	// 😅😅 [left, right) 左闭右开
+	left, right := 0, len(nums)
+	// 1. 😅😅 循环条件 【<】
+	for left < right {
+		mid := (left + right) / 2
+		if nums[mid] == target {
+			right = mid
+		} else if nums[mid] < target {
+			left = mid + 1
+		} else if nums[mid] > target {
+			right = mid
 		}
 	}
-	return l
+	return left
 }
 
 /*
