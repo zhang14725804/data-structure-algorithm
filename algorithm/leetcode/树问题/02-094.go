@@ -1,65 +1,36 @@
 /*
 	方法1：DFS-递归实现
-	指针和地址是唯一的难点 😅😅
 */
 func inorderTraversal(root *TreeNode) []int {
-	res := make([]int, 0)
-	if root == nil {
-		return res
-	}
-	dfs(root, &res)
-	return res
-
-}
-func dfs(node *TreeNode, res *[]int) {
-	// 当前节点为空
-	if node == nil {
-		return
-	}
-	// 左子树
-	dfs(node.Left, res)
-	// 指针
-	(*res) = append(*res, node.Val)
-	// 右子树
-	dfs(node.Right, res)
-}
-
-/*
-	方法1：DFS-递归实现
-	用全局变量替代指针地址
-*/
-func inorderTraversal(root *TreeNode) []int {
-	res := make([]int, 0)
-	if root == nil {
-		return res
-	}
+	ans := []int{}
 	var dfs func(root *TreeNode)
 	dfs = func(root *TreeNode) {
+		// base case
 		if root == nil {
 			return
 		}
-		// 左、跟、右
+		// 左根右
 		dfs(root.Left)
-		res = append(res, root.Val)
+		ans = append(ans, root.Val)
 		dfs(root.Right)
 	}
 	dfs(root)
-	return res
+	return ans
 }
 
 /*
-	思路2：DFS-迭代实现
-	question 😅😅😅😅
-	(1) 将整棵树的最左边一条链压入栈
-	(2) 每次取出栈顶元素，如果它有右子树，将右子树压入栈中
+	思路2：用栈实现 😅😅😅
+	1. 将整棵树的最左边一条链压入栈
+	2. 取出栈顶元素加入集合
+	3. 如果它有右子树，将右子树压入栈中
 */
 func inorderTraversal(root *TreeNode) []int {
 	res := make([]int, 0)
-	// 栈
 	stack := make([]*TreeNode, 0)
+	// 这里是for 😅
 	for root != nil || len(stack) > 0 {
 		if root != nil {
-			// 左，将整棵树的最左边一条链压入栈
+			// 😅 左，将整棵树的最左边一条链压入栈
 			stack = append(stack, root)
 			root = root.Left
 		} else {
@@ -69,7 +40,7 @@ func inorderTraversal(root *TreeNode) []int {
 			stack = stack[:sLen]
 			// 根
 			res = append(res, cur.Val)
-			// 右，将整棵树的最右边一条链压入栈
+			// 😅 右，将整棵树的最右边一条链压入栈
 			root = cur.Right
 		}
 	}
@@ -77,9 +48,9 @@ func inorderTraversal(root *TreeNode) []int {
 }
 
 /*
-	思路2：DFS-迭代实现
-	右根左入栈，出栈刚好是：左根右
-	需要使用空节点作为标记 （不好理解）
+	思路2：用层序遍历实现 😅😅😅😅
+	1. 右根左入栈（出栈刚好是左根右）
+	2. 使用空节点作为标记 （难以理解）
 */
 func inorderTraversal(root *TreeNode) []int {
 	stack := make([]*TreeNode, 0)
@@ -92,6 +63,7 @@ func inorderTraversal(root *TreeNode) []int {
 		cLen := len(stack) - 1
 		cnode := stack[cLen]
 		stack = stack[:cLen]
+
 		if cnode != nil {
 			// （2） 右 😅😅😅
 			if cnode.Right != nil {
@@ -110,6 +82,7 @@ func inorderTraversal(root *TreeNode) []int {
 			cLen = len(stack) - 1
 			cnode = stack[cLen]
 			stack = stack[:cLen]
+
 			res = append(res, cnode.Val)
 		}
 	}
