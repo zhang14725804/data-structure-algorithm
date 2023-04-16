@@ -1,65 +1,77 @@
 /*
-	1. 从前向后遍历，【stack存储当前数字】，默认符号是“+”号，默认num=0
-	2. 遇到数字转数字
-	3. 遇到非数字非空格（也就是遇到加减乘除）或者已经遍历完时，根据当前sign把当前数字入栈，更新num和sign
+	折腾了很久
+	😅😅😅
 */
-
 func calculate(s string) int {
-	if len(s) == 0 {
-		return 0
-	}
-	return helper(s)
-}
+	prio := 0 // 优先级
+	nums := []int{}
+	opers := []byte{}
 
-func helper(s string) int {
-	stack := make([]int, 0)
-	num := 0
-	sign := '+'
-
-	// 从前向后遍历
-	for len(s) > 0 {
-		c := s[0]
-		s = s[1:]
-
-		// 是数字
-		if isdigit(c) {
-			num = num*10 + int(c-'0')
+	for i := 0; i < len(s); i++ {
+		if s[i] == ' ' {
+			continue
 		}
-
-		// 非数字并且非空格（遇到符号），或者字符串长度为0
-		if (!isdigit(c) && c != ' ') || len(s) == 0 {
-			switch sign {
-			case '-':
-				stack = append(stack, -num)
-			case '+':
-				stack = append(stack, num)
-			case '*':
-				pre := stack[len(stack)-1]   // top
-				stack = stack[:len(stack)-1] // pop
-				stack = append(stack, num*pre)
-			case '/':
-				pre := stack[len(stack)-1]
-				stack = stack[:len(stack)-1]
-				stack = append(stack, pre/num)
+		if s[i] == '*' || s[i] == '/' {
+			prio = 1
+			opers = append(opers, s[i])
+		} else if s[i] == '+' || s[i] == '-' {
+			opers = append(opers, s[i])
+		} else {
+			j := i
+			temp := 0
+			for j < len(s) && isdigit(s[j]) {
+				temp = temp*10 + int(s[j]-'0')
+				j++
 			}
+			i = j - 1 // 😅
+			nums = append(nums, temp)
 
-			// 😅
-			sign = rune(c)
-			num = 0
+			// 遇到乘除，nums 在队尾操作
+			if prio == 1 {
+				prio = 0
+				x := nums[len(nums)-1]
+				nums = nums[:len(nums)-1]
+				y := nums[len(nums)-1]
+				nums = nums[:len(nums)-1]
+				op := opers[len(opers)-1]
+				opers = opers[:len(opers)-1]
+
+				nums = append(nums, calc(y, x, op))
+			}
 		}
 	}
 
-	return sum(stack)
-}
+	// 遇到加减，nums 在队头顺序操作
+	for len(opers) != 0 {
+		x := nums[0]
+		nums = nums[1:]
 
-func sum(stack []int) int {
-	res := 0
-	for i := 0; i < len(stack); i++ {
-		res += stack[i]
+		y := nums[0]
+		nums = nums[1:]
+
+		op := opers[0]
+		opers = opers[1:]
+
+		nums = append([]int{calc(x, y, op)}, nums...)
 	}
-	return res
+	return nums[len(nums)-1]
 }
 
+func calc(x, y int, op byte) int {
+	if op == '-' {
+		return x - y
+	}
+	if op == '+' {
+		return x + y
+	}
+	if op == '/' {
+		return x / y
+	}
+	if op == '*' {
+		return x * y
+	}
+	return -9999
+}
 func isdigit(char byte) bool {
 	return char >= '0' && char <= '9'
 }
