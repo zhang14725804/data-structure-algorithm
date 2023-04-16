@@ -1,6 +1,22 @@
 /*
-	partition-list
-	给你一个链表的头节点 head 和一个特定值 x ，请你对链表进行分隔，使得所有 小于 x 的节点都出现在 大于或等于 x 的节点之前。
-	你应当 保留 两个分区中每个节点的初始相对位置。
-	TODO 😅😅😅
-*/
+
+ */
+func partition(head *ListNode, x int) *ListNode {
+	small, large := &ListNode{}, &ListNode{}
+	sHead, lHead := small, large
+	for head != nil {
+		if head.Val < x {
+			small.Next = head
+			small = small.Next
+		} else {
+			large.Next = head
+			large = large.Next
+		}
+		head = head.Next
+	}
+	// 😅 断尾巴
+	large.Next = nil
+	// 😅 small链接large
+	small.Next = lHead.Next
+	return sHead.Next
+}

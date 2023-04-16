@@ -1,6 +1,41 @@
 /*
-	方法1：双指针 😅😅😅😅😅😅,
-	0109 居然做成了快慢指针（一个走一步，一个走两步，怎么想的）
+	方法1：两次遍历
+	删除一个结点，无非是遍历链表找到那个结点前边的结点，然后改变下指向就好了。
+	（1）但由于它是链表，它的长度我们并不知道，我们得先遍历一遍得到它的长度，
+	（2）之后用长度减去 n 就是要删除的结点的位置，然后遍历到结点的前一个位置就好了。
+*/
+func removeNthFromEnd(head *ListNode, n int) *ListNode {
+	lLen := 0
+	// 😅 这里要用虚拟头节点进行遍历
+	p := head
+	// （1）获取链表长度
+	for p != nil {
+		p = p.Next
+		lLen++
+	}
+	// （2）长度等于1的情况 ，再删除一个结点就为 null 了
+	if lLen == 1 {
+		return nil
+	}
+
+	rmNodeIndex := lLen - n
+	// （3）如果删除的是头结点
+	if rmNodeIndex == 0 {
+		return head.Next
+	}
+
+	// 😅 这里要用虚拟头节点进行遍历
+	p = head
+	// （4） 😅找到被删除结点的前一个结点
+	for i := 0; i < rmNodeIndex-1; i++ {
+		p = p.Next
+	}
+	p.Next = p.Next.Next
+	return head
+}
+
+/*
+	方法2：双指针 😅😅😅😅😅😅,
 	依次遍历即可 😮😮😮
 	（1）建立虚拟头节点（省去判断是否是头节点）
 	（2）让某个指针（假设first）向后走n步
@@ -26,43 +61,6 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	}
 	// （4）删除倒数第n个节点
 	slow.Next = slow.Next.Next
-	return head
-}
-
-/*
-	方法2：两次遍历
-	删除一个结点，无非是遍历链表找到那个结点前边的结点，然后改变下指向就好了。
-	（1）但由于它是链表，它的长度我们并不知道，我们得先遍历一遍得到它的长度，
-	（2）之后用长度减去 n 就是要删除的结点的位置，然后遍历到结点的前一个位置就好了。
-*/
-func removeNthFromEnd(head *ListNode, n int) *ListNode {
-	lLen := 0
-	// 😅 这里要用虚拟头节点进行遍历
-	p := head
-	// （1）获取链表长度
-	for p != nil {
-		p = p.Next
-		lLen++
-	}
-	// （2）长度等于1的情况 ，再删除一个结点就为 null 了
-	if lLen == 1 {
-		return nil
-	}
-
-	rmNodeIndex := lLen - n
-	// （3）如果删除的是头结点
-	if rmNodeIndex == 0 {
-		return head.Next
-	}
-
-	// question 删除链表的第n个节点(12.23号,字节面试被问到)
-	// 😅 这里要用虚拟头节点进行遍历
-	p = head
-	// （4） 😅找到被删除结点的前一个结点
-	for i := 0; i < rmNodeIndex-1; i++ {
-		p = p.Next
-	}
-	p.Next = p.Next.Next
 	return head
 }
 
@@ -97,5 +95,4 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	rmNodePrev := listArray[rmi-1]
 	rmNodePrev.Next = rmNodePrev.Next.Next
 	return head
-
 }

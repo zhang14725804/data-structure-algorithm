@@ -1,16 +1,16 @@
 /*
-	方法1：快慢指针 平平无奇
+	方法1：快慢指针
 	1. slow每次走一步，fast每次走两步
 	2. 若重合，代表有环
 	3. 同时判断 fast和fast.Next 不为nil 😅😅😅
 */
 func hasCycle1(head *ListNode) bool {
 	fast, slow := head, head
-	//  😅😅😅
+	// 判断fast 😅😅😅
 	for fast != nil && fast.Next != nil {
 		slow = slow.Next
 		fast = fast.Next.Next
-		// 比较指针是否相等（不要使用val比较！）
+		// 有环
 		if fast == slow {
 			return true
 		}
