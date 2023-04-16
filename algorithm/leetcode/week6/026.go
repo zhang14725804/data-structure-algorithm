@@ -14,7 +14,7 @@ func removeDuplicates(nums []int) int {
 	// fast从前向后遍历
 	for fast < len(nums) {
 		if nums[slow] != nums[fast] {
-			// 😅 slow需要先走，后更新 nums[slow]
+			// 😅😅😅 slow需要先走，跳过【0】号元素，第一个元素不存在重复问题
 			slow++
 			nums[slow] = nums[fast]
 		}

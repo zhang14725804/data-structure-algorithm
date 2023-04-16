@@ -11,22 +11,26 @@ func reverseString(s []byte) {
 }
 
 /*
-	方法二：递归
+	方法二：递归 😅😅😅
+	分解子问题
 	TODO 没理解递归
 */
 func reverseString(s []byte) {
 	res := make([]byte, 0)
-	reverse(s, 0, &res)
+	//
+	var reverse func(i int)
+	reverse = func(i int) {
+		// base case
+		if i == len(s) {
+			return
+		}
+		reverse(i + 1)
+		res = append(res, s[i])
+	}
+
+	reverse(0)
+
 	for i := 0; i < len(s); i++ {
 		s[i] = res[i]
 	}
-}
-
-func reverse(s []byte, i int, res *[]byte) {
-	// 递归出口
-	if i == len(s) {
-		return
-	}
-	reverse(s, i+1, res)
-	*res = append(*res, s[i])
 }
