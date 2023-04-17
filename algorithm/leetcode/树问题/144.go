@@ -1,8 +1,4 @@
 /*
-	二叉树前序遍历（根左右）
-*/
-
-/*
 	方法1：DFS-递归实现
 */
 func preorderTraversal(root *TreeNode) []int {
@@ -15,7 +11,7 @@ func preorderTraversal(root *TreeNode) []int {
 		if root == nil {
 			return
 		}
-		// 单层递归的逻辑
+		// 根左右
 		res = append(res, root.Val)
 		dfs(root.Left)
 		dfs(root.Right)
@@ -25,32 +21,49 @@ func preorderTraversal(root *TreeNode) []int {
 }
 
 /*
-	方法2：迭代【栈】实现
+	用栈模拟递归
+	😅😅😅
 */
 func preorderTraversal(root *TreeNode) []int {
-	stack := make([]*TreeNode, 0)
-	res := make([]int, 0)
-	if root == nil {
-		return res
+	res := []int{}
+	stk := []*TreeNode{}
+	for root != nil || len(stk) > 0 {
+		if root != nil {
+			res = append(res, root.Val)
+			// 这里不理解 😅，不应该是先root = root.Left，后入栈么
+			stk = append(stk, root)
+			root = root.Left
+		} else {
+			root = stk[len(stk)-1]
+			stk = stk[:len(stk)-1]
+			root = root.Right
+		}
 	}
-	stack = append(stack, root)
+	return res
+}
 
-	for len(stack) > 0 {
-		sLen := len(stack)
-		for i := 0; i < sLen; i++ {
-			// 栈，后进先出
-			cLen := len(stack) - 1
-			cur := stack[cLen]
-			stack = stack[:cLen]
-			// （1）根节点
-			res = append(res, cur.Val)
-			// （2）右子树先入栈
-			if cur.Right != nil {
-				stack = append(stack, cur.Right)
+/*
+	方法2：迭代【栈】实现
+	根右左的方式入栈😅😅😅
+*/
+func preorderTraversal(root *TreeNode) []int {
+	res := []int{}
+	stk := []*TreeNode{}
+	if root != nil {
+		stk = append(stk, root)
+	}
+	for len(stk) > 0 {
+		for i := 0; i < len(stk); i++ {
+			node := stk[len(stk)-1]
+			stk = stk[:len(stk)-1]
+			//
+			res = append(res, node.Val)
+			//  入栈先右后左！！ 😅😅
+			if node.Right != nil {
+				stk = append(stk, node.Right)
 			}
-			// （3）左子树后入栈
-			if cur.Left != nil {
-				stack = append(stack, cur.Left)
+			if node.Left != nil {
+				stk = append(stk, node.Left)
 			}
 		}
 	}
@@ -58,7 +71,9 @@ func preorderTraversal(root *TreeNode) []int {
 }
 
 /*
-	迭代【栈】实现，使用【😅空节点😅】作为标记
+	迭代【栈】实现
+	使用【😅空节点😅】作为标记
+	TODO 😅😅😅
 */
 func preorderTraversal(root *TreeNode) []int {
 	stack := make([]*TreeNode, 0)

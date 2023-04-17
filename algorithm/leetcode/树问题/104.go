@@ -28,27 +28,11 @@ func maxDepth(root *TreeNode) int {
 }
 
 /*
-	方法1：DFS-递归实现
-	😅😅😅😅😅😅 精简之后的代码根本看不出是哪种遍历方式，也看不出递归三部曲的步骤
+	方法2：BFS-层序遍历
+	队列实现 😅😅😅
 */
 func maxDepth(root *TreeNode) int {
-	var dfs func(root *TreeNode) int
-	dfs = func(root *TreeNode) int {
-		// base case
-		if root == nil {
-			return 0
-		}
-		// 😅😅😅 递归下一层，需要 【+1】
-		return MaxInt(dfs(root.Left), dfs(root.Right)) + 1
-	}
-	return dfs(root)
-}
-
-/*
-	方法2：BFS-层序遍历，迭代法
-	careful： 从队尾操作是错的😅，要从队头开始操作（ 为什么呢 队列先进先出嘛 ）
-*/
-func maxDepth(root *TreeNode) int {
+	//
 	if root == nil {
 		return 0
 	}
@@ -57,11 +41,13 @@ func maxDepth(root *TreeNode) int {
 	queue = append(queue, root)
 	level := 0
 	for len(queue) > 0 {
+		level++
 		cLen := len(queue)
 		for i := 0; i < cLen; i++ {
-			// 先进先出
+			// 出队
 			cnode := queue[0]
 			queue = queue[1:]
+			// 入队
 			if cnode.Left != nil {
 				queue = append(queue, cnode.Left)
 			}
@@ -69,7 +55,12 @@ func maxDepth(root *TreeNode) int {
 				queue = append(queue, cnode.Right)
 			}
 		}
-		level++
 	}
 	return level
 }
+
+/*
+	方法3：BFS-层序遍历
+	如何用 栈实现 😅😅😅
+	TODO
+*/
