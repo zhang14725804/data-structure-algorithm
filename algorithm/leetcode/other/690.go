@@ -1,6 +1,5 @@
 /*
-	深度优先遍历或者广度优先遍历
-	我没想到 😅 😅 😅
+	方法一：递归
 */
 func getImportance(employees []*Employee, id int) (total int) {
 	mp := map[int]*Employee{}
@@ -20,6 +19,9 @@ func getImportance(employees []*Employee, id int) (total int) {
 	return
 }
 
+/*
+	方法二：基于【队列】的层序遍历
+*/
 func getImportance(employees []*Employee, id int) (total int) {
 	mp := map[int]*Employee{}
 	for _, employee := range employees {

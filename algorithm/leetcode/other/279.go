@@ -18,7 +18,3 @@ func numSquares(n int) int {
 	}
 	return dp[n]
 }
-
-/*
-	方法2: 四平方和定理 😅😅😅
-*/

@@ -20,9 +20,9 @@ func inorderTraversal(root *TreeNode) []int {
 
 /*
 	思路2：用栈实现 😅😅😅
-	1. 将整棵树的最左边一条链压入栈
-	2. 取出栈顶元素加入集合
-	3. 如果它有右子树，将右子树压入栈中
+	1. 将整棵树的最【左】边一条链压入栈
+	2. 取出栈顶【根】元素加入集合
+	3. 如果它有【右】子树，将右子树压入栈中
 */
 func inorderTraversal(root *TreeNode) []int {
 	res := make([]int, 0)

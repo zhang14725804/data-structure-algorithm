@@ -67,7 +67,7 @@ func jump2(nums []int) int {
 }
 
 /*
-	自顶向下的递归动态规划
+	自顶向下的递归
 */
 var nums []int
 var memo []int
@@ -76,6 +76,7 @@ var n int
 func jump(_nums []int) int {
 	nums = _nums
 	n = len(nums)
+	//
 	memo = make([]int, n)
 	for i := 0; i < n; i++ {
 		memo[i] = n

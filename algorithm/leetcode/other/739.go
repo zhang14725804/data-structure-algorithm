@@ -35,7 +35,7 @@ func dailyTemperatures(temperatures []int) []int {
 		for len(stack) > 0 && tp > temperatures[stack[len(stack)-1]] {
 			// 出栈
 			prevIdx := stack[len(stack)-1]
-			stack = stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
 			// 更新res值
 			res[prevIdx] = i - prevIdx
 		}

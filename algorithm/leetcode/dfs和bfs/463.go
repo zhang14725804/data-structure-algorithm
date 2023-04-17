@@ -24,7 +24,7 @@ func islandPerimeter(grid [][]int) (ans int) {
 	n, m := len(grid), len(grid[0])
 	var dfs func(x, y int)
 	dfs = func(x, y int) {
-		// 边界情况：可以遍历每个陆地格子，看其四个方向是否为边界或者水域，如果是，将这条边的贡献（即 1）加入答案 ans 中即可。
+		// base case：可以遍历每个陆地格子，看其四个方向是否为边界或者水域，如果是，将这条边的贡献（即 1）加入答案 ans 中即可。
 		if x < 0 || x >= n || y < 0 || y >= m || grid[x][y] == 0 {
 			ans++
 			return

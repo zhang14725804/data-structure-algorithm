@@ -1,5 +1,6 @@
 /*
 	双指针法
+	两边向中间靠拢
 */
 func sortArrayByParity(nums []int) []int {
 	left, right := 0, len(nums)-1

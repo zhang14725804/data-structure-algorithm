@@ -22,10 +22,9 @@ func swapColors(colors []int, target int) (countTarget int) {
 /*
 	双指针法1 😅😅😅
 	1. p0, p1分别交换0和1
-	2. 遇到0时，事多
+	2. 遇到0时，
 	3. 遇到1时
-
-	双指针法2 TODO
+	TODO 不懂
 */
 func sortColors(nums []int) {
 	p0, p1 := 0, 0

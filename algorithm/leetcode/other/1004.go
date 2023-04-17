@@ -12,8 +12,6 @@
 	左侧的下标是 left − 1 而不是 left，那么我们在构造前缀和数组时，可以将前缀和整体向右移动一位，空出 P[0] 的位置
 		P[0]=0
 		P[i]=P[i−1]+(1−A[i−1])
-​
-
 */
 func longestOnes(nums []int, k int) (ans int) {
 	nLen := len(nums)
@@ -47,18 +45,26 @@ func binarySearch(nums []int, target int) int {
 
 /*
 	😅😅😅😅
-
 	方法二：滑动窗口
+	把【最多可以把 K 个 0 变成 1，求仅包含 1 的最长子数组的长度】转换为 【找出一个最长的子数组，该子数组内最多允许有 K 个 0 】
 */
 func longestOnes(nums []int, k int) (ans int) {
-	left, lsum, rsum := 0, 0, 0
-	for right, v := range nums {
-		rsum += 1 - v
-		for lsum < rsum-k {
-			lsum += 1 - nums[left]
+	res := 0
+	zeros := 0
+	left, right := 0, 0
+	for right < len(nums) {
+		if nums[right] == 0 {
+			zeros++
+		}
+		// 收缩窗口
+		for zeros > k {
+			if nums[left] == 0 {
+				zeros--
+			}
 			left++
 		}
-		ans = Max(ans, right-left+1)
+		res = max(res, right-left+1)
+		right++
 	}
-	return
+	return res
 }
